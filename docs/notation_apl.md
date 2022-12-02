@@ -2,6 +2,10 @@
 
 ---
 
+![qr](images/qr.png)
+
+---
+
 ## Pattern
 
 * a regularity in the world
