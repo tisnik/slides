@@ -70,7 +70,7 @@
 
 ### Common idioms, notation, code structure, algorithms
 
-* Everyday's programmers tasks
+* Everyday programmers tasks
 * Depends on ecosystem
     - idioms in Java are different from Go, ...
 * Algorithms are usually not well formalized on source level
@@ -109,7 +109,7 @@
 ### Why?
 
 * human brain is excellent in recognizing patterns
-* and can be train to recognize new set of patterns
+* and can be trained to recognize new set of patterns
 * **Notation as a tool of thought**
 
 ---
@@ -282,7 +282,7 @@ plus x y <= rec x {
 * it was invented as new form of mathematical notation
     - when teaching mathematics at Harvard,
     - "Mathematical notation to express computation"
-* during his work for IBM (yes, IBM!) it was translater into aprogramming language
+* during his work for IBM (yes, IBM!) it was translated into aprogramming language
 * in 1979, Iverson received the Turing Award for his work on APL
 * "A shocking brevity"
 * "It is a lot easier to find your errors in four lines of code than in four hundred."
