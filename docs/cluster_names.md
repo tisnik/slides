@@ -1,6 +1,6 @@
 # Cluster names benchmark (in progress)
 
---
+---
 
 ## Cluster name
 
@@ -12,7 +12,7 @@
     - `bytea`
     - `uuid`
 
---
+---
 
 ## Why bother?
 
@@ -27,7 +27,7 @@
     - and size matters there
     - (number of blocks stored in memory, number of block read for each query)
 
---
+---
 
 ## Theory
 
@@ -36,39 +36,39 @@
 * `char` on third place
 * `varchar` on the last place
 
---
+---
 
 ## Don't trust theory...until proven
 
---
+---
 
 ### Small tables with 100 records
 
 ```
 ```
 
---
+---
 
 ### Medium tables with 1000 records
 
 ```
 ```
 
---
+---
 
 ### Larger tables with 10000 records
 
 ```
 ```
 
---
+---
 
 ### Huge tables with 100000 records
 
 ```
 ```
 
---
+---
 
 ## Links
 
