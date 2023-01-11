@@ -86,29 +86,32 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 ```
 
 ```sql
-DELETE FROM reported_benchmark_1 WHERE cluster=$1
+DELETE FROM reported_benchmark_1
+ WHERE cluster=$1
 ```
 
 ---
 
 ### Small tables with 100 records
 
+* Just to quick check if benchmark works
+
 ```
 goos: linux
 goarch: amd64
 pkg: github.com/RedHatInsights/ccx-notification-service
-BenchmarkInsertClusterAsChar-8               100           1990038 ns/op
-BenchmarkInsertClusterAsVarchar-8            100           2099556 ns/op
-BenchmarkInsertClusterAsBytea-8              100           2060851 ns/op
-BenchmarkInsertClusterAsUUID-8               100           2024153 ns/op
-BenchmarkDeleteClusterAsChar-8               100           2058986 ns/op
-BenchmarkDeleteClusterAsVarchar-8            100           1855351 ns/op
-BenchmarkDeleteClusterAsBytea-8              100           1645019 ns/op
-BenchmarkDeleteClusterAsUUID-8               100           1955547 ns/op
-BenchmarkSelectClusterAsChar-8               100            738880 ns/op
-BenchmarkSelectClusterAsVarchar-8            100            487008 ns/op
-BenchmarkSelectClusterAsBytea-8              100            751563 ns/op
-BenchmarkSelectClusterAsUUID-8               100            725236 ns/op
+BenchmarkInsertClusterAsChar-8          100      1990038 ns/op
+BenchmarkInsertClusterAsVarchar-8       100      2099556 ns/op
+BenchmarkInsertClusterAsBytea-8         100      2060851 ns/op
+BenchmarkInsertClusterAsUUID-8          100      2024153 ns/op
+BenchmarkDeleteClusterAsChar-8          100      2058986 ns/op
+BenchmarkDeleteClusterAsVarchar-8       100      1855351 ns/op
+BenchmarkDeleteClusterAsBytea-8         100      1645019 ns/op
+BenchmarkDeleteClusterAsUUID-8          100      1955547 ns/op
+BenchmarkSelectClusterAsChar-8          100       738880 ns/op
+BenchmarkSelectClusterAsVarchar-8       100       487008 ns/op
+BenchmarkSelectClusterAsBytea-8         100       751563 ns/op
+BenchmarkSelectClusterAsUUID-8          100       725236 ns/op
 PASS
 ok      github.com/RedHatInsights/ccx-notification-service      2884.159s
 ```
@@ -117,7 +120,26 @@ ok      github.com/RedHatInsights/ccx-notification-service      2884.159s
 
 ### Medium tables with 1000 records
 
+* Possible speedup won't be much visible there
+
 ```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkInsertClusterAsChar-8         1000      1926411 ns/op
+BenchmarkInsertClusterAsVarchar-8      1000      2045086 ns/op
+BenchmarkInsertClusterAsBytea-8        1000      2063993 ns/op
+BenchmarkInsertClusterAsUUID-8         1000      1783965 ns/op
+BenchmarkDeleteClusterAsChar-8         1000      2117746 ns/op
+BenchmarkDeleteClusterAsVarchar-8      1000      2129500 ns/op
+BenchmarkDeleteClusterAsBytea-8        1000      2156378 ns/op
+BenchmarkDeleteClusterAsUUID-8         1000      2244083 ns/op
+BenchmarkSelectClusterAsChar-8         1000       313019 ns/op
+BenchmarkSelectClusterAsVarchar-8      1000       288332 ns/op
+BenchmarkSelectClusterAsBytea-8        1000       294040 ns/op
+BenchmarkSelectClusterAsUUID-8         1000       262347 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      2914.665s
 ```
 
 ---
@@ -125,13 +147,74 @@ ok      github.com/RedHatInsights/ccx-notification-service      2884.159s
 ### Larger tables with 10000 records
 
 ```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkInsertClusterAsChar-8        10000      2006754 ns/op
+BenchmarkInsertClusterAsVarchar-8     10000      2051222 ns/op
+BenchmarkInsertClusterAsBytea-8       10000      2019572 ns/op
+BenchmarkInsertClusterAsUUID-8        10000      2042202 ns/op
+BenchmarkDeleteClusterAsChar-8        10000      2539460 ns/op
+BenchmarkDeleteClusterAsVarchar-8     10000      2474926 ns/op
+BenchmarkDeleteClusterAsBytea-8       10000      2552969 ns/op
+BenchmarkDeleteClusterAsUUID-8        10000      2402486 ns/op
+BenchmarkSelectClusterAsChar-8        10000      1269443 ns/op
+BenchmarkSelectClusterAsVarchar-8     10000      1323098 ns/op
+BenchmarkSelectClusterAsBytea-8       10000      1332636 ns/op
+BenchmarkSelectClusterAsUUID-8        10000      1080828 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      6151.486s
 ```
 
 ---
 
-### Huge tables with 100000 records
+### Huge tables with 50000 records
+
+* Aprox. number of records stored in real Aggregator database
 
 ```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkInsertClusterAsChar-8        50000      2044506 ns/op
+BenchmarkInsertClusterAsVarchar-8     50000      2037891 ns/op
+BenchmarkInsertClusterAsBytea-8       50000      2020112 ns/op
+BenchmarkInsertClusterAsUUID-8        50000      2037548 ns/op
+BenchmarkDeleteClusterAsChar-8        50000      7413309 ns/op
+BenchmarkDeleteClusterAsVarchar-8     50000      7466647 ns/op
+BenchmarkDeleteClusterAsBytea-8       50000      7296210 ns/op
+BenchmarkDeleteClusterAsUUID-8        50000      6645221 ns/op
+BenchmarkSelectClusterAsChar-8        50000      5375757 ns/op
+BenchmarkSelectClusterAsVarchar-8     50000      5579126 ns/op
+BenchmarkSelectClusterAsBytea-8       50000      5480033 ns/op
+BenchmarkSelectClusterAsUUID-8        50000      4437253 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      9470.518s
+```
+---
+
+### Huge tables with 100000 records
+
+* Aprox. number of records stored in real Notification Service database
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkInsertClusterAsChar-8       100000      3030527 ns/op
+BenchmarkInsertClusterAsVarchar-8    100000      3019363 ns/op
+BenchmarkInsertClusterAsBytea-8      100000      2962184 ns/op
+BenchmarkInsertClusterAsUUID-8       100000      2988198 ns/op
+BenchmarkDeleteClusterAsChar-8       100000     11399657 ns/op
+BenchmarkDeleteClusterAsVarchar-8    100000     11439103 ns/op
+BenchmarkDeleteClusterAsBytea-8      100000     11334972 ns/op
+BenchmarkDeleteClusterAsUUID-8       100000      9881923 ns/op
+BenchmarkSelectClusterAsChar-8       100000     10860747 ns/op
+BenchmarkSelectClusterAsVarchar-8    100000     11064993 ns/op
+BenchmarkSelectClusterAsBytea-8      100000     10914949 ns/op
+BenchmarkSelectClusterAsUUID-8       100000      8749562 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      17928.382s
 ```
 
 ---
