@@ -1,4 +1,4 @@
-# Cluster names benchmark (in progress)
+# Cluster names benchmark
 
 ---
 
