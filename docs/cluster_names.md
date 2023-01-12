@@ -47,6 +47,8 @@
 
 * Use real table schema
 * Use real SQL statements
+* Cluster names column should be part of compound primary key
+* Additionally we can try to add a new index
 
 ---
 
@@ -118,6 +120,10 @@ ok      github.com/RedHatInsights/ccx-notification-service      2884.159s
 
 ---
 
+![Normal 100 records](images/normal_100_records.png)
+
+---
+
 ### Medium tables with 1000 records
 
 * Possible speedup won't be much visible there
@@ -144,6 +150,10 @@ ok      github.com/RedHatInsights/ccx-notification-service      2914.665s
 
 ---
 
+![Normal 1000 records](images/normal_1000_records.png)
+
+---
+
 ### Larger tables with 10000 records
 
 ```
@@ -165,6 +175,9 @@ BenchmarkSelectClusterAsUUID-8        10000      1080828 ns/op
 PASS
 ok      github.com/RedHatInsights/ccx-notification-service      6151.486s
 ```
+---
+
+![Normal 10000 records](images/normal_10000_records.png)
 
 ---
 
@@ -193,6 +206,10 @@ ok      github.com/RedHatInsights/ccx-notification-service      9470.518s
 ```
 ---
 
+![Normal 50000 records](images/normal_50000_records.png)
+
+---
+
 ### Huge tables with 100000 records
 
 * Aprox. number of records stored in real Notification Service database
@@ -219,11 +236,159 @@ ok      github.com/RedHatInsights/ccx-notification-service      17928.382s
 
 ---
 
+![Normal 100000 records](images/normal_100000_records.png)
+
+---
+
+## Cluster names column as index
+
+```sql
+CREATE INDEX IF NOT EXISTS reported_benchmark_1_cluster_idx
+                        ON reported_benchmark_1
+                     USING btree (cluster);
+```
+
+---
+
+### Small tables with 100 records
+
+```
+BenchmarkDeleteClusterAsCharIndexed-8        100   2024163 ns/op
+BenchmarkDeleteClusterAsVarcharIndexed-8     100   1800105 ns/op
+BenchmarkDeleteClusterAsByteaIndexed-8       100   2019889 ns/op
+BenchmarkDeleteClusterAsUUIDIndexed-8        100   2039386 ns/op
+BenchmarkSelectClusterAsCharIndexed-8        100    716129 ns/op
+BenchmarkSelectClusterAsVarcharIndexed-8     100    637573 ns/op
+BenchmarkSelectClusterAsByteaIndexed-8       100    339237 ns/op
+BenchmarkSelectClusterAsUUIDIndexed-8        100    765160 ns/op
+```
+
+---
+
+![Indexed 100 records](images/indexed_100_records.png)
+
+---
+
+### Medium tables with 1000 records
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkDeleteClusterAsCharIndexed-8       1000   1993100 ns/op
+BenchmarkDeleteClusterAsVarcharIndexed-8    1000   2059622 ns/op
+BenchmarkDeleteClusterAsByteaIndexed-8      1000   2066688 ns/op
+BenchmarkDeleteClusterAsUUIDIndexed-8       1000   2041433 ns/op
+BenchmarkSelectClusterAsCharIndexed-8       1000    191250 ns/op
+BenchmarkSelectClusterAsVarcharIndexed-8    1000    201501 ns/op
+BenchmarkSelectClusterAsByteaIndexed-8      1000    192396 ns/op
+BenchmarkSelectClusterAsUUIDIndexed-8       1000    171307 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      3865.170s
+```
+
+---
+
+![Indexed 1000 records](images/indexed_1000_records.png)
+
+---
+
+### Larger tables with 10000 records
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkDeleteClusterAsCharIndexed-8      10000   1985390 ns/op
+BenchmarkDeleteClusterAsVarcharIndexed-8   10000   2016402 ns/op
+BenchmarkDeleteClusterAsByteaIndexed-8     10000   2017756 ns/op
+BenchmarkDeleteClusterAsUUIDIndexed-8      10000   2052270 ns/op
+BenchmarkSelectClusterAsCharIndexed-8      10000    157450 ns/op
+BenchmarkSelectClusterAsVarcharIndexed-8   10000    156115 ns/op
+BenchmarkSelectClusterAsByteaIndexed-8     10000    149408 ns/op
+BenchmarkSelectClusterAsUUIDIndexed-8      10000    154142 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      4089.958s
+
+```
+
+---
+
+![Indexed 10000 records](images/indexed_10000_records.png)
+
+---
+
+### Huge tables with 50000 records
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkDeleteClusterAsCharIndexed-8      50000   3943668 ns/op
+BenchmarkDeleteClusterAsVarcharIndexed-8   50000   3920540 ns/op
+BenchmarkDeleteClusterAsByteaIndexed-8     50000   3853470 ns/op
+BenchmarkDeleteClusterAsUUIDIndexed-8      50000   3908516 ns/op
+BenchmarkSelectClusterAsCharIndexed-8      50000    145972 ns/op
+BenchmarkSelectClusterAsVarcharIndexed-8   50000    152372 ns/op
+BenchmarkSelectClusterAsByteaIndexed-8     50000    147668 ns/op
+BenchmarkSelectClusterAsUUIDIndexed-8      50000    145055 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      5472.322s
+```
+
+---
+
+![Indexed 50000 records](images/indexed_50000_records.png)
+
+---
+
+### Huge tables with 100000 records
+
+```
+goos: linux
+goarch: amd64
+pkg: github.com/RedHatInsights/ccx-notification-service
+BenchmarkDeleteClusterAsCharIndexed-8     100000   4438956 ns/op
+BenchmarkDeleteClusterAsVarcharIndexed-8  100000   4436202 ns/op
+BenchmarkDeleteClusterAsByteaIndexed-8    100000   4434197 ns/op
+BenchmarkDeleteClusterAsUUIDIndexed-8     100000   4433377 ns/op
+BenchmarkSelectClusterAsCharIndexed-8     100000    151399 ns/op
+BenchmarkSelectClusterAsVarcharIndexed-8  100000    152682 ns/op
+BenchmarkSelectClusterAsByteaIndexed-8    100000    144385 ns/op
+BenchmarkSelectClusterAsUUIDIndexed-8     100000    143342 ns/op
+PASS
+ok      github.com/RedHatInsights/ccx-notification-service      8082.365s
+```
+
+---
+
+![Indexed 100000 records](images/indexed_100000_records.png)
+
+---
+
 ### Problems that has been solved
 
 * Delay between tests to "fix" DB vacuuming issue
 * Total test time
     - by default benchmarks are killed after 10 minutes
+
+---
+
+### Conclusion
+
+* Don't trust the theory in IT :)
+* UUID data type will improve database performance a bit
+    - especially for compound keys
+    - on the other hand it is not 2x, 3x speedup
+* When cluster names are stored in separate index
+    - no measurable performance improvement
+* This change is
+    - fully transparent
+* Which means
+    - no updates of program code
+    - no updates in tests etc.
+    - OTOH migration needs to be done
+* Decision has not been made (yet)
 
 ---
 
