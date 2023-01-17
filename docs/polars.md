@@ -1,10 +1,10 @@
 # Polars: Blazingly fast DataFrames in Rust, Python & Node.js
 
---
+---
 
 ![Polars](images/polars.png)
 
---
+---
 
 ## Polars
 
@@ -14,7 +14,7 @@
 * Query optimization
 * Lazy execution
 
---
+---
 
 ## Polars
 
@@ -25,7 +25,7 @@
 * Interface to Python and NodeJS
     - we'll ignore NodeJS, of course :)
 
---
+---
 
 ## Data series and data frames
 
@@ -33,7 +33,7 @@
     - very similar functions and methods
     - (not fully compatible)
 
---
+---
 
 ## Data frames loading
 
@@ -49,7 +49,7 @@ print()
 
 ```
 
---
+---
 
 ## Multiple input formats (TSV)
 
@@ -66,7 +66,7 @@ print(df.dtypes)
 print()
 ```
 
---
+---
 
 ## Loading directly from database
 
@@ -87,7 +87,7 @@ print(df)
 print()
 ```
 
---
+---
 
 ## Processing/querying data - source
 
@@ -115,7 +115,7 @@ Year,Winner
 2003,C++
 ```
 
---
+---
 
 ## Processing/querying data
 
@@ -129,7 +129,7 @@ polars.Config.set_tbl_rows(100)
 df = df.sort("Winner")
 ```
 
---
+---
 
 ## Processing data
 
@@ -146,7 +146,7 @@ print(df)
 print()
 ```
 
---
+---
 
 ## Groupby + aggregation
 
@@ -160,7 +160,7 @@ df = df.groupby("Winner", maintain_order=True).agg([polars.col("Year").sort()])
 print(df)
 ```
 
---
+---
 
 ## Groupby + aggregation + sort
 
@@ -177,12 +177,12 @@ df = df.groupby("Winner", maintain_order=True).agg([polars.col("Year").len()]). 
 print(df)
 ```
 
---
+---
 
 ## The key to success in IT: be lazy!
 
 * Laziness in FP
-* All those Kafka-based architectures postpone execution
+* Kafka-based architectures postpone execution
 * Lazy data frames in Polars
 
 ```python
@@ -199,7 +199,7 @@ print(df2.describe_plan())
 print(df2.describe_optimized_plan())
 ```
 
---
+---
 
 ## Plans for lazy evaluation
 
