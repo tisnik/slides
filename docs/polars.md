@@ -174,3 +174,46 @@ df = df.groupby("Winner", maintain_order=True).agg([polars.col("Year").len()]). 
 
 print(df)
 ```
+
+--
+
+## The key to success in IT: be lazy!
+
+* Laziness in FP
+* All those Kafka-based architectures postpone execution
+* Lazy data frames in Polars
+
+```python
+import polars
+
+df = polars.read_csv("hall_of_fame.csv").lazy()
+
+df2 = df.groupby("Winner", maintain_order=True).agg([polars.col("Year").len()]). \
+      sort("Year"). \
+      reverse(). \
+      head(5)
+
+print(df2.describe_plan())
+print(df2.describe_optimized_plan())
+```
+
+--
+
+## Plans for lazy evaluation
+
+```
+  SLICE[offset: 0, len: 5]
+     LOCAL SELECT [col("Winner").reverse(), col("Year").reverse()] FROM
+      SORT BY [col("Year")]
+        Aggregate
+                [col("Year").count()] BY [col("Winner")] FROM
+                  DF ["Year", "Winner"]; PROJECT */2 COLUMNS; SELECTION: "None"
+
+
+  SLICE[offset: 0, len: 5]
+     LOCAL SELECT [col("Winner").reverse(), col("Year").reverse()] FROM
+      SORT BY [col("Year")]
+        Aggregate
+                [col("Year").count()] BY [col("Winner")] FROM
+                  DF ["Year", "Winner"]; PROJECT 2/2 COLUMNS; SELECTION: "None"
+```
