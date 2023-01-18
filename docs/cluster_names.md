@@ -1,11 +1,20 @@
-# Cluster names benchmark
+# Storing cluster names in database
 
 ---
 
 ## Cluster name
 
 * represented as UUID
-    - in format `123e4567-e89b-12d3-a456-426614174000`
+    - 128bit value (16 bytes)
+    - displayed as \
+      `123e4567-e89b-12d3-a456-426614174000` \
+      (36 characters)
+    - processed as string (JSON, ...)
+
+---
+
+## Cluster name
+
 * how to store it in PostgreSQL?
     - `char(36)`
     - `varchar(36)`
@@ -18,9 +27,10 @@
 
 * DB size
     - `char`: 36 bytes per record
-    - `varchar`: 1 byte + 36 bytes per record
-    - `bytea`: 1 byte + 36/2 bytes per record
-    - `uuid`: 36/2 bytes per record (automatically converted to/from char)
+    - `varchar`: 1 byte + 36=37 bytes per record
+    - `bytea`: 1 byte + 36/2=19 bytes per record
+    - `uuid`: 32/2=16 bytes per record \
+      (automatically converted to/from char)
 
 ---
 
@@ -31,6 +41,35 @@
     - so it's stored separately in B-tree or similar structure
     - and size matters there
     - (number of blocks stored in memory, number of block read for each query)
+
+---
+
+### Where it is used?
+
+* Aggregator DB
+* Notification service DB
+* Parquet files (not relevant there)
+
+---
+
+### Aggregator DB
+
+* Several tables
+    - report
+    - rule_hit
+    - cluster_rule_user_feedback
+    - cluster_rule_toggle
+    - cluster_user_rule_disable_feedback
+    - recommendation
+
+---
+
+### Notification service DB
+
+* Several tables
+    - new_reports
+    - reported
+    - read_errors
 
 ---
 
@@ -82,15 +121,23 @@ SELECT org_id, account_number, notification_type, state, report, updated_at, not
 ```
 
 ```sql
-INSERT INTO reported_benchmark_1
+INSERT
+  INTO reported_benchmark_1
 (org_id, account_number, cluster, notification_type, state, report, updated_at, notified_at, error_log)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 ```
 
 ```sql
-DELETE FROM reported_benchmark_1
+DELETE
+  FROM reported_benchmark_1
  WHERE cluster=$1
 ```
+
+---
+
+### Benchmarks implementation
+
+[uuid_column_test.go](https://github.com/RedHatInsights/ccx-notification-service/blob/master/docs/demos/uuid_column_in_db/demo/uuid_column_test.go)
 
 ---
 
@@ -374,14 +421,20 @@ ok      github.com/RedHatInsights/ccx-notification-service      8082.365s
 
 ---
 
-### Conclusion
+### Conclusion (1/2)
 
 * Don't trust the theory in IT :)
+    - a lot of unknowns play role
 * UUID data type will improve database performance a bit
     - especially for compound keys
     - on the other hand it is not 2x, 3x speedup
 * When cluster names are stored in separate index
     - no measurable performance improvement
+
+---
+
+### Conclusion (2/2)
+
 * This change is
     - fully transparent
 * Which means
@@ -397,3 +450,8 @@ ok      github.com/RedHatInsights/ccx-notification-service      8082.365s
 * [Character Types in PostgreSQL](https://www.postgresql.org/docs/current/datatype-character.html)
 * [Binary Data Types in PostgreSQL](https://www.postgresql.org/docs/current/datatype-binary.html)
 * [UUID Type](https://www.postgresql.org/docs/current/datatype-uuid.html)
+* [uuid_column_test.go](https://github.com/RedHatInsights/ccx-notification-service/blob/master/docs/demos/uuid_column_in_db/demo/uuid_column_test.go)
+* [Optimizing Storage and Managing Cleanup in PostgreSQL](https://medium.com/coding-blocks/optimizing-storage-and-managing-cleanup-in-postgresql-c2fe56d4cf5)
+* [Optimizing and shrinking reported table for CCX Notification Service](https://redhatinsights.github.io/ccx-notification-service/demos/shrinking_report_table/shringink_report_table.html)
+* [Usage of DB indexes to optimize data throughput in CCX Notification Service](https://redhatinsights.github.io/ccx-notification-service/demos/db-indexes/db-indexes.html)
+* [4 Ways To Optimise PostgreSQL Database With Millions of Data](https://medium.com/geekculture/4-ways-to-optimise-postgresql-database-with-millions-of-data-c70e11d27a94)
