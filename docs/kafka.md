@@ -21,6 +21,80 @@
 
 ---
 
+## Microservices
+
+* Apache Kafka is sometimes key component in microservice-based architectures
+
+
+
+### Classic architecture
+
+* Front-end
+* Back-end
+    - business logic
+    - data layer
+* Storage
+
+![Microservices1](images/microservices1.png)
+---
+
+
+
+### Stateless and stateful microservices
+
+* Services w/o state
+    - super easy to test
+    - usually very easy to scale up
+    - restarts are usually not a big deal
+* Stateful service
+    - the opposite is true
+
+![Microservices2](images/microservices2.png)
+---
+
+
+
+### Communication between stateful microservices
+
+* Not as easy as it might seem
+    - "compound" transactions
+    - should one service synchronously wait for second one?
+
+![Microservices3](images/microservices3.png)
+---
+
+
+
+### Compensation transactions
+
+* One possible solution
+
+![Microservices4](images/microservices4.png)
+---
+
+
+
+### Apache Kafka as source of events
+
+![Microservices5](images/microservices5.png)
+---
+
+
+
+### Apache Kafka as message broker
+
+![Microservices6](images/microservices6.png)
+---
+
+
+
+### Kappa architecture
+![Microservices7](images/microservices7.png)
+
+
+
+---
+
 ## Monitoring
 
 ### JMX
