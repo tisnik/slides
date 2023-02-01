@@ -27,6 +27,8 @@
 
 
 
+---
+
 ### Classic architecture
 
 * Front-end
@@ -36,6 +38,7 @@
 * Storage
 
 ![Microservices1](images/microservices1.png)
+
 ---
 
 
@@ -50,6 +53,7 @@
     - the opposite is true
 
 ![Microservices2](images/microservices2.png)
+
 ---
 
 
@@ -61,6 +65,7 @@
     - should one service synchronously wait for second one?
 
 ![Microservices3](images/microservices3.png)
+
 ---
 
 
@@ -70,6 +75,7 @@
 * One possible solution
 
 ![Microservices4](images/microservices4.png)
+
 ---
 
 
@@ -77,6 +83,7 @@
 ### Apache Kafka as source of events
 
 ![Microservices5](images/microservices5.png)
+
 ---
 
 
@@ -84,11 +91,13 @@
 ### Apache Kafka as message broker
 
 ![Microservices6](images/microservices6.png)
+
 ---
 
 
 
 ### Kappa architecture
+
 ![Microservices7](images/microservices7.png)
 
 
@@ -123,6 +132,8 @@ public interface StatusMBean {
 }
 ```
 
+---
+
 #### Interface implementation:
 
 ```java
@@ -154,3 +165,34 @@ public class Status implements StatusMBean {
 }
 ```
 
+---
+
+#### MBean export
+
+```java
+import java.util.Scanner;
+
+import javax.management.*;
+import java.lang.management.ManagementFactory;
+
+public class Main {
+   public static void main(String[] args) {
+       try {
+           String programName = (args.length == 0) ? "foobar" : args[0];
+
+           StatusMBean systemStatus = new Status(programName);
+
+           MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
+           ObjectName objectName = new ObjectName("cz.root.app:name=StatusExample");
+           platformMBeanServer.registerMBean(systemStatus, objectName);
+
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+       new Scanner(System.in).nextLine();
+   }
+}
+```
+
+---
