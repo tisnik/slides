@@ -183,7 +183,7 @@ public class Main {
            StatusMBean systemStatus = new Status(programName);
 
            MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
-           ObjectName objectName = new ObjectName("cz.root.app:name=StatusExample");
+           ObjectName objectName = new ObjectName("cz.amend.app:name=StatusExample");
            platformMBeanServer.registerMBean(systemStatus, objectName);
 
        } catch (Exception e) {
@@ -269,4 +269,36 @@ public class Status implements StatusMBean {
    }
 }
 ```
+
+#### MBean export
+
+```java
+import java.util.Scanner;
+
+import javax.management.*;
+import java.lang.management.ManagementFactory;
+
+public class Main {
+   public static void main(String[] args) {
+       try {
+           String programName = (args.length == 0) ? "foobar" : args[0];
+
+           StatusMBean systemStatus = new Status(programName);
+
+           MBeanServer platformMBeanServer = ManagementFactory.getPlatformMBeanServer();
+           ObjectName objectName = new ObjectName("cz.amend.app:name=StatusExample");
+           platformMBeanServer.registerMBean(systemStatus, objectName);
+
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+       new Scanner(System.in).nextLine();
+   }
+}
+```
+
+(example of **jconsole** usage)
+
+---
 
