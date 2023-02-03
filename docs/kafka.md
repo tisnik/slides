@@ -401,3 +401,39 @@ io-wait-time-ns-avg     kafka.producer:type=producer-metrics,client-id=([-.w]+)
 batch-size-avg          kafka.producer:type=producer-metrics,client-id=([-.w]+)
 ```
 
+---
+
+### Consumer metrics
+
+```
+records-lag             kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+),topic=([-.w]+),partition=([-.w]+)
+records-lag-max         kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+),topic=([-.w]+),partition=([-.w]+)
+                        kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+)
+bytes-consumed-rate     kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+),topic=([-.w]+)
+                        kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+)
+records-consumed-rate   kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+),topic=([-.w]+)
+                        kafka.consumer:type=consumer-fetch-manager-metrics,client-id=([-.w]+)
+fetch-rate              kafka.consumer:type=consumer-fetch-manager-metrics,client_id=([-.w]+)
+```
+
+---
+
+### ZooKeeper metrics
+
+```
+outstanding_requests        Number of requests queued
+avg_latency                 Amount of time it takes to respond to a client
+num_alive_connections       Number of clients connected to ZooKeeper
+followers                   Number of active followers
+pending_syncs               Number of pending syncs from followers
+open_file_descriptor_count  Number of file descriptors in use
+```
+
+---
+
+### JVM-related metrics
+
+```
+CollectionCount	            java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
+CollectionTime	            java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
+```
