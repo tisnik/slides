@@ -360,3 +360,30 @@ export KAFKA_OPTS=' -javaagent:jmx_prometheus_javaagent-0.15.0.jar=9999:./config
 exec $base_dir/kafka-run-class.sh $EXTRA_ARGS kafka.Kafka "$@"
 ```
 
+---
+
+### Kafka metrics
+
+- Kafka server (broker) metrics
+- Producer metrics
+- Consumer metrics
+- ZooKeeper metrics
+- JVM-related metrics
+
+---
+
+#### Kafka server (broker) metrics
+
+```
+UnderReplicatedPartitions         kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions
+IsrShrinksPerSec/IsrExpandsPerSec kafka.server:type=ReplicaManager,name=IsrShrinksPerSec
+ActiveControllerCount             kafka.controller:type=KafkaController,name=ActiveControllerCount
+OfflinePartitionsCount            kafka.controller:type=KafkaController,name=OfflinePartitionsCount
+LeaderElectionRateAndTimeMs       kafka.controller:type=ControllerStats,name=LeaderElectionRateAndTimeMs
+UncleanLeaderElectionsPerSec      kafka.controller:type=ControllerStats,name=UncleanLeaderElectionsPerSec
+TotalTimeMs                       kafka.network:type=RequestMetrics,name=TotalTimeMs
+PurgatorySize                     kafka.server:type=DelayedOperationPurgatory,name=PurgatorySize
+BytesInPerSec/BytesOutPerSec      kafka.server:type=BrokerTopicMetrics,name={BytesInPerSec|BytesOutPerSec}
+RequestsPerSecond                 kafka.network:type=RequestMetrics,name=RequestsPerSec
+```
+
