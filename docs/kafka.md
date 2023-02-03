@@ -387,3 +387,17 @@ BytesInPerSec/BytesOutPerSec      kafka.server:type=BrokerTopicMetrics,name={Byt
 RequestsPerSecond                 kafka.network:type=RequestMetrics,name=RequestsPerSec
 ```
 
+---
+
+### Producer metrics
+
+```
+compression-rate-avg    kafka.producer:type=producer-metrics,client-id=([-.w]+)
+response-rate           kafka.producer:type=producer-metrics,client-id=([-.w]+)
+request-rate            kafka.producer:type=producer-metrics,client-id=([-.w]+)
+request-latency-avg     kafka.producer:type=producer-metrics,client-id=([-.w]+)
+outgoing-byte-rate      kafka.producer:type=producer-metrics,client-id=([-.w]+)
+io-wait-time-ns-avg     kafka.producer:type=producer-metrics,client-id=([-.w]+)
+batch-size-avg          kafka.producer:type=producer-metrics,client-id=([-.w]+)
+```
+
