@@ -4,8 +4,6 @@
 
 ---
 
-
-
 ## Multifaceted Apache Kafka
 
 * scalable real-time messaging platform
@@ -17,9 +15,8 @@
 * data integration framework for streaming ETL
 * data processing framework
     - continuous stateless or stateful stream processing
+
 ---
-
-
 
 ## Kafka in not:
 
@@ -35,8 +32,6 @@
 
 ---
 
-
-
 ## Typical usage of Kafka
 
 * Message broker on steroids
@@ -44,25 +39,29 @@
 * Central part of Kappa architecture
 * Logging platform
 
+---
+
+### Kafka streams
+
 ![Kafka streams](images/kafka_streams.png)
 
+---
+
+### Source of truth
+
+[full image](images/kafka_kappa.png)
 ![Kafka kappa](images/kafka_kappa.png)
 
 ---
 
-
-
 ### Message brokers: communication strategies
-
 
 ---
 
 ## Microservices
 
-* Apache Kafka is sometimes key component in microservice-based architectures
+* Apache Kafka is sometimes used as a key component in microservice-based architectures
 * "Design the organisation you want, the architecture will follow (kicking and screaming)"
-
-
 
 ---
 
@@ -78,8 +77,6 @@
 
 ---
 
-
-
 ### Stateless and stateful microservices
 
 * Services w/o state
@@ -89,11 +86,12 @@
 * Stateful service
     - the opposite is true
 
+---
+
+[Full image](images/microservices2.png)
 ![Microservices2](images/microservices2.png)
 
 ---
-
-
 
 ### Communication between stateful microservices
 
@@ -101,11 +99,11 @@
     - "compound" transactions
     - should one service synchronously wait for second one?
 
+---
+
 ![Microservices3](images/microservices3.png)
 
 ---
-
-
 
 ### Compensation transactions
 
@@ -115,8 +113,9 @@
 
 ---
 
-
 ### Apache Kafka as source of events
+
+[Full image](images/microservices5.png)
 
 ![Microservices5](images/microservices5.png)
 
@@ -130,22 +129,58 @@
 
 ### Kappa architecture
 
+[Full image](images/microservices7.png)
+
 ![Microservices7](images/microservices7.png)
 
 ---
 
 ### Messaging
+
 * Command–query separation (CQS)
 * Command-query responsibility segregation (CQRS)
 * How to communicate between components
     - COMMAND message
     - EVENT message
     - QUERY message
-CommandBus EventBus QueryBus
+* Sometimes different buses are used
+    - CommandBus
+    - EventBus
+    - QueryBus
+
+---
+
+## Basic concepts
+
+* Topic
+    -  a log of events
+* Producer
+    - sends messages/events into selected topic
+* Consumer
+    - retrieves messages/events from selected topic
+
+---
+
+## Append-only log
+
+* new mesage/event is always written on the end of topic
+* messages/events are immutable
+* can be read by
+    - seeking and arbitrary offset
+    - sequential scanning
+
+---
+
+## Kafka connect
 
 ---
 
 ## Monitoring
+
+* JMX
+* Prometheus metrics
+
+---
 
 ### JMX
 
@@ -156,8 +191,6 @@ CommandBus EventBus QueryBus
 * Standard tool named **jconsole**
 
 (example of **jconsole** usage)
-
-
 
 ---
 
@@ -188,7 +221,16 @@ public class Status implements StatusMBean {
        this.programName = programName;
        this.switchStatus = false;
    }
-   
+```
+
+---
+
+#### Interface implementation (cont.):
+
+* getters
+* setters
+
+```java
    @Override
    public Integer getAnswer() {
        return this.answer;
@@ -251,11 +293,11 @@ public class Main {
 ```java
 public interface StatusMBean {
     Integer getAnswer();
-    Long getCounter();
-    String getProgramName();
+    Long    getCounter();
+    String  getProgramName();
     Boolean getSwitchStatus();
-    void setSwitchStatus(Boolean newStatus);
-    void flipSwitchStatus();
+    void    setSwitchStatus(Boolean newStatus);
+    void    flipSwitchStatus();
 }
 ```
 
@@ -311,6 +353,8 @@ public class Status implements StatusMBean {
 }
 ```
 
+---
+
 #### MBean export
 
 ```java
@@ -339,6 +383,8 @@ public class Main {
 }
 ```
 
+---
+
 (example of **jconsole** usage)
 
 ---
@@ -347,6 +393,10 @@ public class Main {
 
 * Tool to provide metrics via Prometheus-like HTTP responses
 * Used as `agent` for JVM
+
+---
+
+### JMX exporter setup and usage
 
 * Setup
 
@@ -365,6 +415,8 @@ java -javaagent:./jmx_prometheus_javaagent-0.15.0.jar=8080:config.yaml Main
 ```bash
 curl localhost:8080/metrics
 ```
+
+---
 
 ### JMX Exporter setup for Kafka broker
 
@@ -475,6 +527,12 @@ open_file_descriptor_count  Number of file descriptors in use
 ### JVM-related metrics
 
 ```
-CollectionCount	            java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
-CollectionTime	            java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
+CollectionCount             java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
+CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) Generation
 ```
+
+---
+
+## Useful links
+
+1. [Getter and Setter in Java](https://www.geeksforgeeks.org/getter-and-setter-in-java/)
