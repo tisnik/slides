@@ -6,17 +6,53 @@
 
 
 
-## Usage of Kafka
+## Multifaceted Apache Kafka
+
+* scalable real-time messaging platform
+    - able to process millions of messages per second
+* event streaming platform for massive volumes of big data analytics
+* distributed storage
+    - with support for replayability of events
+    - and with guaranteed ordering
+* data integration framework for streaming ETL
+* data processing framework
+    - continuous stateless or stateful stream processing
+---
+
+
+
+## Kafka in not:
+
+* proxy for millions of clients
+    - like mobile apps
+* API Management platform
+* database for complex queries and batch analytics workloads
+    - simple aggregations possible thanks to ksqlDB
+* IoT platform with features such as device management
+* technology for hard real-time applications
+    - safety-critical systems
+    - deterministic systems
+
+---
+
+
+
+## Typical usage of Kafka
 
 * Message broker on steroids
-* Lambda architecture
-* Kappa architecture
+* Central part of lambda architecture
+* Central part of Kappa architecture
 * Logging platform
 
 ![Kafka streams](images/kafka_streams.png)
 
 ![Kafka kappa](images/kafka_kappa.png)
 
+---
+
+
+
+### Message brokers: communication strategies
 
 
 ---
@@ -24,6 +60,7 @@
 ## Microservices
 
 * Apache Kafka is sometimes key component in microservice-based architectures
+* "Design the organisation you want, the architecture will follow (kicking and screaming)"
 
 
 
@@ -79,14 +116,11 @@
 ---
 
 
-
 ### Apache Kafka as source of events
 
 ![Microservices5](images/microservices5.png)
 
 ---
-
-
 
 ### Apache Kafka as message broker
 
@@ -94,13 +128,20 @@
 
 ---
 
-
-
 ### Kappa architecture
 
 ![Microservices7](images/microservices7.png)
 
+---
 
+### Messaging
+* Command–query separation (CQS)
+* Command-query responsibility segregation (CQRS)
+* How to communicate between components
+    - COMMAND message
+    - EVENT message
+    - QUERY message
+CommandBus EventBus QueryBus
 
 ---
 
