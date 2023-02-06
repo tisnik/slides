@@ -56,6 +56,8 @@
 
 ### Message brokers: communication strategies
 
+* Enterprise integration patterns (EIP)
+
 ---
 
 ## Microservices
@@ -536,3 +538,4 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 ## Useful links
 
 1. [Getter and Setter in Java](https://www.geeksforgeeks.org/getter-and-setter-in-java/)
+1. [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/)
