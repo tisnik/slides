@@ -175,6 +175,73 @@
 
 ## Kafka connect
 
+
+* "Distributed scalable framework"
+* Automatic consuming or producing data
+    - with data persistence in-between
+* Part of Apache Kafka
+* Just configuration files
+* And connectors
+
+---
+
+## Kafka Connect components
+
+* Sources
+* Kafka Cluster
+* Sinks
+
+---
+
+## Kafka Connect use cases
+
+---
+
+### Moving data from one DB to another one
+
+![Kafka_Connector_1](images/Kafka_Connect_1.png)
+
+---
+
+### Connection between MQTT and AWS SQS
+
+![Kafka_Connector_2](images/Kafka_Connect_2.png)
+
+---
+
+### From one source to various sinks
+
+* Amazon S3
+* Logs
+* Storage (database)
+
+![Kafka_Connector_3](images/Kafka_Connect_3.png)
+
+---
+
+#### Custom consumers are possible
+
+* Amazon S3
+* Logs
+* Storage (database)
+* And bunch of custom consumers
+
+![Kafka_Connector_4](images/Kafka_Connect_4.png)
+
+---
+
+## Kafka Connect from developers PoV
+
+* Is separate process
+* It requires no programming
+    - failures handling
+    - logging
+    - monitoring
+    - scaling
+    - migrating
+    - sec. handling etc.
+* Lightweight data transformations
+
 ---
 
 ## Monitoring
@@ -539,3 +606,7 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 
 1. [Getter and Setter in Java](https://www.geeksforgeeks.org/getter-and-setter-in-java/)
 1. [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/)
+1. [Apache Kafka vs. Middleware (MQ, ETL, ESB) – Slides + Video](https://www.kai-waehner.de/blog/2019/03/07/apache-kafka-middleware-mq-etl-esb-comparison/)
+1. [Discover Kafka® connectors and more](https://www.confluent.io/hub/?_ga=2.197519912.642206306.1675149141-1201563621.1675149140)
+1. [JDBC Connector (Source and Sink)](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+1. [From Zero to Hero with Kafka Connect by Robin Moffatt](https://www.youtube.com/watch?v=Jkcp28ki82k)
