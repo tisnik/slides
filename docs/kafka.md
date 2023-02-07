@@ -292,6 +292,21 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic conect-test-1
 
 ---
 
+### Messages in JSON format
+
+* Common requirement
+
+```property
+name=local-file-sink
+connector.class=FileStreamSink
+tasks.max=1
+file=test.sink.txt
+topics=connect-test-1
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+```
 
 ---
 
