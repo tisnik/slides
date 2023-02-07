@@ -241,6 +241,61 @@
     - migrating
     - sec. handling etc.
 * Lightweight data transformations
+* Sometimes defined by one simple property file
+
+---
+
+### Simple file sink
+
+* Connector that read all messages from selected topic
+* Such messages are written into selected text file
+    - line by line
+
+---
+
+### Configuration file
+
+```property
+name=local-file-sink
+connector.class=FileStreamSink
+tasks.max=1
+file=test.sink.txt
+topics=connect-test-1
+key.converter=org.apache.kafka.connect.storage.StringConverter
+value.converter=org.apache.kafka.connect.storage.StringConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+```
+
+---
+
+### Use the connector
+
+* Starting
+
+```bash
+cd kafka/kafka_2.12-3.3.2/
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-sink.properties
+```
+
+* Producing messages
+
+```bash
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic connect-test-1
+```
+
+* Key+value
+
+```bash
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic conect-test-1 -property parse.key=true --property key.separator=:
+```
+
+---
+
+
+---
+
+### Handling messages with improper format
 
 ---
 
