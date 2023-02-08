@@ -155,7 +155,7 @@
 ## Basic concepts
 
 * Topic
-    -  a log of events
+    -  a named log of events
 * Producer
     - sends messages/events into selected topic
 * Consumer
@@ -170,6 +170,64 @@
 * can be read by
     - seeking and arbitrary offset
     - sequential scanning
+
+---
+
+## Three basic operations
+
+* Producer
+    - produce (send) message to given topic
+* Consumer
+    - rewind (seek) to message X
+    - consume message + update offset
+
+---
+
+## Topic is NOT a queue
+
+* Topic is basically stateless
+    - consumers have to maintain their state
+    - by storing their offsets "somewhere"
+* Message is not deleted after consumption
+    - just messages past the retention period are deleted
+* FIFO model is not followed
+
+---
+
+## Kafka technology is much more difficult though
+
+* Partitions
+* Multiple replicas per partition
+* Sharding
+
+---
+
+## Key features
+
+* Scalability
+* Reliability
+* Log compaction
+
+---
+
+## Scalability
+
+* Topic can be partitioned
+    - across different servers
+
+---
+
+## Reliability
+
+* Replication
+* Changing leadership role
+
+---
+
+## Log compaction
+
+* Keeps the latest known value for each record key
+* Preserves the most recent version of a record during deletion
 
 ---
 
@@ -784,3 +842,7 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 1. [Discover Kafka® connectors and more](https://www.confluent.io/hub/?_ga=2.197519912.642206306.1675149141-1201563621.1675149140)
 1. [JDBC Connector (Source and Sink)](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
 1. [From Zero to Hero with Kafka Connect by Robin Moffatt](https://www.youtube.com/watch?v=Jkcp28ki82k)
+1. [Apache Kafka Queue 101: Messaging Made Easy](https://hevodata.com/learn/kafka-queue/)
+1. [What is Apache Kafka?](https://aws.amazon.com/msk/what-is-kafka/)
+1. [Kafka Is Not A Queue](https://abhyrama.com/2019/06/25/kafka-is-not-a-queue/)
+1. [Sharding Kafka for Increased Scale and Reliability](https://www.crowdstrike.com/blog/how-we-improved-scale-and-reliability-by-sharding-kafka/)
