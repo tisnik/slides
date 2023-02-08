@@ -183,6 +183,9 @@ kafkacat -L -b localhost:9092
 
 * Producer mode
 
+```
+```
+
 * Consumer mode
 
 ```
