@@ -173,6 +173,23 @@
 
 ---
 
+## Kafkacat (kcat)
+
+* List topics
+
+```
+kafkacat -L -b localhost:9092
+```
+
+* Producer mode
+
+* Consumer mode
+
+```
+```
+
+---
+
 ## Kafka connect
 
 
@@ -311,6 +328,90 @@ value.converter.schemas.enable=false
 ---
 
 ### Handling messages with improper format
+
+* Stop the connector
+* Ignore incorrect message
+* Send incorrect message into DLQ
+    - dead letter queue
+    - pretty common approach in message brokers world
+
+---
+
+### Stop the connector
+
+* We already know how to do it
+
+---
+
+### Ignore incorrect message
+
+* property named `errors.tolerance`
+
+```property
+name=local-file-sink-json
+connector.class=FileStreamSink
+tasks.max=1
+file=test.sink3.jsons
+topics=connect-test-json
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+errors.tolerance=all
+```
+
+---
+
+### Send incorrect message into DLQ
+
+```property
+name=local-file-sink-json
+connector.class=FileStreamSink
+tasks.max=1
+file=test.sink4.jsons
+topics=connect-test-json
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+errors.tolerance=all
+errors.deadletterqueue.topic.name=dlq_bad_jsons
+errors.deadletterqueue.topic.replication.factor=1
+```
+
+---
+
+### Retrieve incorrect messages
+
+* Using standard tools
+
+```
+bin/kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic dlq_bad_jsons --partition 0 --offset earliest
+```
+
+* Using *Kafkacat*
+
+```
+kafkacat -b localhost:9092 -t dlq_bad_jsons -C
+```
+
+---
+
+### JDBC-based sink
+
+```property
+name=db-sink
+connector.class=io.confluent.connect.jdbc.JdbcSinkConnector
+tasks.max=1
+topics=connect-test-3
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=false
+value.converter.schemas.enable=false
+connection.url=jdbc:postgresql://localhost:5432/kafka_sink?user=postgres&password=postgres
+auto.create=true
+delete.enabled=false
+```
 
 ---
 
