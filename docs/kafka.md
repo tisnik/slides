@@ -300,16 +300,117 @@ kafkacat -L -b localhost:9092
 
 ---
 
+#### Messages producer
+
+```
+#!/usr/bin/env python3
+
+from kafka import KafkaProducer
+from time import sleep
+from json import dumps
+
+server = "localhost:9092"
+topic = "upload"
+
+print("Connecting to Kafka")
+producer = KafkaProducer(
+    bootstrap_servers=[server], value_serializer=lambda x: dumps(x).encode("utf-8")
+)
+print("Connected to Kafka")
+
+for i in range(1000):
+    data = {"counter": i}
+    producer.send(topic, value=data)
+    sleep(5)
+```
+
+---
+
+#### Messages consumer
+
+```
+#!/usr/bin/env python3
+
+import sys
+from kafka import KafkaConsumer
+
+server = "localhost:9092"
+topic = "upload"
+group_id = "group1"
+
+print("Connecting to Kafka")
+consumer = KafkaConsumer(
+    topic, group_id=group_id, bootstrap_servers=[server], auto_offset_reset="earliest"
+)
+print("Connected to Kafka")
+
+try:
+    for message in consumer:
+        print(
+            "%s:%d:%d: key=%s value=%s"
+            % (
+                message.topic,
+                message.partition,
+                message.offset,
+                message.key,
+                message.value,
+            )
+        )
+except KeyboardInterrupt:
+    sys.exit()
+```
+
+---
+
 ### Examples for Go
 
+---
+
+#### Messages producer
+
+```
+```
+
+---
+
+#### Messages consumer
+
+```
+```
 ---
 
 ### Examples for Java
 
 ---
 
+#### Messages producer
+
+```
+```
+
+---
+
+#### Messages consumer
+
+```
+```
+---
+
 ### Examples for Clojure
 
+---
+
+#### Messages producer
+
+```
+```
+
+---
+
+#### Messages consumer
+
+```
+```
 ---
 
 ## Kafka connect
