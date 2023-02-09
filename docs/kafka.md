@@ -231,6 +231,18 @@
 
 ---
 
+## CLI
+
+---
+
+### CLI producers and consumers
+
+---
+
+### Other standard CLI tools
+
+---
+
 ## Kafkacat (kcat)
 
 * List topics
@@ -248,6 +260,55 @@ kafkacat -L -b localhost:9092
 
 ```
 ```
+
+---
+
+## Clients for Apache Kafka
+
+* [Supported languages/ecosystems](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
+    - C/C++
+    - Python
+    - Go (AKA golang)
+    - Erlang
+    - PowerShell
+    - .NET
+    - Ruby
+    - Node.js
+    - Proxy (HTTP REST, etc)
+    - Perl
+    - stdin/stdout
+    - PHP
+    - Rust
+    - Alternative Java
+    - Storm
+    - Scala DSL 
+    - Clojure
+    - Swift
+
+---
+
+## Client examples
+
+* Examples for Python
+* Examples for Go
+* Examples for Java
+* Examples for Clojure
+
+---
+
+### Examples for Python
+
+---
+
+### Examples for Go
+
+---
+
+### Examples for Java
+
+---
+
+### Examples for Clojure
 
 ---
 
@@ -846,3 +907,4 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 1. [What is Apache Kafka?](https://aws.amazon.com/msk/what-is-kafka/)
 1. [Kafka Is Not A Queue](https://abhyrama.com/2019/06/25/kafka-is-not-a-queue/)
 1. [Sharding Kafka for Increased Scale and Reliability](https://www.crowdstrike.com/blog/how-we-improved-scale-and-reliability-by-sharding-kafka/)
+1. [Kafka clients](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
