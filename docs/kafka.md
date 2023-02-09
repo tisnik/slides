@@ -369,6 +369,51 @@ except KeyboardInterrupt:
 #### Messages producer
 
 ```
+package main
+
+import (
+        "log"
+
+        "github.com/Shopify/sarama"
+)
+
+const (
+        <i>// KafkaConnectionString obsahuje jméno počítače a port, na kterém běží Kafka broker</i>
+        KafkaConnectionString = "localhost:9092"
+
+        <i>// KafkaTopic obsahuje jméno tématu</i>
+        KafkaTopic = "test-topic"
+)
+
+func main() {
+        <i>// konstrukce konzumenta</i>
+        producer, err := sarama.NewSyncProducer([]string{KafkaConnectionString}, nil)
+
+        <i>// kontrola chyby při připojování ke Kafce</i>
+        if err != nil {
+                log.Fatal(err)
+        }
+
+        log.Printf("Connected to %s", KafkaConnectionString)
+
+        <i>// zajištění uzavření připojení ke Kafce</i>
+        defer func() {
+                if err := producer.Close(); err != nil {
+                        log.Fatal(err)
+                }
+        }()
+
+        <i>// poslání (produkce) zprávy</i>
+        msg := &amp;sarama.ProducerMessage{Topic: KafkaTopic, Value: sarama.StringEncoder("testing 123")}
+        partition, offset, err := producer.SendMessage(msg)
+        if err != nil {
+                log.Printf("FAILED to send message: %s\n", err)
+        } else {
+                log.Printf("&gt; message sent to partition %d at offset %d\n", partition, offset)
+        }
+
+        log.Print("Done")
+}
 ```
 
 ---
