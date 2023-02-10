@@ -421,6 +421,52 @@ func main() {
 #### Messages consumer
 
 ```go
+package main
+
+import (
+        "log"
+
+        "github.com/Shopify/sarama"
+)
+
+const (
+        // KafkaConnectionString obsahuje jméno počítače a port, na kterém běží Kafka broker
+        KafkaConnectionString = "localhost:9092"
+
+        // KafkaTopic obsahuje jméno tématu
+        KafkaTopic = "test-topic"
+)
+
+func main() {
+        // konstrukce konzumenta
+        consumer, err := sarama.NewConsumer([]string{KafkaConnectionString}, nil)
+
+        // kontrola chyby při připojování ke Kafce
+        if err != nil {
+                log.Fatal(err)
+        }
+
+        log.Printf("Connected to %s", KafkaConnectionString)
+
+        // zajištění uzavření připojení ke Kafce
+        defer func() {
+                if err := consumer.Close(); err != nil {
+                        log.Fatal(err)
+                }
+        }()
+
+        // přihlášení ke zvolenému tématu
+        partitionConsumer, err := consumer.ConsumePartition(KafkaTopic, 0, sarama.OffsetNewest)
+        if err != nil {
+                log.Fatal(err)
+        }
+
+        // zajištění ukončení přihlášení ke zvolenému tématu
+        defer func() {
+                if err := partitionConsumer.Close(); err != nil {
+                        log.Fatal(err)
+                }
+        }()
 
         // postupné čtení zpráv, které byly do zvoleného tématu publikovány
         consumed := 0
