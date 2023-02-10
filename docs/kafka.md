@@ -35,7 +35,7 @@
 ## Typical usage of Kafka
 
 * Message broker on steroids
-* Central part of lambda architecture
+* Central part of Lambda architecture
 * Central part of Kappa architecture
 * Logging platform
 
@@ -368,7 +368,7 @@ except KeyboardInterrupt:
 
 #### Messages producer
 
-```
+```go
 package main
 
 import (
@@ -378,33 +378,33 @@ import (
 )
 
 const (
-        <i>// KafkaConnectionString obsahuje jméno počítače a port, na kterém běží Kafka broker</i>
+        // KafkaConnectionString obsahuje jméno počítače a port, na kterém běží Kafka broker
         KafkaConnectionString = "localhost:9092"
 
-        <i>// KafkaTopic obsahuje jméno tématu</i>
+        // KafkaTopic obsahuje jméno tématu
         KafkaTopic = "test-topic"
 )
 
 func main() {
-        <i>// konstrukce konzumenta</i>
+        // konstrukce konzumenta
         producer, err := sarama.NewSyncProducer([]string{KafkaConnectionString}, nil)
 
-        <i>// kontrola chyby při připojování ke Kafce</i>
+        // kontrola chyby při připojování ke Kafce
         if err != nil {
                 log.Fatal(err)
         }
 
         log.Printf("Connected to %s", KafkaConnectionString)
 
-        <i>// zajištění uzavření připojení ke Kafce</i>
+        // zajištění uzavření připojení ke Kafce
         defer func() {
                 if err := producer.Close(); err != nil {
                         log.Fatal(err)
                 }
         }()
 
-        <i>// poslání (produkce) zprávy</i>
-        msg := &amp;sarama.ProducerMessage{Topic: KafkaTopic, Value: sarama.StringEncoder("testing 123")}
+        // poslání (produkce) zprávy
+        msg := &sarama.ProducerMessage{Topic: KafkaTopic, Value: sarama.StringEncoder("testing 123")}
         partition, offset, err := producer.SendMessage(msg)
         if err != nil {
                 log.Printf("FAILED to send message: %s\n", err)
@@ -420,7 +420,22 @@ func main() {
 
 #### Messages consumer
 
-```
+```go
+
+        // postupné čtení zpráv, které byly do zvoleného tématu publikovány
+        consumed := 0
+        for {
+                msg := &lt;-partitionConsumer.Messages()
+                // vypíšeme pouze offset zprávy, její klíč a tělo (value, payload)
+                log.Printf("Consumed message offset %d: %s:%s", msg.Offset, msg.Key, msg.Value)
+                consumed++
+        }
+
+        // výpis počtu zpracovaných zpráv (ovšem sem se stejně nedostaneme :-)
+        log.Printf("Consumed: %d", consumed)
+        log.Print("Done")
+}
+
 ```
 ---
 
