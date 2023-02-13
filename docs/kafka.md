@@ -4,6 +4,10 @@
 
 ---
 
+"Every enterprise is powered by data"
+
+---
+
 ## Multifaceted Apache Kafka
 
 * scalable real-time messaging platform
@@ -38,6 +42,7 @@
 * Central part of Lambda architecture
 * Central part of Kappa architecture
 * Logging platform
+* ETL with capability to "replay" data
 
 ---
 
@@ -51,6 +56,28 @@
 
 [full image](images/kafka_kappa.png)
 ![Kafka kappa](images/kafka_kappa.png)
+
+---
+
+### Message brokers
+
+* Classic ones
+   - ActiveMQ (Artemis)
+   - RabbitMQ
+   - IBM MQ
+   - etc.
+
+---
+
+### Why message brokers?
+
+![Without broker](images/kafka_without_broker.png)
+
+---
+
+### Why message brokers?
+
+![With broker](images/kafka_with_broker.png)
 
 ---
 
@@ -154,12 +181,33 @@
 
 ## Basic concepts
 
+* Message
+    - also called event
 * Topic
-    -  a named log of events
+    - a named log of events
 * Producer
     - sends messages/events into selected topic
 * Consumer
     - retrieves messages/events from selected topic
+
+---
+
+### Messages in Kafka
+
+* Array of bytes
+    - no prior knowledge about format
+* Optional key
+* Batch(es)
+    - multiple messages for the same topic+partition
+    - written as one block
+    - efficiency
+
+---
+
+### Topics and partitions
+
+* Messages are categorized into topics
+* Topic is splitted into partitions
 
 ---
 
@@ -298,6 +346,14 @@ kafkacat -L -b localhost:9092
 
 ### Examples for Python
 
+* Libraries used
+    - kafka-python
+    - confluent-kafka
+
+```bash
+pip3 install --user kafka-python
+```
+
 ---
 
 #### Messages producer
@@ -409,7 +465,7 @@ func main() {
         if err != nil {
                 log.Printf("FAILED to send message: %s\n", err)
         } else {
-                log.Printf("&gt; message sent to partition %d at offset %d\n", partition, offset)
+                log.Printf("> message sent to partition %d at offset %d\n", partition, offset)
         }
 
         log.Print("Done")
@@ -471,7 +527,7 @@ func main() {
         // postupné čtení zpráv, které byly do zvoleného tématu publikovány
         consumed := 0
         for {
-                msg := &lt;-partitionConsumer.Messages()
+                msg := <-partitionConsumer.Messages()
                 // vypíšeme pouze offset zprávy, její klíč a tělo (value, payload)
                 log.Printf("Consumed message offset %d: %s:%s", msg.Offset, msg.Key, msg.Value)
                 consumed++
@@ -520,12 +576,48 @@ public class SimpleProducer {
 
 ---
 
+#### Compilation and running
+
+```bash
+javac -cp kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar SimpleProducer.java
+```
+
+```bash
+java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/slf4j-api-1.7.36.jar SimpleProducer
+```
+
+---
+
+#### Maven setup
+
+```xml
+```
+
+---
+
 #### Messages consumer
 
 ```java
 ```
 
 ---
+
+#### Compilation and running
+
+```bash
+javac -cp kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar SimpleConsumer.java
+```
+
+```bash
+java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/slf4j-api-1.7.36.jar SimpleConsumer
+```
+
+---
+
+#### Maven setup
+
+```xml
+```
 
 ### Examples for Clojure
 
