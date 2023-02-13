@@ -420,6 +420,10 @@ except KeyboardInterrupt:
 
 ### Examples for Go
 
+* Two libraries can be used
+    - Sarama
+    - Confluent-kafka-go
+
 ---
 
 #### Messages producer
