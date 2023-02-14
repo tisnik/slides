@@ -308,6 +308,29 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 ---
 
+## Consumer groups, clusters, multiple brokers
+
+* Consumer groups
+    - at most one consumer per partition
+    - scalability
+* Clusters
+    - one broker is controller
+    - elected automatically
+    - assigning partitions
+    - monitoring broker failures
+* Partition can be assigned to more brokers
+    - replication
+    - redundancy
+    - can survive broker(s) failure
+
+---
+
+### Retention
+
+* Retention
+
+---
+
 ## CLI
 
 * Apache Kafka with batteries included
@@ -324,6 +347,38 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 dataDir=/tmp/zookeeper
 clientPort=2181
 maxClientCnxns=0
+```
+
+---
+
+### Starting Zookeeper
+
+```bash
+```
+
+---
+
+### Checking Zookeeper by telnet
+
+```bash
+$ telnet localhost 2181
+```
+
+```
+Trying ::1...
+Connected to localhost.
+Escape character is '^]'.
+srvr
+Zookeeper version: 3.6.3--6401e4ad2087061bc6b9f80dec2d69f2e3c8660a, built on 04/08/2021 16:35 GMT
+Latency min/avg/max: 0/0.0/0
+Received: 1
+Sent: 0
+Connections: 1
+Outstanding: 0
+Zxid: 0x16e
+Mode: standalone
+Node count: 174
+Connection closed by foreign host.
 ```
 
 ---
