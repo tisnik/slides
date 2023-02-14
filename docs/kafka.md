@@ -1002,8 +1002,34 @@ tasks.max=1
 topics=connect-test-3
 key.converter=org.apache.kafka.connect.json.JsonConverter
 value.converter=org.apache.kafka.connect.json.JsonConverter
-key.converter.schemas.enable=false
-value.converter.schemas.enable=false
+key.converter.schemas.enable=true
+value.converter.schemas.enable=true
+connection.url=jdbc:postgresql://localhost:5432/kafka_sink?user=postgres&password=postgres
+auto.create=true
+delete.enabled=false
+```
+
+---
+
+### JDBC-based sink
+
+* It will work
+* But it will use table named `connect-test-3`
+    - a bit problematic
+
+---
+
+### JDBC-based sink
+
+```property
+name=db-sink
+connector.class=io.confluent.connect.jdbc.JdbcSinkConnector
+tasks.max=1
+topics=test_table
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
+key.converter.schemas.enable=true
+value.converter.schemas.enable=true
 connection.url=jdbc:postgresql://localhost:5432/kafka_sink?user=postgres&password=postgres
 auto.create=true
 delete.enabled=false
