@@ -242,11 +242,40 @@
 
 ---
 
+## Topic with one partition only
+
+```
++---+---+---+---+---+---+---+---+---+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
++---+---+---+---+---+---+---+---+---+
+                ^                        ^
+                |                        |
+              read                     write
+```
+
+---
+
 ## Kafka technology is much more difficult though
 
 * Partitions
 * Multiple replicas per partition
 * Sharding
+
+---
+
+## Multiple partitions for one topic
+
+```
+              +---+---+---+---+---+---+
+partition #0  | 0 | 1 | 2 | 3 | 4 | 5 | ...
+              +---+---+---+---+---+---+
+partition #1  | 0 | 1 | 2 | ...
+              +---+---+---+
+partition #2  | ...
+              +---+---+---+---+---+---+---+---+---+
+partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
+              +---+---+---+---+---+---+---+---+---+
+```
 
 ---
 
@@ -281,9 +310,76 @@
 
 ## CLI
 
+* Apache Kafka with batteries included
+
+---
+
+## Starting Zookeeper and broker(s)
+
+---
+
+### Zookeeper config
+
+```property
+dataDir=/tmp/zookeeper
+clientPort=2181
+maxClientCnxns=0
+```
+
+---
+
+### Broker(s) config
+
+```property
+broker.id=0
+listeners=PLAINTEXT://:9092
+num.network.threads=3
+num.io.threads=8
+ 
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+ 
+log.dirs=/tmp/kafka-logs
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+ 
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+```
+
+---
+
+### More brokers
+
+* Configuration files
+    - `config/server0.properties`
+    - `config/server1.properties` etc.
+* Rules
+    - `broker.id` must be unique
+    - `listeners` must have unique port numbers
+    - `log.dirs` better to be different
+
+---
+
+### Starting more brokers
+
+* On one machine:
+
+```bash
+$ nohup bin/kafka-server-start.sh config/server1.properties &
+$ nohup bin/kafka-server-start.sh config/server2.properties &
+$ nohup bin/kafka-server-start.sh config/server3.properties &
+```
+
 ---
 
 ### CLI producers and consumers
+
+* Stored in `bin` subdirectory
+* Two scripts
 
 ---
 
