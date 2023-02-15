@@ -520,14 +520,54 @@ zookeeper-shell.sh
 kafkacat -L -b localhost:9092
 ```
 
-* Producer mode
+---
+
+## Kafkacat as producer
+
+* Messages on standard input
 
 ```
+kafkacat -P -b localhost:9092 -t "upload"
+```
+
+* Messages from files
+
+```
+kafkacat -P -b localhost:9092 -t filedrop -p 0 file1.bin file2.txt /etc/motd dalsi_soubor.tgz
+```
+
+---
+
+## Kafkacat as consumer
+
+* Standard consumer for topic
+
+```
+kafkacat -C -b localhost:9092 -t "upload"
 ```
 
 * Consumer mode
+    - 1000 messages from topic topic1
+    - does not wait for new messages
 
 ```
+kafkacat -C -b localhost:9092 -t topic1 -p 0 -o -1000 -e
+```
+
+---
+
+## Kafkacat as consumer (2)
+
+* Consumer mode for with consumer group spec.
+
+```
+kafkacat -b localhost:9092 -G skupina_konzumentů topic1
+```
+
+* Consumer for multiple topics
+
+```
+kafkacat -b localhost:9092 -G skupina_konzumentů téma1 téma2
 ```
 
 ---
@@ -635,6 +675,13 @@ try:
         )
 except KeyboardInterrupt:
     sys.exit()
+```
+
+---
+
+### Consumer with "replay" ability
+
+```python
 ```
 
 ---
