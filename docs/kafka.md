@@ -318,6 +318,11 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
     - elected automatically
     - assigning partitions
     - monitoring broker failures
+
+---
+
+## Consumer groups, clusters, multiple brokers
+
 * Partition can be assigned to more brokers
     - replication
     - redundancy
@@ -327,7 +332,18 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 ### Retention
 
-* Retention
+* Retention policy
+    - setup globally
+    - and possible to setup for topic
+    - retention limits are minimum guarantees
+
+```
+log.retention.hours
+log.retention.bytes
+log.segment.bytes
+log.retention.check.interval.ms
+log.roll.hours
+```
 
 ---
 
@@ -341,9 +357,11 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 ---
 
-### Zookeeper config
+### Zookeeper configuration
 
-```property
+* Stored in `config/zookeeper.properties` file
+
+```properties
 dataDir=/tmp/zookeeper
 clientPort=2181
 maxClientCnxns=0
@@ -354,6 +372,7 @@ maxClientCnxns=0
 ### Starting Zookeeper
 
 ```bash
+bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 ---
@@ -383,9 +402,11 @@ Connection closed by foreign host.
 
 ---
 
-### Broker(s) config
+### Broker(s) configuration
 
-```property
+* Stored in `config/server.properties`
+
+```properties
 broker.id=0
 listeners=PLAINTEXT://:9092
 num.network.threads=3
@@ -403,6 +424,14 @@ log.segment.bytes=1073741824
  
 zookeeper.connect=localhost:2181
 zookeeper.connection.timeout.ms=6000
+```
+
+---
+
+### Starting server
+
+```
+bin/kafka-server-start.sh config/server.properties
 ```
 
 ---
@@ -435,10 +464,51 @@ $ nohup bin/kafka-server-start.sh config/server3.properties &
 
 * Stored in `bin` subdirectory
 * Two scripts
+    - `bin/kafka-console-producer.sh`
+    - `bin/kafka-console-consumer.sh
 
 ---
 
 ### Other standard CLI tools
+
+```
+connect-distributed.sh
+connect-mirror-maker.sh
+connect-standalone.sh
+kafka-acls.sh
+kafka-broker-api-versions.sh
+kafka-cluster.sh
+kafka-configs.sh
+kafka-consumer-groups.sh
+kafka-consumer-perf-test.sh
+kafka-delegation-tokens.sh
+kafka-delete-records.sh
+kafka-dump-log.sh
+kafka-features.sh
+kafka-get-offsets.sh
+kafka-leader-election.sh
+kafka-log-dirs.sh
+kafka-metadata-quorum.sh
+kafka-metadata-shell.sh
+kafka-mirror-maker.sh
+kafka-producer-perf-test.sh
+kafka-reassign-partitions.sh
+kafka-replica-verification.sh
+kafka-run-class.sh
+kafka-server-start.sh
+kafka-server-stop.sh
+kafka-storage.sh
+kafka-streams-application-reset.sh
+kafka-topics.sh
+kafka-transactions.sh
+kafka-verifiable-consumer.sh
+kafka-verifiable-producer.sh
+trogdor.sh
+zookeeper-security-migration.sh
+zookeeper-server-start.sh
+zookeeper-server-stop.sh
+zookeeper-shell.sh
+```
 
 ---
 
@@ -923,7 +993,7 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 
 ### Configuration file
 
-```property
+```properties
 name=local-file-sink
 connector.class=FileStreamSink
 tasks.max=1
@@ -964,7 +1034,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic conect-test-1
 
 * Common requirement
 
-```property
+```properties
 name=local-file-sink
 connector.class=FileStreamSink
 tasks.max=1
@@ -998,7 +1068,7 @@ value.converter.schemas.enable=false
 
 * property named `errors.tolerance`
 
-```property
+```properties
 name=local-file-sink-json
 connector.class=FileStreamSink
 tasks.max=1
@@ -1015,7 +1085,7 @@ errors.tolerance=all
 
 ### Send incorrect message into DLQ
 
-```property
+```properties
 name=local-file-sink-json
 connector.class=FileStreamSink
 tasks.max=1
@@ -1050,7 +1120,7 @@ kafkacat -b localhost:9092 -t dlq_bad_jsons -C
 
 ### JDBC-based sink
 
-```property
+```properties
 name=db-sink
 connector.class=io.confluent.connect.jdbc.JdbcSinkConnector
 tasks.max=1
@@ -1076,7 +1146,7 @@ delete.enabled=false
 
 ### JDBC-based sink
 
-```property
+```properties
 name=db-sink
 connector.class=io.confluent.connect.jdbc.JdbcSinkConnector
 tasks.max=1
@@ -1450,7 +1520,7 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 
 ---
 
-## Useful links
+## Useful links 1/2
 
 1. [Getter and Setter in Java](https://www.geeksforgeeks.org/getter-and-setter-in-java/)
 1. [Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/)
@@ -1460,6 +1530,11 @@ CollectionTime              java.lang:type=GarbageCollector,name=G1 (Young|Old) 
 1. [From Zero to Hero with Kafka Connect by Robin Moffatt](https://www.youtube.com/watch?v=Jkcp28ki82k)
 1. [Apache Kafka Queue 101: Messaging Made Easy](https://hevodata.com/learn/kafka-queue/)
 1. [What is Apache Kafka?](https://aws.amazon.com/msk/what-is-kafka/)
+
+---
+
+## Useful links 2/2
+
 1. [Kafka Is Not A Queue](https://abhyrama.com/2019/06/25/kafka-is-not-a-queue/)
 1. [Sharding Kafka for Increased Scale and Reliability](https://www.crowdstrike.com/blog/how-we-improved-scale-and-reliability-by-sharding-kafka/)
 1. [Kafka clients](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
