@@ -465,7 +465,7 @@ $ nohup bin/kafka-server-start.sh config/server3.properties &
 * Stored in `bin` subdirectory
 * Two scripts
     - `bin/kafka-console-producer.sh`
-    - `bin/kafka-console-consumer.sh
+    - `bin/kafka-console-consumer.sh`
 
 ---
 
@@ -882,6 +882,42 @@ func main() {
 ### Message consumer (confluent-kafka)
 
 ```go
+package main
+
+import (
+        "fmt"
+        "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
+)
+
+const (
+        server   = "localhost:9092"
+        topic    = "upload"
+        group_id = "group1"
+)
+
+func main() {
+        consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
+                "bootstrap.servers": server,
+                "group.id":          group_id,
+                "auto.offset.reset": "earliest",
+        })
+        defer consumer.Close()
+
+        if err != nil {
+                panic(err)
+        }
+
+        consumer.SubscribeTopics([]string{topic}, nil)
+
+        for {
+                message, err := consumer.ReadMessage(-1)
+                if err == nil {
+                        fmt.Printf("Message on %s: %s %s\n", message.TopicPartition, string(message.Key), string(message.Value))
+                } else {
+                        fmt.Printf("Consumer error: %v (%v)\n", err, message)
+                }
+        }
+}
 ```
 
 ---
@@ -933,13 +969,6 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 
 ---
 
-#### Maven setup
-
-```xml
-```
-
----
-
 #### Messages consumer
 
 ```java
@@ -958,11 +987,6 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 ```
 
 ---
-
-#### Maven setup
-
-```xml
-```
 
 ### Examples for Clojure
 
@@ -1007,13 +1031,13 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 
 ### Moving data from one DB to another one
 
-![Kafka_Connector_1](images/Kafka_Connect_1.png)
+![Kafka_Connector_1](images/kafka_connect_1.png)
 
 ---
 
 ### Connection between MQTT and AWS SQS
 
-![Kafka_Connector_2](images/Kafka_Connect_2.png)
+![Kafka_Connector_2](images/kafka_connect_2.png)
 
 ---
 
@@ -1023,7 +1047,7 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 * Logs
 * Storage (database)
 
-![Kafka_Connector_3](images/Kafka_Connect_3.png)
+![Kafka_Connector_3](images/kafka_connect_3.png)
 
 ---
 
@@ -1034,7 +1058,7 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 * Storage (database)
 * And bunch of custom consumers
 
-![Kafka_Connector_4](images/Kafka_Connect_4.png)
+![Kafka_Connector_4](images/kafka_connect_4.png)
 
 ---
 
@@ -1048,6 +1072,11 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
     - scaling
     - migrating
     - sec. handling etc.
+
+---
+
+## Kafka Connect from developers PoV (cont.)
+
 * Lightweight data transformations
 * Sometimes defined by one simple property file
 
@@ -1110,8 +1139,8 @@ connector.class=FileStreamSink
 tasks.max=1
 file=test.sink.txt
 topics=connect-test-1
-key.converter=org.apache.kafka.connect.storage.StringConverter
-value.converter=org.apache.kafka.connect.storage.StringConverter
+key.converter=org.apache.kafka.connect.json.JsonConverter
+value.converter=org.apache.kafka.connect.json.JsonConverter
 key.converter.schemas.enable=false
 value.converter.schemas.enable=false
 ```
@@ -1176,13 +1205,13 @@ errors.deadletterqueue.topic.replication.factor=1
 
 * Using standard tools
 
-```
+```bashj
 bin/kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic dlq_bad_jsons --partition 0 --offset earliest
 ```
 
 * Using *Kafkacat*
 
-```
+```bash
 kafkacat -b localhost:9092 -t dlq_bad_jsons -C
 ```
 
