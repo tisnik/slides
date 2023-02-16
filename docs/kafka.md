@@ -484,6 +484,48 @@ bin\windows\kafka-server-start.bat config/server.properties
 
 ---
 
+## Number of zookeepers
+
+* Zookeeper cluster:
+    - called ensemble
+* Quorum
+    - so odd number of Zookepers are preferred
+    - better to keep <=7 Zookepers
+* Writes to Zookeeper
+    - changes membership of consumer groups
+    - changes in Kafka cluster itself
+    - pretty low frequency of changes (usually)
+    - (+ commit offsets if configured)
+
+---
+
+## How Zookeepers know about each other
+
+* Common configuration
+    - ID (small number)
+    - peer port
+    - leader port
+
+---
+
+### Config
+
+```
+tickTime=2000
+dataDir=/var/lib/zookeeper
+clientPort=2181
+initLimit=20
+syncLimit=5
+server.1=zoo1.example.com:2888:3888
+server.2=zoo2.example.com:2888:3888
+server.3=zoo3.example.com:2888:3888
+```
+
+* Each server `myid` file in `dataDir`
+    - specifies unique ID
+
+---
+
 ### More brokers
 
 * Configuration files
