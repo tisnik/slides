@@ -87,6 +87,46 @@
 
 ---
 
+### Request reply
+
+[!com-1](images/com-01-request_reply.png)
+
+---
+
+### Surveyor
+
+[!com-2](images/com-02-surveyor.png)
+
+---
+
+### Pub-sub
+
+[!com-3](images/com-03-pub-sub.png)
+
+---
+
+### Push-pull
+
+[!com-4](images/com-04-push-pull.png)
+
+---
+
+### Push-pull with messages redistribution
+
+[!com-5](images/com-05-push-pull.png)
+
+---
+
+### Push-pull with reply to producer
+
+[!com-6](images/com-06-push-pull-reply.png)
+
+--- Other strategies (NATS etc.)
+
+[!com-7](images/com-07-req-pull.png)
+
+---
+
 ## Microservices
 
 * Apache Kafka is sometimes used as a key component in microservice-based architectures
