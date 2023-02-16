@@ -415,6 +415,10 @@ maxClientCnxns=0
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
+```bash
+bin\windows\zookeeper-server-start.bat config/zookeeper.properties
+```
+
 ---
 
 ### Checking Zookeeper by telnet
@@ -474,6 +478,10 @@ zookeeper.connection.timeout.ms=6000
 bin/kafka-server-start.sh config/server.properties
 ```
 
+```
+bin\windows\kafka-server-start.bat config/server.properties
+```
+
 ---
 
 ### More brokers
@@ -496,6 +504,12 @@ bin/kafka-server-start.sh config/server.properties
 $ nohup bin/kafka-server-start.sh config/server1.properties &
 $ nohup bin/kafka-server-start.sh config/server2.properties &
 $ nohup bin/kafka-server-start.sh config/server3.properties &
+```
+
+```bash
+bin\windows\kafka-server-start.bat config/server1.properties
+bin\windows\kafka-server-start.bat config/server2.properties
+bin\windows\kafka-server-start.bat config/server3.properties
 ```
 
 ---
@@ -1062,6 +1076,14 @@ javac -cp kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar SimpleConsumer.java
 java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/slf4j-api-1.7.36.jar SimpleConsumer
 ```
 
+```bash
+javac -cp kafka_2.12-3.3.2\libs\kafka-clients-3.3.2.jar SimpleConsumer.java
+```
+
+```bash
+java -cp .;kafka_2.12-3.3.2\libs\kafka-clients-3.3.2.jar;kafka_2.12-3.3.2\libs\slf4j-api-1.7.36.jar SimpleConsumer
+```
+
 ---
 
 ### Examples for Clojure
@@ -1233,6 +1255,15 @@ cd kafka/kafka_2.12-3.3.2/
 bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-sink.properties
 ```
 
+```bash
+cd kafka\kafka_2.12-3.3.2\
+bin\windows\connect-standalone.bat config\connect-standalone.properties config\connect-file-sink.properties
+```
+
+---
+
+### Use the connector (Linux)
+
 * Producing messages
 
 ```bash
@@ -1243,6 +1274,22 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic connect-test-
 
 ```bash
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic conect-test-1 -property parse.key=true --property key.separator=:
+```
+
+---
+
+### Use the connector (Windows)
+
+* Producing messages
+
+```bash
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic connect-test-1
+```
+
+* Key+value
+
+```bash
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic conect-test-1 -property parse.key=true --property key.separator=:
 ```
 
 ---
@@ -1323,8 +1370,12 @@ errors.deadletterqueue.topic.replication.factor=1
 
 * Using standard tools
 
-```bashj
+```bash
 bin/kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic dlq_bad_jsons --partition 0 --offset earliest
+```
+
+```bash
+bin\windows\kafka-console-consumer.bat  --bootstrap-server localhost:9092 --topic dlq_bad_jsons --partition 0 --offset earliest
 ```
 
 * Using *Kafkacat*
