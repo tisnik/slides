@@ -566,6 +566,119 @@ zookeeper-shell.sh
 
 ---
 
+### Create topic with #partitions
+
+```bash
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic topic3 --partitions 4
+```
+
+```bash
+bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --create --topic topic3 --partitions 4
+```
+
+---
+
+### List all topics
+
+```bash
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+```
+
+```bash
+bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --list
+```
+
+---
+
+### List all consumer groups
+
+```bash
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+```
+
+```bash
+bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+```
+
+---
+
+### Info about one group
+
+```bash
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group test-group --describe
+```
+
+```bash
+bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group test-group --describe
+```
+
+---
+
+### Reset offsets
+
+```bash
+bin/kafka-consumer-groups.sh --reset-offsets --to-earliest --topic topic3 --execute --group test-group-4 --bootstrap-server localhost:9092
+```
+
+```bash
+bin\windows\kafka-consumer-groups.bat --reset-offsets --to-earliest --topic topic3 --execute --group test-group-4 --bootstrap-server localhost:9092
+```
+
+
+---
+
+### Multiple consumers example #1
+
+```
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic T3 --partitions 3
+```
+
+```
+bin\windows\kafka-topics.bat --bootstrap-server localhost:9092 --create --topic T3 --partitions 3
+```
+
+---
+
+### Multiple consumers example #2
+
+```
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic T3 --group G3
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic T3 --group G3
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic T3 --group G3
+```
+
+```
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic T3 --group G3
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic T3 --group G3
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic T3 --group G3
+```
+
+---
+
+### Multiple consumers example #3
+
+```
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic T3 --property parse.key=true --property key.separator=":"
+```
+
+```
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic T3 --property parse.key=true --property key.separator=":"
+```
+
+---
+
+### Multiple consumers example #4
+
+```bash
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group G3 --describe
+```
+
+```bash
+bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group G3 --describe
+```
+
+---
+
 ## Kafkacat (kcat)
 
 * List topics
