@@ -1031,6 +1031,27 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 #### Messages producer
 
 ```
+(ns produce-messages-2.core
+  (:require [jackdaw.client :as jc]
+            [clojure.pprint :as pp]))
+
+(def producer-config
+  {"bootstrap.servers" "localhost:9092"
+   "key.serializer" "org.apache.kafka.common.serialization.StringSerializer"
+   "value.serializer" "org.apache.kafka.common.serialization.StringSerializer"
+   "acks" "all"
+   "client.id" "foo"})
+
+(defn -main
+  [& args]
+  (with-open [producer (jc/producer producer-config)]
+    (doseq [i (range 1 101)]
+      (let [key (str i)
+            value (str "Message #" i)]
+        (println "Publishing message with key '" key "' and value '" value "'")
+        (let [record-metadata (jc/produce! producer {:topic-name "test2"} key value)]
+          (pp/pprint @record-metadata)))
+      )))
 ```
 
 ---
@@ -1038,6 +1059,27 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 #### Messages consumer
 
 ```
+(ns consume-messages-1.core
+  (:require [jackdaw.client :as jc]
+            [jackdaw.client.log :as jl]
+            [clojure.pprint :as pp]))
+
+(def consumer-config
+  {"bootstrap.servers" "localhost:9092"
+   "key.deserializer" "org.apache.kafka.common.serialization.StringDeserializer"
+   "value.deserializer" "org.apache.kafka.common.serialization.StringDeserializer"
+   "group.id"  "group-A"})
+
+(defn -main
+  [& args]
+  (with-open [consumer (-> (jc/consumer consumer-config)
+                           (jc/subscribe [{:topic-name "test1"}]))]
+    (doseq [{:keys [key value partition timestamp offset]} (jl/log consumer 10)]
+      (println "key: " key)
+      (println "value: " value)
+      (println "partition: " partition)
+      (println "timestamp: " timestamp)
+      (println "offset: " offset))))
 ```
 ---
 
