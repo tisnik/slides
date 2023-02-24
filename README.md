@@ -10,3 +10,4 @@ List of slideshows:
 2. [Cluster names benchmark](https://tisnik.github.io/slides/cluster_names.html#/)
 3. [Polars: Blazingly fast DataFrames in Rust, Python & Node.js](https://tisnik.github.io/slides/polars.html#/)
 4. [Apache Kafka](https://tisnik.github.io/slides/kafka.html#/)
+5. [Apache Kafka: introduction](https://tisnik.github.io/slides/kafka_introduction.html#/)
