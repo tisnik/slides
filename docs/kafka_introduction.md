@@ -132,3 +132,52 @@
 ![com-7](images/com-07-req-pull.png)
 
 ---
+
+## Microservices
+
+* Apache Kafka is sometimes used as a key component in microservice-based architectures
+* "Design the organisation you want, the architecture will follow (kicking and screaming)"
+
+---
+
+### Classic architecture
+
+* Front-end
+* Back-end
+    - business logic
+    - data layer
+* Storage
+
+![Microservices1](images/microservices1.png)
+
+---
+
+### Stateless and stateful microservices
+
+* Services w/o state
+    - super easy to test
+    - usually very easy to scale up
+    - restarts are usually not a big deal
+* Stateful service
+    - the opposite is true
+
+---
+
+[Full image](images/microservices2.png)
+![Microservices2](images/microservices2.png)
+
+---
+---
+
+## Basic concepts
+
+* Message
+    - also called event
+* Topic
+    - a named log of events
+* Producer
+    - sends messages/events into selected topic
+* Consumer
+    - retrieves messages/events from selected topic
+
+---
