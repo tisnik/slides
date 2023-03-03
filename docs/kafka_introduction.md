@@ -118,3 +118,17 @@
 ### Push-pull with messages redistribution
 
 ![com-5](images/com-05-push-pull.png)
+
+---
+
+### Push-pull with reply to producer
+
+![com-6](images/com-06-push-pull-reply.png)
+
+---
+
+### Other strategies (NATS etc.)
+
+![com-7](images/com-07-req-pull.png)
+
+---
