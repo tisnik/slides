@@ -274,3 +274,46 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 * Reliability
 * Log compaction
 
+---
+
+## Scalability
+
+* Topic can be partitioned
+    - across different servers
+
+---
+
+## Reliability
+
+* Replication
+* Changing leadership role
+
+---
+
+## Log compaction
+
+* Keeps the latest known value for each record key
+* Preserves the most recent version of a record during deletion
+
+---
+
+## Consumer groups, clusters, multiple brokers
+
+* Consumer groups
+    - at most one consumer per partition
+    - scalability
+* Clusters
+    - one broker is controller
+    - elected automatically
+    - assigning partitions
+    - monitoring broker failures
+
+---
+
+## Consumer groups, clusters, multiple brokers
+
+* Partition can be assigned to more brokers
+    - replication
+    - redundancy
+    - can survive broker(s) failure
+
