@@ -252,7 +252,7 @@
 
 ---
 
-## Multiple partitions for one topic
+### Multiple partitions for one topic
 
 ```
               +---+---+---+---+---+---+
@@ -264,6 +264,20 @@ partition #2  | ...
               +---+---+---+---+---+---+---+---+---+
 partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
               +---+---+---+---+---+---+---+---+---+
+```
+
+---
+
+### Multiple replicas per partition
+
+```
+```
+
+---
+
+### Multiple replicas for partitioned topic
+
+```
 ```
 
 ---
@@ -280,6 +294,10 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 * Topic can be partitioned
     - across different servers
+    - consumers can consume messages paralelly
+
+```
+```
 
 ---
 
@@ -287,6 +305,9 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 * Replication
 * Changing leadership role
+
+```
+```
 
 ---
 
@@ -316,4 +337,21 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
     - replication
     - redundancy
     - can survive broker(s) failure
+
+---
+
+### Retention
+
+* Retention policy
+    - setup globally
+    - and possible to setup for topic
+    - retention limits are minimum guarantees
+
+```
+log.retention.hours
+log.retention.bytes
+log.segment.bytes
+log.retention.check.interval.ms
+log.roll.hours
+```
 
