@@ -59,6 +59,10 @@
 
 ---
 
+### Kafka: Message broker on steroids
+
+---
+
 ### Message brokers
 
 * Classic ones
