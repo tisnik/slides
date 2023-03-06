@@ -167,7 +167,6 @@
 ![Microservices2](images/microservices2.png)
 
 ---
----
 
 ## Basic concepts
 
@@ -181,3 +180,97 @@
     - retrieves messages/events from selected topic
 
 ---
+
+### Messages in Kafka
+
+* Array of bytes
+    - no prior knowledge about format
+* Optional key
+* Batch(es)
+    - multiple messages for the same topic+partition
+    - written as one block
+    - efficiency
+
+---
+
+### Topics and partitions
+
+* Messages are categorized into topics
+* Topic is splitted into partitions
+
+---
+
+## Append-only log
+
+* new mesage/event is always written on the end of topic
+* messages/events are immutable
+* can be read by
+    - seeking and arbitrary offset
+    - sequential scanning
+
+---
+
+## Three basic operations
+
+* Producer
+    - produce (send) message to given topic
+* Consumer
+    - rewind (seek) to message X
+    - consume message + update offset
+
+---
+
+## Topic is NOT a queue
+
+* Topic is basically stateless
+    - consumers have to maintain their state
+    - by storing their offsets "somewhere"
+* Message is not deleted after consumption
+    - just messages past the retention period are deleted
+* FIFO model is not followed
+
+---
+
+## Topic with one partition only
+
+```
++---+---+---+---+---+---+---+---+---+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
++---+---+---+---+---+---+---+---+---+
+                ^                        ^
+                |                        |
+              read                     write
+```
+
+---
+
+## Kafka technology is much more difficult though
+
+* Partitions
+* Multiple replicas per partition
+* Sharding
+
+---
+
+## Multiple partitions for one topic
+
+```
+              +---+---+---+---+---+---+
+partition #0  | 0 | 1 | 2 | 3 | 4 | 5 | ...
+              +---+---+---+---+---+---+
+partition #1  | 0 | 1 | 2 | ...
+              +---+---+---+
+partition #2  | ...
+              +---+---+---+---+---+---+---+---+---+
+partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
+              +---+---+---+---+---+---+---+---+---+
+```
+
+---
+
+## Key features
+
+* Scalability
+* Reliability
+* Log compaction
+
