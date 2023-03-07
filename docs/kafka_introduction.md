@@ -243,6 +243,29 @@
 
 ---
 
+## Key features
+
+* Scalability
+* Reliability
+* Log compaction
+
+---
+
+## Scalability
+
+* Topic can be partitioned
+    - across different servers
+    - consumers can consume messages paralelly
+
+---
+
+## Reliability
+
+* Replication
+* Changing leadership role
+
+---
+
 ## Topic with one partition only
 
 ```
@@ -350,34 +373,6 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
               +---+---+---+---+---+---+---+---+---+
 ```
 
----
-
-## Key features
-
-* Scalability
-* Reliability
-* Log compaction
-
----
-
-## Scalability
-
-* Topic can be partitioned
-    - across different servers
-    - consumers can consume messages paralelly
-
-```
-```
-
----
-
-## Reliability
-
-* Replication
-* Changing leadership role
-
-```
-```
 
 ---
 
@@ -425,3 +420,119 @@ log.retention.check.interval.ms
 log.roll.hours
 ```
 
+---
+
+## Kafkacat (kcat)
+
+```
+kafkacat -L -b localhost:9092
+kafkacat -P -b localhost:9092 -t "upload"
+kafkacat -P -b localhost:9092 -t filedrop -p 0 file1.bin file2.txt /etc/motd dalsi_soubor.tgz
+kafkacat -C -b localhost:9092 -t "upload"
+kafkacat -C -b localhost:9092 -t topic1 -p 0 -o -1000 -e
+kafkacat -b localhost:9092 -G skupina_konzumentů topic1
+kafkacat -b localhost:9092 -G skupina_konzumentů téma1 téma2
+```
+
+---
+
+## Clients for Apache Kafka
+
+* [Supported languages/ecosystems](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
+    - C/C++
+    - Python
+    - Go (AKA golang)
+    - Erlang
+    - PowerShell
+    - .NET
+    - Ruby
+    - Node.js
+    - Proxy (HTTP REST, etc)
+    - Perl
+    - stdin/stdout
+    - PHP
+    - Rust
+    - Alternative Java
+    - Storm
+    - Scala DSL 
+    - Clojure
+    - Swift
+
+---
+
+## Kafka connect
+
+
+* "Distributed scalable framework"
+* Automatic consuming or producing data
+    - with data persistence in-between
+* Part of Apache Kafka
+* Just configuration files
+* And connectors
+
+---
+
+## Kafka Connect components
+
+* Sources
+* Kafka Cluster
+* Sinks
+
+---
+
+## Kafka Connect use cases
+
+---
+
+### Moving data from one DB to another one
+
+![Kafka_Connector_1](images/kafka_connect_1.png)
+
+---
+
+### Connection between MQTT and AWS SQS
+
+![Kafka_Connector_2](images/kafka_connect_2.png)
+
+---
+
+### From one source to various sinks
+
+* Amazon S3
+* Logs
+* Storage (database)
+
+![Kafka_Connector_3](images/kafka_connect_3.png)
+
+---
+
+#### Custom consumers are possible
+
+* Amazon S3
+* Logs
+* Storage (database)
+* And bunch of custom consumers
+
+![Kafka_Connector_4](images/kafka_connect_4.png)
+
+---
+
+## Kafka Connect from developers PoV
+
+* Is separate process
+* It requires no programming
+    - failures handling
+    - logging
+    - monitoring
+    - scaling
+    - migrating
+    - sec. handling etc.
+
+---
+
+## Kafka Connect from developers PoV (cont.)
+
+* Lightweight data transformations
+* Sometimes defined by one simple property file
+
+---
