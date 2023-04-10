@@ -1,0 +1,112 @@
+# Dasel
+
+# Input file
+
+cat config.toml
+
+# Pretty printing
+
+dasel -f config.toml "."
+
+# Colorized output
+
+dasel --colour -f config.toml "."
+
+# Selecting/querying section
+
+clear
+dasel -f config.toml "service_log"
+
+# Selecting/querying subsection or attribute
+
+clear
+dasel -f config.toml "service_log.cooldown"
+
+dasel -f config.toml "kafka_broker.address"
+
+# Woking with YAML files
+
+clear
+cat gh-pages.yml
+
+clear
+dasel -f gh-pages.yml "."
+
+clear
+dasel --colour -f gh-pages.yml "."
+
+(see that "true"? -> b...y YAML...)
+
+# Selecting/querying
+
+clear
+dasel -f gh-pages.yml ".jobs.github-pages.steps
+
+# One-level flatten
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps.all()'
+
+# Filtering
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps.all().name'
+
+# Export into different format
+
+dasel -f gh-pages.yml -w json
+
+# Sequence vs. array
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps' -w json
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps.all()' -w json
+
+# Optional attributes
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps.all().uses' -w json
+
+clear
+dasel -f gh-pages.yml '.jobs.github-pages.steps.all().uses?' -w json
+
+# Adding / putting items
+
+cp config.toml config2.toml
+dasel put -f config2.toml -t int -v 1 "priority_threshold"
+cat config2.toml | more
+
+cp config.toml config3.toml
+dasel put -f config3.toml -t int -v 1 "service_log.priority_threshold"
+cat config3.toml | more
+
+# Deleting items
+
+cp config.toml config4.toml
+dasel delete -f config4.toml "service_log"
+cat config4.toml | more
+
+cp config.toml config5.toml
+dasel delete -f config5.toml "logging.debug"
+cat config5.toml | more
+
+# XML mode
+
+dasel -f notification.public.xml "."
+
+dasel --colour -f notification.public.xml "."
+
+dasel -f notification.public.xml ".database.tables"
+
+dasel --colour -f notification.public.xml -w json | more
+
+# CSV more
+
+clear
+dasel --colour -f config.toml -w csv | more
+
+clear
+dasel --colour -f config.toml -w csv service_log | more
+
