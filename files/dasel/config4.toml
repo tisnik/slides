@@ -1,0 +1,34 @@
+
+[kafka_broker]
+  address = "kafka:29092"
+  cert_path = "not-set"
+  cooldown = "1 week"
+  enabled = true
+  event_filter = "totalRisk >= totalRiskThreshold"
+  impact_threshold = 0
+  likelihood_threshold = 0
+  sasl_mechanism = "PLAIN"
+  sasl_password = "not-used"
+  sasl_username = "not-used"
+  security_protocol = "PLAINTEXT"
+  severity_threshold = 0
+  tag_filter_enabled = false
+  tags = []
+  timeout = "60s"
+  topic = "platform.notifications.ingress"
+  total_risk_threshold = 2
+
+[logging]
+  debug = true
+  log_level = "info"
+  logging_to_cloud_watch_enabled = false
+
+[storage]
+  db_driver = "postgres"
+  log_sql_queries = true
+  pg_db_name = "notification"
+  pg_host = "localhost"
+  pg_params = "sslmode=disable"
+  pg_password = "postgres"
+  pg_port = 5432
+  pg_username = "postgres"

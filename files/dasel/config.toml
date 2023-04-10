@@ -1,0 +1,55 @@
+[logging]
+debug = true
+log_level = "info"
+logging_to_cloud_watch_enabled = false
+
+[kafka_broker]
+enabled = true
+address = "kafka:29092" #provide in deployment env or as secret
+security_protocol = "PLAINTEXT"
+cert_path = "not-set"
+sasl_mechanism = "PLAIN"
+sasl_username = "not-used"
+sasl_password = "not-used"
+topic = "platform.notifications.ingress" #provide in deployment env or as secret
+timeout = "60s"
+likelihood_threshold = 0
+impact_threshold = 0
+severity_threshold = 0
+total_risk_threshold = 2
+event_filter = "totalRisk >= totalRiskThreshold"
+tag_filter_enabled = false
+tags = []
+# valid units are SQL epoch time units: months days hours minutes seconds"
+# set to empty string "" or 0 to disable
+cooldown = "1 week"
+
+[service_log]
+client_id = "a-service-id"
+client_secret = "a-secret"
+created_by = "service-account-service"
+username ="service-username"
+token_url = ""
+enabled = false
+url = "https://api.foobar.com/api/service_logs/v1/"
+timeout = "15s"
+likelihood_threshold = 0
+impact_threshold = 0
+severity_threshold = 0
+total_risk_threshold = 0
+event_filter = "totalRisk >= totalRiskThreshold"
+tag_filter_enabled = true
+tags = ["osd_customer"]
+# valid units are SQL epoch time units: months days hours minutes seconds"
+# set to empty string "" or "0" to disable
+cooldown = "1 week"
+
+[storage]
+db_driver = "postgres"
+pg_username = "postgres" #provide in deployment env or as secret
+pg_password = "postgres" #provide in deployment env or as secret
+pg_host = "localhost" #provide in deployment env or as secret
+pg_port = 5432 #provide in deployment env or as secret
+pg_db_name = "notification" #provide in deployment env or as secret
+pg_params = "sslmode=disable"
+log_sql_queries = true
