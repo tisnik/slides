@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="notification" schema="public" type="PostgreSQL - 9.6.10">
+   <sequences>
+      <sequence increment="1" name="read_errors_error_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="event_targets" numRows="2" remarks="specification of all event targets currently supported" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="event_type_id" foreignKey="reported_event_type_id_fkey" implied="false" onDeleteCascade="false" schema="public" table="reported"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="metainfo" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="event_targets_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="event_targets_metainfo_key" unique="true">
+            <column ascending="true" name="metainfo"/>
+         </index>
+         <index name="event_targets_name_key" unique="true">
+            <column ascending="true" name="name"/>
+         </index>
+      </table>
+      <table name="migration_info" numRows="1" remarks="information about the latest DB schema and migration status" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="version" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+      </table>
+      <table name="states" numRows="4" remarks="states for each row stored in reported table" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="XXXXXXXXX" size="10" type="int4" typeCode="4">
+            <child column="state" foreignKey="fk_state" implied="false" onDeleteCascade="false" schema="public" table="reported"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="value" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="comment" nullable="true" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="states_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+   </tables>
+</database>
