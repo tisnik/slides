@@ -1,0 +1,29 @@
+{
+  "schema": {
+    "type": "struct",
+    "optional": false,
+    "version": 1,
+    "fields": [
+      {
+        "field": "ID",
+        "type": "int64",
+        "optional": false
+      },
+      {
+        "field": "Name",
+        "type": "string",
+        "optional": false
+      },
+      {
+        "field": "Surname",
+        "type": "string",
+        "optional": false
+      }
+    ]
+  },
+  "payload": {
+    "ID": 1,
+    "Name": "Linus",
+    "Surname": "Torvalds"
+  }
+}
