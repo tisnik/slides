@@ -54,11 +54,6 @@ int main(void)
     static Node *root = NULL;
 
     insert_new_node(&root, "xxx");
-    insert_new_node(&root, "aaa");
-    insert_new_node(&root, "bbb");
-    insert_new_node(&root, "ccc");
-    insert_new_node(&root, "yyy");
-    insert_new_node(&root, "yyy");
 
     traverse_tree(root, callback_function);
 
