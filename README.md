@@ -11,3 +11,5 @@ List of slideshows:
 3. [Polars: Blazingly fast DataFrames in Rust, Python & Node.js](https://tisnik.github.io/slides/polars.html#/)
 4. [Apache Kafka](https://tisnik.github.io/slides/kafka.html#/)
 5. [Apache Kafka: introduction](https://tisnik.github.io/slides/kafka_introduction.html#/)
+6. [Go performance tricks: How I Learned to Stop Worrying and Love Go in production](https://tisnik.github.io/slides/go_performance.html#/)
+7. [HCC Proxy: PoC](https://tisnik.github.io/slides/hccp.html#/)
