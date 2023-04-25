@@ -2,7 +2,7 @@
 
 ---
 
-## Architecture of HCC Proxy usage
+## Architecture of HCC Proxy
 
 ![full image](images/hccp_basic.png)
 
@@ -32,7 +32,7 @@
 
 ---
 
-## Console implementation (PoC)
+## HCCP Console (PoC)
 
 ![full image](images/hccp_console.png)
 
