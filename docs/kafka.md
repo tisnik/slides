@@ -830,6 +830,16 @@ bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group 
 
 ---
 
+## kcli
+
+* Topic, partitions and messages browser
+* Works in console
+* Windows + Linux
+
+* https://github.com/cswank/kcli
+
+---
+
 ## Kafkacat (kcat)
 
 * List topics
