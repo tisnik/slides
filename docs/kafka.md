@@ -238,6 +238,18 @@
 
 ---
 
+### Producer and consumer
+
+![ProducerConsumer1](images/kafka1.png)
+
+---
+
+### More producers and consumers
+
+![ProducerConsumer2](images/kafka2.png)
+
+---
+
 ### Messages in Kafka
 
 * Array of bytes
@@ -344,6 +356,79 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 * Replication
 * Changing leadership role
+
+---
+
+### Multiple replicas per partition
+
+```
+                                     write
+                                       |
++---+---+---+---+---+---+---+---+---+  v
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...    (leader)
++---+---+---+---+---+---+---+---+---+
+                  ^               ^
+                read              |
+                                 sync
+                                  |
+                                  v
++---+---+---+---+---+---+---+---+---+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |        (follower)
++---+---+---+---+---+---+---+---+---+
+                                  ^
+                                  |
+                                 sync
+                                  |
+                                  v
++---+---+---+---+---+---+---+---+---+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |        (follower)
++---+---+---+---+---+---+---+---+---+
+```
+
+---
+
+### Multiple replicas for partitioned topic
+
+```
+              +---+---+---+---+---+---+
+partition #0  | 0 | 1 | 2 | 3 | 4 | 5 | ...
+              +---+---+---+---+---+---+
+partition #1  | 0 | 1 | 2 | ...
+              +---+---+---+                               (leader)
+partition #2  | ...
+              +---+---+---+---+---+---+---+---+---+
+partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
+              +---+---+---+---+---+---+---+---+---+
+                                      ^
+                                      |
+                                     sync
+                                      |
+                                      v
+              +---+---+---+---+---+---+
+partition #0  | 0 | 1 | 2 | 3 | 4 | 5 | ...
+              +---+---+---+---+---+---+
+partition #1  | 0 | 1 | 2 | ...
+              +---+---+---+
+partition #2  | ...                                       (follower)
+              +---+---+---+---+---+---+---+---+---+
+partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
+              +---+---+---+---+---+---+---+---+---+
+                                      ^
+                                      |
+                                     sync
+                                      |
+                                      v
+              +---+---+---+---+---+---+
+partition #0  | 0 | 1 | 2 | 3 | 4 | 5 | ...
+              +---+---+---+---+---+---+
+partition #1  | 0 | 1 | 2 | ...
+              +---+---+---+
+partition #2  | ...                                       (follower)
+              +---+---+---+---+---+---+---+---+---+
+partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
+              +---+---+---+---+---+---+---+---+---+
+```
+
 
 ---
 
@@ -846,7 +931,8 @@ topic = "upload"
 
 print("Connecting to Kafka")
 producer = KafkaProducer(
-    bootstrap_servers=[server], value_serializer=lambda x: dumps(x).encode("utf-8")
+    bootstrap_servers=[server],
+    value_serializer=lambda x: dumps(x).encode("utf-8")
 )
 print("Connected to Kafka")
 
@@ -872,7 +958,9 @@ group_id = "group1"
 
 print("Connecting to Kafka")
 consumer = KafkaConsumer(
-    topic, group_id=group_id, bootstrap_servers=[server], auto_offset_reset="earliest"
+    topic, group_id=group_id,
+    bootstrap_servers=[server],
+    auto_offset_reset="earliest"
 )
 print("Connected to Kafka")
 
