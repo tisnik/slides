@@ -9,7 +9,9 @@ group_id = "group1"
 
 print("Connecting to Kafka")
 consumer = KafkaConsumer(
-    topic, group_id=group_id, bootstrap_servers=[server], auto_offset_reset="earliest"
+    topic, group_id=group_id,
+    bootstrap_servers=[server],
+    auto_offset_reset="earliest"
 )
 print("Connected to Kafka")
 
