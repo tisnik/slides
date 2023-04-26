@@ -9,7 +9,8 @@ topic = "upload"
 
 print("Connecting to Kafka")
 producer = KafkaProducer(
-    bootstrap_servers=[server], value_serializer=lambda x: dumps(x).encode("utf-8")
+    bootstrap_servers=[server],
+    value_serializer=lambda x: dumps(x).encode("utf-8")
 )
 print("Connected to Kafka")
 
