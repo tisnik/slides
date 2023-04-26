@@ -452,6 +452,24 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 ---
 
+## Multiple consumers in one group
+
+![Consumer groups 1](images/consumer_groups_1.png)
+
+---
+
+## Consumers from different groups
+
+![Consumer groups 2](images/consumer_groups_2.png)
+
+---
+
+## Multiple brokers
+
+![Consumer groups 3](images/consumer_groups_3.png)
+
+---
+
 ## Consumer groups, clusters, multiple brokers
 
 * Partition can be assigned to more brokers
