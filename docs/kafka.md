@@ -558,9 +558,14 @@ Connection closed by foreign host.
 ### Broker(s) configuration
 
 * Stored in `config/server.properties`
+* Better to use IDs greater that #replicas
+
+---
+
+### Broker(s) configuration
 
 ```properties
-broker.id=0
+broker.id=100
 listeners=PLAINTEXT://:9092
 num.network.threads=3
 num.io.threads=8
@@ -826,6 +831,47 @@ bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group G3 --desc
 
 ```bash
 bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group G3 --describe
+```
+
+---
+
+### Partition replications
+
+* Examples below expects 3 brokers to run
+    - with different IDs
+    - with different port
+    - and with different log.dirs
+
+---
+
+### Partition replications
+
+* Topic with one partition that is replicated 3 times
+
+```
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_2 --replication-factor 3
+
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic test_topic_2
+```
+
+* Topic with three partitions that are replicated
+
+```
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_3 --replication-factor 3 --partitions 3
+
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic test_topic_3
+```
+
+---
+
+### Partition replications
+
+* Specify replica assignments
+
+```
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_4 --replica-assignment 1:2,0:1
+
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_5 --replica-assignment 2:0:1
 ```
 
 ---
