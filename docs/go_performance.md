@@ -270,9 +270,16 @@ ok      config-struct/conf      27.166s
 
 ### Benchmark results
 
+* 13.20 ns/op vs 0.2405 ns/op
 * That is 5488% speed increase :)
+    - memcpy operation elimination
+
+---
 
 ![Benchmark1](images/benchmark1.png)
+
+---
+
 ![Benchmark1](images/benchmark2.png)
 
 ---
@@ -281,5 +288,7 @@ ok      config-struct/conf      27.166s
 
 * 0.2405 ns vs. 13.20 ns from CPU point of view vs. human point of view
 
-![CPU](go_pass_structs/computer_latency.png)
+![CPU](images/computer_latency.png)
+
+---
 
