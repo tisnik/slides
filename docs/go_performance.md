@@ -11,7 +11,7 @@
 * All data types are passed by value into functions and methods
     - that's good from "state-space" perspective
     - not so good from performance point of view
-    - (and no nice solution like `const` and `mut` exists in Go)
+* And no nice solution like `const` and `mut` exists in Go
 
 ---
 
@@ -20,6 +20,7 @@
 * Large structures passed by value everywhere in the code
     - even within inner loops
 * It causes overhead that is super easy to avoid
+    - but at cost: wrong semantic is used
 
 ---
 
@@ -172,4 +173,113 @@ func GetStorageConfigurationByReference(configuration *ConfigStruct) StorageConf
 	return configuration.Storage
 }
 ```
+
+---
+
+### Is it worth to do it?
+
+```go
+package conf_test
+
+// Benchmark for config module
+
+import (
+	"os"
+	"testing"
+
+	"config-struct/conf"
+)
+
+const (
+	configFileEnvVariableName = "CCX_NOTIFICATION_SERVICE_CONFIG_FILE"
+	defaultConfigFileName     = "./config"
+)
+
+// loadConfiguration function loads configuration prepared to be used by
+// benchmarks
+func loadConfiguration() (conf.ConfigStruct, error) {
+	os.Clearenv()
+
+	err := os.Setenv(configFileEnvVariableName, defaultConfigFileName)
+	if err != nil {
+		return conf.ConfigStruct{}, err
+	}
+
+	config, err := conf.LoadConfiguration(configFileEnvVariableName, defaultConfigFileName)
+	if err != nil {
+		return conf.ConfigStruct{}, err
+	}
+
+	return config, nil
+}
+
+func mustLoadBenchmarkConfiguration(b *testing.B) conf.ConfigStruct {
+	configuration, err := loadConfiguration()
+	if err != nil {
+		b.Fatal(err)
+	}
+	return configuration
+}
+
+func BenchmarkGetStorageConfigurationFunctionByValue(b *testing.B) {
+	b.StopTimer()
+	configuration := mustLoadBenchmarkConfiguration(b)
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		// call benchmarked function
+		conf.GetStorageConfigurationByValue(configuration)
+	}
+
+}
+
+func BenchmarkGetStorageConfigurationFunctionByReference(b *testing.B) {
+	b.StopTimer()
+	configuration := mustLoadBenchmarkConfiguration(b)
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		// call benchmarked function
+		conf.GetStorageConfigurationByReference(&configuration)
+	}
+
+}
+
+```
+
+---
+
+### Benchmark results
+
+```
+$ go test -bench=. -benchtime=1000000000x -cpuprofile profile.out -v config-struct/conf
+
+goos: linux
+goarch: amd64
+pkg: config-struct/conf
+cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
+BenchmarkGetStorageConfigurationFunctionByValue
+BenchmarkGetStorageConfigurationFunctionByValue-8               1000000000              13.20 ns/op
+BenchmarkGetStorageConfigurationFunctionByReference
+BenchmarkGetStorageConfigurationFunctionByReference-8           1000000000               0.2405 ns/op
+PASS
+ok      config-struct/conf      27.166s
+```
+
+---
+
+### Benchmark results
+
+* That is 5488% speed increase :)
+
+![Benchmark1](images/benchmark1.png)
+![Benchmark1](images/benchmark2.png)
+
+---
+
+### Is it still relevant
+
+* 0.2405 ns vs. 13.20 ns from CPU point of view vs. human point of view
+
+![CPU](go_pass_structs/computer_latency.png)
 
