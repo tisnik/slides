@@ -323,6 +323,12 @@ ok      config-struct/conf      27.166s
 
 ---
 
+### Memory is getting "slower"
+
+![CPU2](images/cpu.png)
+
+---
+
 ### What about methods?
 
 * The same issue + simple fix
