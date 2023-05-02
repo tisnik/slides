@@ -2,6 +2,24 @@
 
 ---
 
+## Developers background
+
+```
+Python     35
+C          30
+Java       26
+Bash       19
+JavaScript 16
+C++        13
+Ruby        8
+Perl        4
+Delphi      3
+TypeScript  3
+C#          2
+```
+
+---
+
 ## Simple but useful performance improvements in Go
 
 ---
@@ -284,7 +302,7 @@ ok      config-struct/conf      27.166s
 
 ---
 
-### Is it still relevant
+### Is it still relevant?
 
 * 0.2405 ns vs. 13.20 ns from CPU point of view vs. human point of view
 
@@ -292,3 +310,67 @@ ok      config-struct/conf      27.166s
 
 ---
 
+### What about methods?
+
+* The same issue + simple fix
+
+```go
+func (configuration ConfigStruct) GetStorageConfigurationByValue() StorageConfiguration {
+	return configuration.Storage
+}
+
+func (configuration *ConfigStruct) GetStorageConfigurationByReference() StorageConfiguration {
+	return configuration.Storage
+}
+```
+
+---
+
+### Benchmark for methods
+
+```go
+func BenchmarkGetStorageConfigurationMethodByValue(b *testing.B) {
+	b.StopTimer()
+	configuration := mustLoadBenchmarkConfiguration(b)
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		// call benchmarked function
+		configuration.GetStorageConfigurationByValue()
+	}
+
+}
+
+func BenchmarkGetStorageConfigurationMethodByReference(b *testing.B) {
+	b.StopTimer()
+	configuration := mustLoadBenchmarkConfiguration(b)
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		// call benchmarked function
+		configuration.GetStorageConfigurationByReference()
+	}
+
+}
+```
+
+* Run the benchmark
+
+```
+$ go test -bench=. -benchtime=1000000000x -cpuprofile profile.out -v config-struct/conf
+
+goos: linux
+goarch: amd64
+pkg: config-struct/conf
+cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
+BenchmarkGetStorageConfigurationFunctionByValue
+BenchmarkGetStorageConfigurationFunctionByValue-8               1000000000              13.20 ns/op
+BenchmarkGetStorageConfigurationFunctionByReference
+BenchmarkGetStorageConfigurationFunctionByReference-8           1000000000               0.2405 ns/op
+BenchmarkGetStorageConfigurationMethodByValue
+BenchmarkGetStorageConfigurationMethodByValue-8                 1000000000              13.24 ns/op
+BenchmarkGetStorageConfigurationMethodByReference
+BenchmarkGetStorageConfigurationMethodByReference-8             1000000000               0.3596 ns/op
+PASS
+ok      config-struct/conf      27.166s
+```
