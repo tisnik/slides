@@ -22,6 +22,19 @@ C#          2
 
 ## Simple but useful performance improvements in Go
 
+* Go compiler is pretty straightfoward (= dumb)
+* It needs some help from developers
+
+---
+
+## Some interesting areas backed by experience
+
+1. Pass structures by reference, not by value
+1. Pass receivers by reference, not by value
+1. Maps pre-allocation
+
+* Most things ^ are not idiomatic!
+
 ---
 
 ## Pass structures by reference, not by value
@@ -354,7 +367,9 @@ func BenchmarkGetStorageConfigurationMethodByReference(b *testing.B) {
 }
 ```
 
-* Run the benchmark
+---
+
+### Run the benchmark
 
 ```
 $ go test -bench=. -benchtime=1000000000x -cpuprofile profile.out -v config-struct/conf
@@ -374,3 +389,100 @@ BenchmarkGetStorageConfigurationMethodByReference-8             1000000000      
 PASS
 ok      config-struct/conf      27.166s
 ```
+
+---
+
+## Maps pre-alllocation
+
+* In Go it is possible to specify number of map items during map allocation
+
+```go
+m1 := make(map[UUID]time.Time)
+m2 := make(map[UUID]time.Time, b.N)
+```
+
+* Not strictly needed, so developers took "Python approach"
+* Does it make sense to try to estimate number of items?
+* Who knows? Probably just the benchark...
+
+---
+
+### Benchmark
+
+```go
+```
+
+---
+
+### Benchmark results
+
+```
+goos: linux
+goarch: amd64
+pkg: map-bench
+cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
+BenchmarkInsertIntoEmptyMapUUIDKey-8                     1000000               354.7 ns/op
+BenchmarkInsertIntoPreallocatedMapUUIDKey-8              1000000               163.9 ns/op
+PASS
+```
+
+---
+
+### Benchmark results
+
+* For different input N
+
+![Profiler1](images/profiler1.png)
+
+---
+
+### Maps with large keys
+
+* Keys can be of any type in Go
+* So keys might be pretty large (imagine structs)
+
+```go
+type key struct {
+        ID      int
+        payload [100]byte
+}
+
+m1 := make(map[key]value)
+m2 := make(map[key]value, capacity)
+```
+
+---
+
+### Benchmark results for maps with large keys
+
+```
+goos: linux
+goarch: amd64
+pkg: map-bench
+cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
+BenchmarkInsertIntoEmptyMapCompoundKey-8                 1000000               332.2 ns/op
+BenchmarkInsertIntoPreallocatedMapCompoundKey-8          1000000               177.7 ns/op
+PASS
+```
+
+---
+
+### Memory requirements
+
+* For us much more relevant
+    - as pods will be killed due to OOM
+
+---
+
+### Go profiler to the rescue
+
+![Profiler2](images/profiler2.png)
+
+---
+
+### Go profiler to the rescue
+
+![Profiler3](images/profiler3.png)
+
+---
+
