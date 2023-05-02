@@ -416,6 +416,31 @@ m2 := make(map[UUID]time.Time, b.N)
 ### Benchmark
 
 ```go
+type UUID string
+
+func BenchmarkInsertIntoPreallocatedMapUUIDKey(b *testing.B) {
+	m := make(map[UUID]time.Time, b.N)
+	t := time.Now()
+
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		id := UUID(uuid.New().String())
+		b.StartTimer()
+		m[id] = t
+	}
+}
+
+func BenchmarkInsertIntoEmptyMapUUIDKey(b *testing.B) {
+	m := map[UUID]time.Time{}
+	t := time.Now()
+
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		id := UUID(uuid.New().String())
+		b.StartTimer()
+		m[id] = t
+	}
+}
 ```
 
 ---
@@ -459,6 +484,41 @@ m2 := make(map[key]value, capacity)
 
 ---
 
+### Benchmark
+
+```go
+type key struct {
+	ID      int
+	payload [100]byte
+}
+
+type value struct{}
+
+func BenchmarkInsertIntoPreallocatedMapCompoundKey(b *testing.B) {
+	m := make(map[key]value, b.N)
+
+	for i := 0; i < b.N; i++ {
+		k := key{
+			ID: i,
+		}
+		m[k] = value{}
+	}
+}
+
+func BenchmarkInsertIntoEmptyMapCompoundKey(b *testing.B) {
+	m := map[key]value{}
+
+	for i := 0; i < b.N; i++ {
+		k := key{
+			ID: i,
+		}
+		m[k] = value{}
+	}
+}
+```
+
+---
+
 ### Benchmark results for maps with large keys
 
 ```
@@ -492,3 +552,126 @@ PASS
 
 ---
 
+## Set implementations
+
+* Implementation
+    - first devel instinct: "map" of course
+    - but we tried linear data structure too!
+
+---
+
+## Set implementations
+
+```go
+type ID int
+ 
+func genID(i int) ID {
+        return ID(3*i + 1)
+}
+ 
+func fillInMap(b *testing.B, items int) map[ID]struct{} {
+        b.StopTimer()
+ 
+        m := make(map[ID]struct{}, items)
+ 
+        for i := 0; i < items; i++ {
+                id := genID(i)
+                m[id] = struct{}{}
+        }
+ 
+        b.StartTimer()
+        return m
+}
+ 
+func fillInSlice(b *testing.B, items int) []ID {
+        b.StopTimer()
+ 
+        s := make([]ID, items)
+ 
+        for i := 0; i < items; i++ {
+                id := genID(i)
+                s[i] = id
+        }
+ 
+        b.StartTimer()
+        return s
+}
+```
+
+---
+
+### Benchmark for read/in-set operation
+
+```go
+func performBenchmarkFindInMap(b *testing.B, m map[ID]struct{}) {
+        items := len(m)
+        for i := 0; i < b.N; i++ {
+                _, found := m[genID(i%items)]
+                if !found {
+                        b.Fatal("not found")
+                }
+        }
+}
+ 
+func performBenchmarkFindInSlice(b *testing.B, s []ID) {
+        items := len(s)
+        for i := 0; i < b.N; i++ {
+                found := false
+                id := genID(i % items)
+                for _, p := range s {
+                        if p == id {
+                                found = true
+                                break
+                        }
+                }
+                if !found {
+                        b.Fatal("not found")
+                }
+        }
+}
+```
+
+---
+
+
+### Benchmark results
+
+```
+BenchmarkFindInMap1-8           100000000               12.01 ns/op
+BenchmarkFindInSlice1-8         100000000                7.208 ns/op
+BenchmarkFindInMap5-8           100000000               12.61 ns/op
+BenchmarkFindInSlice5-8         100000000                8.346 ns/op
+BenchmarkFindInMap10-8          100000000               14.57 ns/op
+BenchmarkFindInSlice10-8        100000000                9.498 ns/op
+BenchmarkFindInMap20-8          100000000               14.28 ns/op
+BenchmarkFindInSlice20-8        100000000               11.61 ns/op
+BenchmarkFindInMap100-8         100000000               14.63 ns/op
+BenchmarkFindInSlice100-8       100000000               35.57 ns/op
+BenchmarkFindInMap1000-8        100000000               22.53 ns/op
+BenchmarkFindInSlice1000-8      100000000              281.4 ns/op
+```
+
+---
+
+
+### Graphical interpretation
+
+---
+
+* Low number of items
+
+![Set1](images/set1.png)
+
+---
+
+* Higher number of items
+
+![Set2](images/set2.png)
+
+---
+
+* Map vs slice for set implementation
+
+![Set3](images/set3.png)
+
+---
