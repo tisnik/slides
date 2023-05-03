@@ -13,3 +13,4 @@ List of slideshows:
 5. [Apache Kafka: introduction](https://tisnik.github.io/slides/kafka_introduction.html#/)
 6. [Go performance tricks: How I Learned to Stop Worrying and Love Go in production](https://tisnik.github.io/slides/go_performance.html#/)
 7. [HCC Proxy: PoC](https://tisnik.github.io/slides/hccp.html#/)
+8. [Behavior-driven development (BDD) & Behavior-driven testing (BDT)](https://tisnik.github.io/slides/BDD.html#/)
