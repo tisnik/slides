@@ -33,7 +33,7 @@
     - Given/when/then
     - Variable parameters in tests
     - Tables as data source
-    - Tables for multiple test runs with variable parameters
+    - Tables for multiple test runs
 * Practical part
     - Python & Behave library
     - Project structure
@@ -48,10 +48,20 @@
 * Today IT systems are usually very complex
     - quite hard to get the overall picture
     - overall function vs implementation details
+
+---
+
+## Why BDD?
+
 * Basic/typical problems
     - bug fixes are very expensive in the later stages of the development
     - customers don't like features^W bugs
     - it is vital to verify and validate application behaviour during development
+
+---
+
+## Why BDD?
+
 * Other problems
     - large development teams
     - more programming languages (back end, front end, microservices...)
@@ -73,20 +83,41 @@
 ### Test pyramid
 
 * Business part
-    - Beta tests
-    - Alfa tests
-    - Acceptance tests
 * Technology part
-    - UI tests
-    - API tests
-    - Integration tests
-    - Component nests
-    - and of course Unit tests
 * Other tests
-    - Benchmarks
-    - Performance tests
-    - Security tests
-    - ...
+
+---
+
+### Business part
+
+* Beta tests
+* Alfa tests
+* Acceptance tests
+
+---
+
+### Technology part
+
+* UI tests
+* API tests
+* Integration tests
+* Component tests
+* and of course Unit tests
+
+---
+
+### Other tests
+
+* Benchmarks
+* Performance tests
+* Security tests
+* ...
+
+---
+
+### OT: unit tests are not enough!
+
+![dum](images/obraceny-dum-1.jpg)
 
 ---
 
