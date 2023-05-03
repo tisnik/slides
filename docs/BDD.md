@@ -24,16 +24,31 @@
 
 ---
 
+
+## TOC
+
+---
+
 * Why BDD?
     - Test pyramid
     - BDD: behavior-driven development
     - Simple DSL
+
+## TOC
+
+---
+
 * Gherkin language
     - Feature/Scenario/Scenario Outline
     - Given/when/then
     - Variable parameters in tests
     - Tables as data source
     - Tables for multiple test runs
+
+---
+
+## TOC
+
 * Practical part
     - Python & Behave library
     - Project structure
