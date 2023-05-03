@@ -1,4 +1,10 @@
-# Behavior-driven development (BDD) & Behavior-driven testing (BDT)
+## Behavior-driven development (BDD) & Behavior-driven testing (BDT)
+
+---
+
+![QR](images/bdd_qr.png)
+
+---
 
 * Papa Bakary Camara, Pavel Tišnovský
     - `pcamara@redhat.com`
@@ -11,6 +17,12 @@
 ---
 
 ## TOC
+
+* Why BDD?
+* Gherkin language
+* Practical part
+
+---
 
 * Why BDD?
     - Test pyramid
