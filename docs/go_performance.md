@@ -762,7 +762,7 @@ func BenchmarkPassArrayByReference(b *testing.B) {
 
 ---
 
-## Benchmark results
+### Benchmark results
 
 ```
 BenchmarkPassSlice-8              100000000    0.4799 ns/op
@@ -784,13 +784,98 @@ BenchmarkPassArrayByReference-8   100000000    0.4740 ns/op
 
 ## Now with side effect
 
+```go
+func changeMe1(values []int) int {
+        values[0] = FIRST_VALUE
+        values[MAX_VALS-1] = LAST_VALUE
+        return values[MAX_VALS/2]
+}
+
+func changeMe2(values [MAX_VALS]int) int {
+        values[0] = FIRST_VALUE
+        values[MAX_VALS-1] = LAST_VALUE
+        return values[MAX_VALS/2]
+}
+
+func changeMe3(values *[MAX_VALS]int) int {
+        values[0] = FIRST_VALUE
+        values[MAX_VALS-1] = LAST_VALUE
+        return values[MAX_VALS/2]
+}
+```
+
 ---
 
-###
+### Benchmark
+
+```
+func BenchmarkPassSlice(b *testing.B) {
+	var values []int = make([]int, MAX_VALS)
+
+	for i := 0; i < b.N; i++ {
+		r := changeMe1(values)
+		if r != DEFAULT_VALUE {
+			b.Fatal()
+		}
+	}
+	if values[0] != FIRST_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != LAST_VALUE {
+		b.Fatal()
+	}
+}
+
+func BenchmarkPassArrayByValue(b *testing.B) {
+	var values [MAX_VALS]int = [MAX_VALS]int{DEFAULT_VALUE}
+
+	for i := 0; i < b.N; i++ {
+		r := changeMe2(values)
+		if r != DEFAULT_VALUE {
+			b.Fatal()
+		}
+	}
+	if values[0] != DEFAULT_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != DEFAULT_VALUE {
+		b.Fatal()
+	}
+}
+
+func BenchmarkPassArrayByReference(b *testing.B) {
+	var values [MAX_VALS]int = [MAX_VALS]int{DEFAULT_VALUE}
+
+	for i := 0; i < b.N; i++ {
+		r := changeMe3(&values)
+		if r != DEFAULT_VALUE {
+			b.Fatal()
+		}
+	}
+	if values[0] != FIRST_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != LAST_VALUE {
+		b.Fatal()
+	}
+}
+```
 
 ---
 
-###
+### Benchmark results
+
+```
+BenchmarkPassSlice-8                    100000000                0.4768 ns/op
+BenchmarkPassArrayByValue-8             100000000              135.3 ns/op
+BenchmarkPassArrayByReference-8         100000000                0.5629 ns/op
+```
+
+---
+
+### Benchmark results
+
+![benchmark3](images/benchmark3.png)
 
 ---
 
@@ -897,6 +982,8 @@ int main(void)
 }
 ```
 
+---
+
 ### Generated machine code
 
 ```asm
@@ -920,7 +1007,7 @@ int main(void)
 * Assembler
     - built-in N/A in Go
     - external one is cumbersome to use
-    - gccgo + GNU assembler (gasm)
+    - gccgo + GNU assembler (gas)
 
 ---
 
