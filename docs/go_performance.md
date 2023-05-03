@@ -143,32 +143,32 @@ blocked_clusters = []
 
 ```go
 type ConfigStruct struct {
-	Logging       LoggingConfiguration       `mapstructure:"logging" toml:"logging"`
-	Storage       StorageConfiguration       `mapstructure:"storage" toml:"storage"`
-	Kafka         KafkaConfiguration         `mapstructure:"kafka_broker" toml:"kafka_broker"`
-	ServiceLog    ServiceLogConfiguration    `mapstructure:"service_log" toml:"service_log"`
-	Dependencies  DependenciesConfiguration  `mapstructure:"dependencies" toml:"dependencies"`
-	Notifications NotificationsConfiguration `mapstructure:"notifications" toml:"notifications"`
-	Metrics       MetricsConfiguration       `mapstructure:"metrics" toml:"metrics"`
-	Cleaner       CleanerConfiguration       `mapstructure:"cleaner" toml:"cleaner"`
-	Processing    ProcessingConfiguration    `mapstructure:"processing" toml:"processing"`
+        Logging       LoggingConfiguration       `mapstructure:"logging" toml:"logging"`
+        Storage       StorageConfiguration       `mapstructure:"storage" toml:"storage"`
+        Kafka         KafkaConfiguration         `mapstructure:"kafka_broker" toml:"kafka_broker"`
+        ServiceLog    ServiceLogConfiguration    `mapstructure:"service_log" toml:"service_log"`
+        Dependencies  DependenciesConfiguration  `mapstructure:"dependencies" toml:"dependencies"`
+        Notifications NotificationsConfiguration `mapstructure:"notifications" toml:"notifications"`
+        Metrics       MetricsConfiguration       `mapstructure:"metrics" toml:"metrics"`
+        Cleaner       CleanerConfiguration       `mapstructure:"cleaner" toml:"cleaner"`
+        Processing    ProcessingConfiguration    `mapstructure:"processing" toml:"processing"`
 }
 
 type LoggingConfiguration struct {
-	// Debug enables pretty colored logging
-	Debug bool `mapstructure:"debug" toml:"debug"`
-	LogLevel string `mapstructure:"log_level" toml:"log_level"`
+        // Debug enables pretty colored logging
+        Debug bool `mapstructure:"debug" toml:"debug"`
+        LogLevel string `mapstructure:"log_level" toml:"log_level"`
 }
 
 type StorageConfiguration struct {
-	Driver        string `mapstructure:"db_driver"       toml:"db_driver"`
-	PGUsername    string `mapstructure:"pg_username"     toml:"pg_username"`
-	PGPassword    string `mapstructure:"pg_password"     toml:"pg_password"`
-	PGHost        string `mapstructure:"pg_host"         toml:"pg_host"`
-	PGPort        int    `mapstructure:"pg_port"         toml:"pg_port"`
-	PGDBName      string `mapstructure:"pg_db_name"      toml:"pg_db_name"`
-	PGParams      string `mapstructure:"pg_params"       toml:"pg_params"`
-	LogSQLQueries bool   `mapstructure:"log_sql_queries" toml:"log_sql_queries"`
+        Driver        string `mapstructure:"db_driver"       toml:"db_driver"`
+        PGUsername    string `mapstructure:"pg_username"     toml:"pg_username"`
+        PGPassword    string `mapstructure:"pg_password"     toml:"pg_password"`
+        PGHost        string `mapstructure:"pg_host"         toml:"pg_host"`
+        PGPort        int    `mapstructure:"pg_port"         toml:"pg_port"`
+        PGDBName      string `mapstructure:"pg_db_name"      toml:"pg_db_name"`
+        PGParams      string `mapstructure:"pg_params"       toml:"pg_params"`
+        LogSQLQueries bool   `mapstructure:"log_sql_queries" toml:"log_sql_queries"`
 }
 ```
 
@@ -178,7 +178,7 @@ type StorageConfiguration struct {
 
 ```go
 func GetStorageConfigurationByValue(configuration ConfigStruct) StorageConfiguration {
-	return configuration.Storage
+        return configuration.Storage
 }
 ```
 
@@ -201,7 +201,7 @@ func GetStorageConfigurationByValue(configuration ConfigStruct) StorageConfigura
 
 ```go
 func GetStorageConfigurationByReference(configuration *ConfigStruct) StorageConfiguration {
-	return configuration.Storage
+        return configuration.Storage
 }
 ```
 
@@ -215,64 +215,64 @@ package conf_test
 // Benchmark for config module
 
 import (
-	"os"
-	"testing"
+        "os"
+        "testing"
 
-	"config-struct/conf"
+        "config-struct/conf"
 )
 
 const (
-	configFileEnvVariableName = "CCX_NOTIFICATION_SERVICE_CONFIG_FILE"
-	defaultConfigFileName     = "./config"
+        configFileEnvVariableName = "CCX_NOTIFICATION_SERVICE_CONFIG_FILE"
+        defaultConfigFileName     = "./config"
 )
 
 // loadConfiguration function loads configuration prepared to be used by
 // benchmarks
 func loadConfiguration() (conf.ConfigStruct, error) {
-	os.Clearenv()
+        os.Clearenv()
 
-	err := os.Setenv(configFileEnvVariableName, defaultConfigFileName)
-	if err != nil {
-		return conf.ConfigStruct{}, err
-	}
+        err := os.Setenv(configFileEnvVariableName, defaultConfigFileName)
+        if err != nil {
+                return conf.ConfigStruct{}, err
+        }
 
-	config, err := conf.LoadConfiguration(configFileEnvVariableName, defaultConfigFileName)
-	if err != nil {
-		return conf.ConfigStruct{}, err
-	}
+        config, err := conf.LoadConfiguration(configFileEnvVariableName, defaultConfigFileName)
+        if err != nil {
+                return conf.ConfigStruct{}, err
+        }
 
-	return config, nil
+        return config, nil
 }
 
 func mustLoadBenchmarkConfiguration(b *testing.B) conf.ConfigStruct {
-	configuration, err := loadConfiguration()
-	if err != nil {
-		b.Fatal(err)
-	}
-	return configuration
+        configuration, err := loadConfiguration()
+        if err != nil {
+                b.Fatal(err)
+        }
+        return configuration
 }
 
 func BenchmarkGetStorageConfigurationFunctionByValue(b *testing.B) {
-	b.StopTimer()
-	configuration := mustLoadBenchmarkConfiguration(b)
-	b.StartTimer()
+        b.StopTimer()
+        configuration := mustLoadBenchmarkConfiguration(b)
+        b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
-		// call benchmarked function
-		conf.GetStorageConfigurationByValue(configuration)
-	}
+        for i := 0; i < b.N; i++ {
+                // call benchmarked function
+                conf.GetStorageConfigurationByValue(configuration)
+        }
 
 }
 
 func BenchmarkGetStorageConfigurationFunctionByReference(b *testing.B) {
-	b.StopTimer()
-	configuration := mustLoadBenchmarkConfiguration(b)
-	b.StartTimer()
+        b.StopTimer()
+        configuration := mustLoadBenchmarkConfiguration(b)
+        b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
-		// call benchmarked function
-		conf.GetStorageConfigurationByReference(&configuration)
-	}
+        for i := 0; i < b.N; i++ {
+                // call benchmarked function
+                conf.GetStorageConfigurationByReference(&configuration)
+        }
 
 }
 
@@ -290,9 +290,9 @@ goarch: amd64
 pkg: config-struct/conf
 cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
 BenchmarkGetStorageConfigurationFunctionByValue
-BenchmarkGetStorageConfigurationFunctionByValue-8               1000000000              13.20 ns/op
+BenchmarkGetStorageConfigurationFunctionByValue-8       1000000000  13.20 ns/op
 BenchmarkGetStorageConfigurationFunctionByReference
-BenchmarkGetStorageConfigurationFunctionByReference-8           1000000000               0.2405 ns/op
+BenchmarkGetStorageConfigurationFunctionByReference-8   1000000000   0.2405 ns/op
 PASS
 ok      config-struct/conf      27.166s
 ```
@@ -335,11 +335,11 @@ ok      config-struct/conf      27.166s
 
 ```go
 func (configuration ConfigStruct) GetStorageConfigurationByValue() StorageConfiguration {
-	return configuration.Storage
+        return configuration.Storage
 }
 
 func (configuration *ConfigStruct) GetStorageConfigurationByReference() StorageConfiguration {
-	return configuration.Storage
+        return configuration.Storage
 }
 ```
 
@@ -349,26 +349,26 @@ func (configuration *ConfigStruct) GetStorageConfigurationByReference() StorageC
 
 ```go
 func BenchmarkGetStorageConfigurationMethodByValue(b *testing.B) {
-	b.StopTimer()
-	configuration := mustLoadBenchmarkConfiguration(b)
-	b.StartTimer()
+        b.StopTimer()
+        configuration := mustLoadBenchmarkConfiguration(b)
+        b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
-		// call benchmarked function
-		configuration.GetStorageConfigurationByValue()
-	}
+        for i := 0; i < b.N; i++ {
+                // call benchmarked function
+                configuration.GetStorageConfigurationByValue()
+        }
 
 }
 
 func BenchmarkGetStorageConfigurationMethodByReference(b *testing.B) {
-	b.StopTimer()
-	configuration := mustLoadBenchmarkConfiguration(b)
-	b.StartTimer()
+        b.StopTimer()
+        configuration := mustLoadBenchmarkConfiguration(b)
+        b.StartTimer()
 
-	for i := 0; i < b.N; i++ {
-		// call benchmarked function
-		configuration.GetStorageConfigurationByReference()
-	}
+        for i := 0; i < b.N; i++ {
+                // call benchmarked function
+                configuration.GetStorageConfigurationByReference()
+        }
 
 }
 ```
@@ -385,13 +385,13 @@ goarch: amd64
 pkg: config-struct/conf
 cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
 BenchmarkGetStorageConfigurationFunctionByValue
-BenchmarkGetStorageConfigurationFunctionByValue-8               1000000000              13.20 ns/op
+BenchmarkGetStorageConfigurationFunctionByValue-8      1000000000   13.20 ns/op
 BenchmarkGetStorageConfigurationFunctionByReference
-BenchmarkGetStorageConfigurationFunctionByReference-8           1000000000               0.2405 ns/op
+BenchmarkGetStorageConfigurationFunctionByReference-8  1000000000    0.2405 ns/op
 BenchmarkGetStorageConfigurationMethodByValue
-BenchmarkGetStorageConfigurationMethodByValue-8                 1000000000              13.24 ns/op
+BenchmarkGetStorageConfigurationMethodByValue-8        1000000000   13.24 ns/op
 BenchmarkGetStorageConfigurationMethodByReference
-BenchmarkGetStorageConfigurationMethodByReference-8             1000000000               0.3596 ns/op
+BenchmarkGetStorageConfigurationMethodByReference-8    1000000000    0.3596 ns/op
 PASS
 ok      config-struct/conf      27.166s
 ```
@@ -419,27 +419,27 @@ m2 := make(map[UUID]time.Time, b.N)
 type UUID string
 
 func BenchmarkInsertIntoPreallocatedMapUUIDKey(b *testing.B) {
-	m := make(map[UUID]time.Time, b.N)
-	t := time.Now()
+        m := make(map[UUID]time.Time, b.N)
+        t := time.Now()
 
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		id := UUID(uuid.New().String())
-		b.StartTimer()
-		m[id] = t
-	}
+        for i := 0; i < b.N; i++ {
+                b.StopTimer()
+                id := UUID(uuid.New().String())
+                b.StartTimer()
+                m[id] = t
+        }
 }
 
 func BenchmarkInsertIntoEmptyMapUUIDKey(b *testing.B) {
-	m := map[UUID]time.Time{}
-	t := time.Now()
+        m := map[UUID]time.Time{}
+        t := time.Now()
 
-	for i := 0; i < b.N; i++ {
-		b.StopTimer()
-		id := UUID(uuid.New().String())
-		b.StartTimer()
-		m[id] = t
-	}
+        for i := 0; i < b.N; i++ {
+                b.StopTimer()
+                id := UUID(uuid.New().String())
+                b.StartTimer()
+                m[id] = t
+        }
 }
 ```
 
@@ -452,8 +452,8 @@ goos: linux
 goarch: amd64
 pkg: map-bench
 cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
-BenchmarkInsertIntoEmptyMapUUIDKey-8                     1000000               354.7 ns/op
-BenchmarkInsertIntoPreallocatedMapUUIDKey-8              1000000               163.9 ns/op
+BenchmarkInsertIntoEmptyMapUUIDKey-8            1000000   354.7 ns/op
+BenchmarkInsertIntoPreallocatedMapUUIDKey-8     1000000   163.9 ns/op
 PASS
 ```
 
@@ -488,32 +488,32 @@ m2 := make(map[key]value, capacity)
 
 ```go
 type key struct {
-	ID      int
-	payload [100]byte
+        ID      int
+        payload [100]byte
 }
 
 type value struct{}
 
 func BenchmarkInsertIntoPreallocatedMapCompoundKey(b *testing.B) {
-	m := make(map[key]value, b.N)
+        m := make(map[key]value, b.N)
 
-	for i := 0; i < b.N; i++ {
-		k := key{
-			ID: i,
-		}
-		m[k] = value{}
-	}
+        for i := 0; i < b.N; i++ {
+                k := key{
+                        ID: i,
+                }
+                m[k] = value{}
+        }
 }
 
 func BenchmarkInsertIntoEmptyMapCompoundKey(b *testing.B) {
-	m := map[key]value{}
+        m := map[key]value{}
 
-	for i := 0; i < b.N; i++ {
-		k := key{
-			ID: i,
-		}
-		m[k] = value{}
-	}
+        for i := 0; i < b.N; i++ {
+                k := key{
+                        ID: i,
+                }
+                m[k] = value{}
+        }
 }
 ```
 
@@ -526,8 +526,8 @@ goos: linux
 goarch: amd64
 pkg: map-bench
 cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
-BenchmarkInsertIntoEmptyMapCompoundKey-8                 1000000               332.2 ns/op
-BenchmarkInsertIntoPreallocatedMapCompoundKey-8          1000000               177.7 ns/op
+BenchmarkInsertIntoEmptyMapCompoundKey-8          1000000    332.2 ns/op
+BenchmarkInsertIntoPreallocatedMapCompoundKey-8   1000000    177.7 ns/op
 PASS
 ```
 
@@ -637,18 +637,18 @@ func performBenchmarkFindInSlice(b *testing.B, s []ID) {
 ### Benchmark results
 
 ```
-BenchmarkFindInMap1-8           100000000               12.01 ns/op
-BenchmarkFindInSlice1-8         100000000                7.208 ns/op
-BenchmarkFindInMap5-8           100000000               12.61 ns/op
-BenchmarkFindInSlice5-8         100000000                8.346 ns/op
-BenchmarkFindInMap10-8          100000000               14.57 ns/op
-BenchmarkFindInSlice10-8        100000000                9.498 ns/op
-BenchmarkFindInMap20-8          100000000               14.28 ns/op
-BenchmarkFindInSlice20-8        100000000               11.61 ns/op
-BenchmarkFindInMap100-8         100000000               14.63 ns/op
-BenchmarkFindInSlice100-8       100000000               35.57 ns/op
-BenchmarkFindInMap1000-8        100000000               22.53 ns/op
-BenchmarkFindInSlice1000-8      100000000              281.4 ns/op
+BenchmarkFindInMap1-8       100000000   12.01 ns/op
+BenchmarkFindInSlice1-8     100000000    7.208 ns/op
+BenchmarkFindInMap5-8       100000000   12.61 ns/op
+BenchmarkFindInSlice5-8     100000000    8.346 ns/op
+BenchmarkFindInMap10-8      100000000   14.57 ns/op
+BenchmarkFindInSlice10-8    100000000    9.498 ns/op
+BenchmarkFindInMap20-8      100000000   14.28 ns/op
+BenchmarkFindInSlice20-8    100000000   11.61 ns/op
+BenchmarkFindInMap100-8     100000000   14.63 ns/op
+BenchmarkFindInSlice100-8   100000000   35.57 ns/op
+BenchmarkFindInMap1000-8    100000000   22.53 ns/op
+BenchmarkFindInSlice1000-8  100000000  281.4 ns/op
 ```
 
 ---
@@ -673,5 +673,269 @@ BenchmarkFindInSlice1000-8      100000000              281.4 ns/op
 * Map vs slice for set implementation
 
 ![Set3](images/set3.png)
+
+---
+
+### Use slices instead of arrays (if possible)
+
+* C-proselytes and Java-proselytes seems to use arrays a lot
+* But in fact arrays are not used much in idiomatic Go code
+
+* Array in Go
+    - passed by value (COPY!)
+    - not the case in Java
+    - semantic is totally different
+
+---
+
+### Slices in Go
+
+* Struct/record with three items
+   - pointer to data (array)
+   - length
+   - capacity
+* Passed by value
+   - but it is not deep clone
+
+---
+
+### Benchmark
+
+```go
+func changeMe1(values []int) {
+	values[0] = FIRST_VALUE
+	values[MAX_VALS-1] = LAST_VALUE
+}
+
+func changeMe2(values [MAX_VALS]int) {
+	values[0] = FIRST_VALUE
+	values[MAX_VALS-1] = LAST_VALUE
+}
+
+func changeMe3(values *[MAX_VALS]int) {
+	values[0] = FIRST_VALUE
+	values[MAX_VALS-1] = LAST_VALUE
+}
+
+func BenchmarkPassSlice(b *testing.B) {
+	var values []int = make([]int, MAX_VALS)
+
+	for i := 0; i < b.N; i++ {
+		changeMe1(values)
+	}
+	if values[0] != FIRST_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != LAST_VALUE {
+		b.Fatal()
+	}
+}
+
+func BenchmarkPassArrayByValue(b *testing.B) {
+	var values [MAX_VALS]int = [MAX_VALS]int{DEFAULT_VALUE}
+
+	for i := 0; i < b.N; i++ {
+		changeMe2(values)
+	}
+	if values[0] != DEFAULT_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != DEFAULT_VALUE {
+		b.Fatal()
+	}
+}
+
+func BenchmarkPassArrayByReference(b *testing.B) {
+	var values [MAX_VALS]int = [MAX_VALS]int{DEFAULT_VALUE}
+
+	for i := 0; i < b.N; i++ {
+		changeMe3(&values)
+	}
+	if values[0] != FIRST_VALUE {
+		b.Fatal()
+	}
+	if values[MAX_VALS-1] != LAST_VALUE {
+		b.Fatal()
+	}
+}
+```
+
+---
+
+## Benchmark results
+
+```
+BenchmarkPassSlice-8              100000000    0.4799 ns/op
+BenchmarkPassArrayByValue-8       100000000    0.2371 ns/op
+BenchmarkPassArrayByReference-8   100000000    0.4740 ns/op
+```
+
+* What?
+    - compiler detected that local changes are not visible outside function
+    - and the whole function was dropped
+
+---
+
+## Is it really the case?
+
+![Profiler4](images/profiler4.png)
+
+---
+
+## Now with side effect
+
+---
+
+###
+
+---
+
+###
+
+---
+
+### SIMD instructions
+
+* Sets of special instructions
+    - operate on short fixed-length arrays
+    - specialized data-processing operations
+    - (not available outside SIMD world)
+    - min, max, abs, saturated arithmetic
+* Very important feature of today CPUs
+    - sometimes more important than multicore(s)
+
+---
+
+### SIMD extensions on x86-64 CPUs
+
+* MMX
+* 3Dnow!
+* SSE
+    - SSE 2, SSE 3, SSE 4.1, SSE 4.2
+* AVX
+    - splitted into multiple sets
+    - F16C etc.
+
+---
+
+### How are these used?
+
+* Auto-vectorization
+    - performed by compiler
+* Intrinsic
+    - available made by compiler/headers/packages
+* Assembler
+    - built-in (if available)
+    - external one
+
+---
+
+### Typical vectors used in SIMD
+
+![SIMD](images/simd.png)
+
+---
+
+### Operations with vectors (GCC)
+
+```c
+typedef signed int v16si __attribute__((vector_size(16)));
+ 
+void add16ui(v16si x, v16si y, v16si * z)
+{
+    *z = x + y;
+}
+
+v16si x = { 0, 1, 2, 3 };
+v16si y = { 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff };
+v16si z;
+
+add16ui(x, y,  z);
+
+int i;
+
+puts("vector of signed ints");
+
+for (i = 0; i < sizeof(v16si) / sizeof(signed int); i++) {
+    printf("%d %d\n", i, z[i]);
+}
+```
+
+---
+
+### Intrinsic
+
+```
+Technology  Header file
+--------------------------
+MMX         mmintrin.h
+SSE1        xmmintrin.h
+SSE2        emmintrin.h
+SSE4.1      smmintrin.h
+AVX2        avx2intrin.h
+```
+
+---
+
+### Intrinsic usage
+
+```c
+#include <xmmintrin.h>
+ 
+int main(void)
+{
+    __v4sf x = { 1.0, 2.0, 3.0, 4.0 };
+    __v4sf y = { 0.1, 0.1, 0.1, 0.1 };
+    __v4sf z;
+    int i;
+ 
+    z = __builtin_ia32_addps(x, y);
+ 
+    for (i = 0; i < sizeof(x) / sizeof(float); i++) {
+        printf("%2d %f %f %f\n", i, x[i], y[i], z[i]);
+    }
+}
+```
+
+### Generated machine code
+
+```asm
+   z = __builtin_ia32_addps(x, y);
+  31:   0f 28 45 d0             movaps xmm0,XMMWORD PTR [rbp-0x30]
+  35:   0f 28 4d c0             movaps xmm1,XMMWORD PTR [rbp-0x40]
+  39:   0f 58 c1                addps  xmm0,xmm1
+  3c:   0f 29 45 e0             movaps XMMWORD PTR [rbp-0x20],xmm0
+```
+
+---
+
+### SIMD support in Go
+
+* Auto-vectorization
+    - not provided by Google's compiler
+    - gccgo can use it
+* Intrinsic
+    - not available in Go
+    - and very probably never will!
+* Assembler
+    - built-in N/A in Go
+    - external one is cumbersome to use
+    - gccgo + GNU assembler (gasm)
+
+---
+
+### SIMD support in Go
+
+* Not ideal situation today
+    - we don't invest into this approach
+    - anyway most processing is performed against UTF-8 chars
+
+---
+
+# Thank you!
+
+---
+
+# Questions?
 
 ---
