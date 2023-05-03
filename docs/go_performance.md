@@ -32,6 +32,7 @@ C#          2
 1. Pass structures by reference, not by value
 1. Pass receivers by reference, not by value
 1. Maps pre-allocation
+1. Arrays vs slices
 
 * Most things ^ are not idiomatic!
 
@@ -866,16 +867,89 @@ func BenchmarkPassArrayByReference(b *testing.B) {
 ### Benchmark results
 
 ```
-BenchmarkPassSlice-8                    100000000                0.4768 ns/op
-BenchmarkPassArrayByValue-8             100000000              135.3 ns/op
-BenchmarkPassArrayByReference-8         100000000                0.5629 ns/op
+BenchmarkPassSlice-8              100000000    0.4768 ns/op
+BenchmarkPassArrayByValue-8       100000000  135.3 ns/op
+BenchmarkPassArrayByReference-8   100000000    0.5629 ns/op
 ```
 
 ---
 
-### Benchmark results
-
 ![benchmark3](images/benchmark3.png)
+
+---
+
+## for-each implementation (arrays, slices)
+
+* idiomatic
+* more performant
+
+---
+
+## for-each imeplementations
+
+```go
+for _, item := range items {
+        sum += item.value
+}
+```
+
+```go
+for j := 0; j < len(items); j++ {
+        sum += items[j].value
+}
+```
+
+---
+
+## Benchmark results
+
+```
+BenchmarkCountValues1-8   100000  70310 ns/op
+BenchmarkCountValues2-8   100000  10687 ns/op
+```
+
+---
+
+![benchmark4](images/benchmark4.png)
+
+---
+
+## for-each implementation (maps)
+
+* idiomatic
+* more performant
+
+---
+
+## for-each imeplementations
+
+```go
+for key, value := range items {
+        ...
+}
+```
+
+```go
+for key, _ := range items {
+        ...
+        items[key]
+        ...
+}
+```
+
+---
+
+## Benchmark results
+
+```
+BenchmarkCountValues1-8   100000   144225 ns/op
+BenchmarkCountValues2-8   100000    12300 ns/op
+```
+
+---
+
+![benchmark4](images/benchmark4.png)
+``
 
 ---
 
