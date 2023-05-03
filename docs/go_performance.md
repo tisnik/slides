@@ -259,10 +259,8 @@ func BenchmarkGetStorageConfigurationFunctionByValue(b *testing.B) {
         b.StartTimer()
 
         for i := 0; i < b.N; i++ {
-                // call benchmarked function
                 conf.GetStorageConfigurationByValue(configuration)
         }
-
 }
 
 func BenchmarkGetStorageConfigurationFunctionByReference(b *testing.B) {
@@ -271,10 +269,8 @@ func BenchmarkGetStorageConfigurationFunctionByReference(b *testing.B) {
         b.StartTimer()
 
         for i := 0; i < b.N; i++ {
-                // call benchmarked function
                 conf.GetStorageConfigurationByReference(&configuration)
         }
-
 }
 
 ```
@@ -355,10 +351,8 @@ func BenchmarkGetStorageConfigurationMethodByValue(b *testing.B) {
         b.StartTimer()
 
         for i := 0; i < b.N; i++ {
-                // call benchmarked function
                 configuration.GetStorageConfigurationByValue()
         }
-
 }
 
 func BenchmarkGetStorageConfigurationMethodByReference(b *testing.B) {
@@ -367,10 +361,8 @@ func BenchmarkGetStorageConfigurationMethodByReference(b *testing.B) {
         b.StartTimer()
 
         for i := 0; i < b.N; i++ {
-                // call benchmarked function
                 configuration.GetStorageConfigurationByReference()
         }
-
 }
 ```
 
@@ -460,10 +452,6 @@ PASS
 
 ---
 
-### Benchmark results
-
-* For different input N
-
 ![Profiler1](images/profiler1.png)
 
 ---
@@ -527,8 +515,8 @@ goos: linux
 goarch: amd64
 pkg: map-bench
 cpu: Intel(R) Core(TM) i7-8665U CPU @ 1.90GHz
-BenchmarkInsertIntoEmptyMapCompoundKey-8          1000000    332.2 ns/op
-BenchmarkInsertIntoPreallocatedMapCompoundKey-8   1000000    177.7 ns/op
+BenchmarkInsertIntoEmptyMapCompoundKey-8         1000000  332.2 ns/op
+BenchmarkInsertIntoPreallocatedMapCompoundKey-8  1000000  177.7 ns/op
 PASS
 ```
 
@@ -537,7 +525,7 @@ PASS
 ### Memory requirements
 
 * For us much more relevant
-    - as pods will be killed due to OOM
+    - as pods might be killed due to OOM
 
 ---
 
@@ -885,7 +873,7 @@ BenchmarkPassArrayByReference-8   100000000    0.5629 ns/op
 
 ---
 
-## for-each imeplementations
+## for-each implementations
 
 ```go
 for _, item := range items {
@@ -921,7 +909,7 @@ BenchmarkCountValues2-8   100000  10687 ns/op
 
 ---
 
-## for-each imeplementations
+## for-each implementations
 
 ```go
 for key, value := range items {
@@ -950,6 +938,193 @@ BenchmarkCountValues2-8   100000    12300 ns/op
 
 ![benchmark4](images/benchmark4.png)
 ``
+
+---
+
+## Synchronization
+
+* using channels
+* using mutexes
+
+---
+
+## Synchronization by mutexes
+
+```go
+func (value *valueWithMutex) <strong>lock</strong>() {
+        value.mutex.Lock()
+}
+
+func (value *valueWithMutex) <strong>unlock</strong>() {
+        value.mutex.Unlock()
+}
+```
+
+---
+
+## Synchronization by using channel
+
+```go
+func (value *valueWithChannel) <strong>lock</strong>() {
+    // blocking
+    <-value.channel
+}
+
+func (value *valueWithChannel) <strong>unlock</strong>() {
+    value.channel <- struct{}{}
+}
+```
+
+---
+
+## Benchmarks
+
+```
+BenchmarkMutexVariant-8     100000  29044 ns/op
+BenchmarkChannelVariant-8   100000  49570 ns/op
+```
+
+---
+
+## String builders
+
+* very frequent operation
+    - templates
+    - JSON and XML serializers
+* usually 'hidden' inside libraries
+
+---
+
+## Strings are immutable
+
+```go
+type stringStruct struct {
+        str unsafe.Pointer
+        len int
+}
+```
+
+--- String concatenation is slow
+
+```go
+func concatstrings(buf *tmpBuf, a []string) string {
+        idx := 0
+        l := 0
+        count := 0
+        for i, x := range a {
+                n := len(x)
+                if n == 0 {
+                        continue
+                }
+                if l+n < l {
+                        throw("string concatenation too long")
+                }
+                l += n
+                count++
+                idx = i
+        }
+        if count == 0 {
+                return ""
+        }
+&nbsp;
+        // If there is just one string and either it is not on the stack
+        // or our result does not escape the calling frame (buf != nil),
+        // then we can return that string directly.
+        if count == 1 && (buf != nil || !stringDataOnStack(a[idx])) {
+                return a[idx]
+        }
+        s, b := rawstringtmp(buf, l)
+        for _, x := range a {
+                copy(b, x)
+                b = b[len(x):]
+        }
+        return s
+}
+```
+
+---
+
+## So how to append strings?
+
+```go
+s := ""
+
+for i := 0; i < n; i++ {
+        s += "*"
+}
+```
+
+---
+
+## String buffer object
+
+```go
+var bb bytes.Buffer
+
+for i := 0; i < n; i++ {
+        bb.WriteRune('*')
+}
+
+return bb.String()
+```
+
+---
+
+## String builded object
+
+```go
+var sb strings.Builder
+
+for i := 0; i < n; i++ {
+        sb.WriteRune('*')
+}
+
+return sb.String()
+```
+
+---
+
+### Memory pre-allocation (buffer)
+
+```go
+var bb bytes.Buffer
+
+bb.Grow(n)
+
+for i := 0; i < n; i++ {
+        bb.WriteRune('*')
+}
+
+return bb.String()
+```
+
+---
+
+## Memory pre-allocation (builder)
+
+```go
+var bb bytes.Builder
+
+bb.Grow(n)
+
+for i := 0; i < n; i++ {
+        bb.WriteRune('*')
+}
+
+return bb.String()
+```
+
+---
+
+![benchmark6](images/benchmark6.png)
+
+---
+
+![benchmark7](images/benchmark7.png)
+
+---
+
+![benchmark8](images/benchmark8.png)
 
 ---
 
