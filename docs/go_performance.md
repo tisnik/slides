@@ -1004,7 +1004,9 @@ type stringStruct struct {
 }
 ```
 
---- String concatenation is slow
+---
+
+## String concatenation is slow
 
 ```go
 func concatstrings(buf *tmpBuf, a []string) string {
@@ -1056,7 +1058,7 @@ for i := 0; i < n; i++ {
 
 ---
 
-## String buffer object
+## Bytes buffer object
 
 ```go
 var bb bytes.Buffer
@@ -1070,7 +1072,7 @@ return bb.String()
 
 ---
 
-## String builded object
+## String builder object
 
 ```go
 var sb strings.Builder
