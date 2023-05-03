@@ -16,7 +16,7 @@
 
 ---
 
-## TOC
+## Overview
 
 * Why BDD?
 * Gherkin language
@@ -24,19 +24,16 @@
 
 ---
 
-
-## TOC
-
----
+## TOC 1/3
 
 * Why BDD?
     - Test pyramid
     - BDD: behavior-driven development
     - Simple DSL
 
-## TOC
-
 ---
+
+## TOC 2/3
 
 * Gherkin language
     - Feature/Scenario/Scenario Outline
@@ -47,7 +44,7 @@
 
 ---
 
-## TOC
+## TOC 3/3
 
 * Practical part
     - Python & Behave library
