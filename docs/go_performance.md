@@ -43,6 +43,7 @@ C#          2
 * All data types are passed by value into functions and methods
     - that's good from "state-space" perspective
     - not so good from performance point of view
+* Java/Python have different semantic!
 * And no nice solution like `const` and `mut` exists in Go
 
 ---
@@ -402,7 +403,7 @@ m2 := make(map[UUID]time.Time, b.N)
 
 * Not strictly needed, so developers took "Python approach"
 * Does it make sense to try to estimate number of items?
-* Who knows? Probably just the benchark...
+* Who knows? Probably only the benchmark...
 
 ---
 
@@ -526,6 +527,7 @@ PASS
 
 * For us much more relevant
     - as pods might be killed due to OOM
+    - and we have to pay for more memory
 
 ---
 
@@ -672,7 +674,7 @@ BenchmarkFindInSlice1000-8  100000000  281.4 ns/op
 
 * Array in Go
     - passed by value (COPY!)
-    - not the case in Java
+    - not the case in C/Java/Python
     - semantic is totally different
 
 ---
