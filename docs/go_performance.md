@@ -392,7 +392,7 @@ ok      config-struct/conf      27.166s
 
 ---
 
-## Maps pre-alllocation
+## Maps pre-allocation
 
 * In Go it is possible to specify number of map items during map allocation
 
