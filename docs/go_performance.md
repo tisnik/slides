@@ -953,11 +953,11 @@ BenchmarkCountValues2-8   100000    12300 ns/op
 ## Synchronization by mutexes
 
 ```go
-func (value *valueWithMutex) <strong>lock</strong>() {
+func (value *valueWithMutex) lock() {
         value.mutex.Lock()
 }
 
-func (value *valueWithMutex) <strong>unlock</strong>() {
+func (value *valueWithMutex) unlock() {
         value.mutex.Unlock()
 }
 ```
@@ -967,12 +967,12 @@ func (value *valueWithMutex) <strong>unlock</strong>() {
 ## Synchronization by using channel
 
 ```go
-func (value *valueWithChannel) <strong>lock</strong>() {
+func (value *valueWithChannel) lock() {
     // blocking
     <-value.channel
 }
 
-func (value *valueWithChannel) <strong>unlock</strong>() {
+func (value *valueWithChannel) unlock() {
     value.channel <- struct{}{}
 }
 ```
