@@ -110,7 +110,7 @@
 
 ---
 
-![test-pyramid-3](images/test_pyramid_3.jpg)
+![test-pyramid-3](images/test_pyramid_3.png)
 
 ---
 
@@ -154,6 +154,11 @@
     - API tests
     - acceptance tests
 * Should be part of verification and validation processes!
+
+---
+
+### BDD: behavior-driven development
+
 * Describe the behavior of the system, usually from customer perspective
     - from the BDD point of view, the system is handled as a black box
 * Can be used for front end and for back end as well
@@ -184,6 +189,10 @@
 
 ---
 
+## BDD in real world
+
+---
+
 ## Gherkin language
 
 * Based on natural language + a few keywords
@@ -203,11 +212,11 @@
 
 * Semi-structured way to write down test cases
 * Three clauses
-    - Given
-    - When
-    - Then
+    - `Given`
+    - `When`
+    - `Then`
 * The same clause on more consecutive lines?
-    - And
+    - `And`
 
 ---
 
@@ -220,17 +229,21 @@ Given the customer has logged into their current account
  Then the new current account balance should be 25 euros
 ```
 
+---
+
+### Gherkin language - an example
+
 Test scenario parts:
 
 * Keywords/clauses
-    - Given, And, When, Then
+    - `Given`, `And`, `When`, `Then`
 * The rest is written in "plain English"
 * Contains variable parts as well
     - 100, 75, 25
 
 ---
 
-### Multi line text
+### Single line text
 
 ```gherkin
 Feature: Count words function test
@@ -242,7 +255,13 @@ Feature: Count words function test
        """
     When I count all words in text
     Then I should get 3 as a result
+```
 
+---
+
+### Multi line text
+
+```gherkin
   Scenario: Check the function count_words()
     Given a sample text
        """
@@ -320,6 +339,26 @@ Feature: Interface to bank backend
 
 ---
 
+### Tables for specifying multiple test runs (reformatted)
+
+```gherkin
+  Scenario Outline: Check the user search feature, perform the search for more users
+    Given GitHub is accessible
+    When I search for user with nick <nick>
+    Then I should receive 200 status code
+     And I should receive proper JSON response
+     And I should find the user with full name <fullname>
+     And I should find that the user works for company <company>
+
+     Examples: users
+     |nick    |fullname        |company         |
+     |torvalds|Linus Torvalds  |Linux Foundation|
+     |brammool|Bram Moolenaar  |Zimbu Labs      |
+     |tisnik  |Pavel Tišnovský |Red Hat, Inc.   |
+```
+
+---
+
 ### Combination of two tables with different purposes
 
 ```gherkin
@@ -346,7 +385,7 @@ Feature: Interface to bank backend
 
 ## Practical part
 
-* Behave library
+* `Behave` library for Python
 * Structure of project with BDD tests
     - tested module
     - the scenario
