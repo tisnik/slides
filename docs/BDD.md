@@ -202,6 +202,10 @@
     - indentation
     - based on keywords, not on special characters
     - tables "drawn" in ASCII
+
+---
+
+## Gherkin language
 * It is not tightly bound with any real programming language
 * ➝ it can be used by non-developers
     - (but don't tell user that he/she is writing source code... :-)
@@ -233,13 +237,12 @@ Given the customer has logged into their current account
 
 ### Gherkin language - an example
 
-Test scenario parts:
-
-* Keywords/clauses
-    - `Given`, `And`, `When`, `Then`
-* The rest is written in "plain English"
-* Contains variable parts as well
-    - 100, 75, 25
+* Test scenario parts:
+    - Keywords/clauses
+        - `Given`, `And`, `When`, `Then`
+    - The rest is written in "plain English"
+    - Contains variable parts as well
+        - 100, 75, 25
 
 ---
 
@@ -251,10 +254,10 @@ Feature: Count words function test
   Scenario: Check the function count_words()
     Given a sample text
        """
-       Some sentence..
+       Some sentence.
        """
     When I count all words in text
-    Then I should get 3 as a result
+    Then I should get 2 as a result
 ```
 
 ---
@@ -265,8 +268,9 @@ Feature: Count words function test
   Scenario: Check the function count_words()
     Given a sample text
        """
-       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-       eiusmod tempor incididunt ut labore et dolore magna aliqua.
+       Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+       sed do eiusmod tempor incididunt ut labore et dolore
+       magna aliqua.
        """
     When I count all words in text
     Then I should get 19 as a result
@@ -319,7 +323,7 @@ Feature: Interface to bank backend
 
 ---
 
-### Tables for specifying multiple test runs
+### Tables for specifying multiple test runs (not formatted)
 
 ```gherkin
   Scenario Outline: Check the user search feature, perform the search for more users
@@ -410,7 +414,8 @@ git clone https://github.com/tisnik/python-behave-demos
 * Behave library
     - for Python 2.x and Python 3.x as well
     - most of Gherkin language is implemented
-    - binding: test description <-> test implementation
+    - binding
+        - test description ↔ test implementation
     - decorators
     - test parameters are "deduced" from decorators
 
@@ -457,9 +462,11 @@ def after_all(context):
     └── adder.py
 ```
 
+---
+
 ### Structure of project with BDD tests
 
-```
+```ascii
 src/adder.py                     tested module
 requirements.in/requirements.txt used by PIP
 feature_list.txt                 list of test scenarios
@@ -487,8 +494,8 @@ Feature: Adder test
  
   Scenario: Check the function add()
     Given The function add is callable
-    When I call function add with arguments 1 and 2
-    Then I should get 3 as a result
+     When I call function add with arguments 1 and 2
+     Then I should get 3 as a result
 ```
 
 ---
@@ -516,7 +523,8 @@ def call_add(context, function, x, y):
 @then('I should get {expected:d} as a result')
 def check_integer_result(context, expected):
     assert context.result == expected, \
-        "Wrong result: {r} != {e}".format(r=context.result, e=expected)
+        "Wrong result: {r} != {e}".format(
+             r=context.result, e=expected)
 ```
 
 ---
@@ -567,8 +575,8 @@ Feature: Adder test # features/adder.feature:1
 
   Scenario: Check the function add()                # features/adder.feature:3
     Given The function add is callable              # features/steps/common.py:20 0.000s
-    When I call function add with arguments 1 and 2 # features/steps/common.py:25 0.000s
-    Then I should get 3 as a result                 # features/steps/common.py:30 0.000s
+     When I call function add with arguments 1 and 2 # features/steps/common.py:25 0.000s
+     Then I should get 3 as a result                 # features/steps/common.py:30 0.000s
 
 1 feature passed, 0 failed, 0 skipped
 1 scenario passed, 0 failed, 0 skipped
@@ -590,13 +598,13 @@ Took 0m0.000s
   @smoketest
   Scenario: Check the function int add(int, int)
     Given The library libadder.so is loaded
-    When I call native function add with arguments 1 and 2
-    Then I should get 3 as a result
+     When I call native function add with arguments 1 and 2
+     Then I should get 3 as a result
 
   Scenario Outline: Thorough checking function int add(int, int)
     Given The library libadder.so is loaded
-    When I call native function add with arguments <x> and <y>
-    Then I should get <result> as a result
+     When I call native function add with arguments <x> and <y>
+     Then I should get <result> as a result
 
      Examples: results
      |x|y|result|
@@ -653,7 +661,8 @@ def call_add(context, x, y):
 
 @then('I should get {result:d} as a result')
 def check_integer_result(context, result):
-    assert context.result == result, "Expected result: {e}, returned value: {r}".format(e=result, r=context.result)
+    assert context.result == result, \
+        "Expected result: {e}, returned value: {r}".format(e=result, r=context.result)
 ```
 
 ---
@@ -671,16 +680,16 @@ def check_integer_result(context, result):
   @smoketest
   Scenario: Check the GitHub API entry point
     Given GitHub is accessible
-    When I access the API endpoint /
-    Then I should receive 200 status code
+     When I access the API endpoint /
+     Then I should receive 200 status code
 
   Scenario: Check the user search feature
     Given GitHub is accessible
-    When I search for user with nick torvalds
-    Then I should receive 200 status code
-     And I should receive proper JSON response
-     And I should find the user with full name Linus Torvalds
-     And I should find that the user works for company Linux Foundation
+     When I search for user with nick torvalds
+     Then I should receive 200 status code
+      And I should receive proper JSON response
+      And I should find the user with full name Linus Torvalds
+      And I should find that the user works for company Linux Foundation
 ```
 
 ---
@@ -839,6 +848,10 @@ def check_company(context, company):
 * The key differences between Python 2.7.x and Python 3.x with examples: http://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html
 * Language differences and workarounds: http://python3porting.com/differences.html
 * Everything you did not want to know about Unicode in Python 3: http://lucumr.pocoo.org/2014/5/12/everything-about-unicode/
+
+---
+
+## Useful links (cont.)
 * Unicode (Wikipedia): https://en.wikipedia.org/wiki/Unicode
 * Dive Into Python: http://www.diveintopython.net/
 * Dive into Python 3: http://www.diveintopython3.net/
