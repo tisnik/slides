@@ -67,7 +67,7 @@
 
 * Basic/typical problems
     - bug fixes are very expensive in the later stages of the development
-    - customers don't like features^W bugs
+    - customers don't like features`^W` bugs
     - it is vital to verify and validate application behaviour during development
 
 ---
@@ -76,9 +76,11 @@
 
 * Other problems
     - large development teams
-    - more programming languages (back end, front end, microservices...)
+    - more programming languages
+        - back end, front end, microservices...
     - customer might like to be part of development process
-    - not well-defined roles in some cases (devel? QA? devops?)
+    - not well-defined roles in some cases
+        - devel? QA? devops?
 
 ---
 
@@ -97,6 +99,18 @@
 * Business part
 * Technology part
 * Other tests
+
+---
+
+![test-pyramid-1](images/test_pyramid_1.jpg)
+
+---
+
+![test-pyramid-2](images/test_pyramid_2.jpg)
+
+---
+
+![test-pyramid-3](images/test_pyramid_3.jpg)
 
 ---
 
