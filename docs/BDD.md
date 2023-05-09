@@ -813,6 +813,11 @@ def check_company(context, company):
 * behave 1.2.6: https://pypi.org/project/behave/
 * Welcome to behave!: https://behave.readthedocs.io/en/latest/
 * Getting Started with Behavior Testing in Python with Behave https://semaphoreci.com/community/tutorials/getting-started-with-behavior-testing-in-python-with-behave
+
+---
+
+## Useful links (cont.)
+
 * What is Gherkin – BDD Language? http://toolsqa.com/cucumber/gherkin/
 * Python Quick Reference: http://rgruet.free.fr/#QuickRef
 * Python docs: http://www.python.org/doc/
