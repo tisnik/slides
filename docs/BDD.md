@@ -806,6 +806,10 @@ def check_company(context, company):
 
 ---
 
+## Real world tests
+
+---
+
 ## Useful links
 
 * Why is software testing necessary? http://tryqa.com/why-is-testing-necessary/
