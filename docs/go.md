@@ -1,21 +1,15 @@
-# Is Go language actually worth learning?
-## Pavel Tišnovský
+## Is Go language actually worth learning?
+### Pavel Tišnovský <ptisnovs@redhat.com>
 10 May 2023
-Tags: golang, go
-
-## Pavel Tišnovský <ptisnovs@redhat.com>
-## Red Hat, Inc.
 
 ---
 
 ## Introduction
 
-There are lots of interesting programming languages that you can learn.
-The question is, should you perfect them all? The answer is no, of course.
-
-So what about the Go language - is it worth try?
-
-In this presentation we are going to talk about Go's pros (goroutines,
+* There are lots of interesting programming languages that you can learn.
+* The question is, should you perfect them all? The answer is no, of course.
+* So what about the Go language - is it worth try?
+* In this presentation we are going to talk about Go's pros (goroutines,
 channels, GC, type systems) and cons (a language with attributes taken from the
 previous century :)
 
@@ -23,10 +17,13 @@ previous century :)
 ---
 
 ## Gophers
+
+<!--
 // #The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/)
 // #Source https://golang.org/doc/gopher/fiveyears.jpg
 // #The design and this image is licensed under the Creative Commons 3.0 Attributions license.
-.image ./common/fiveyears.jpg _ 900
+-->
+![gophers](images/fiveyears.jpg)
 
 
 ---
@@ -69,23 +66,36 @@ previous century :)
 - Declarations in postfix
 - Much faster for parser to parse sources
 - Exported symbols begin with Capital letter
-- [[https://blog.golang.org/gos-declaration-syntax]]
+- [https://blog.golang.org/gos-declaration-syntax]
 
-.code src/syntax_c.go
-.code src/syntax_go.go
+---
+
+## C vs Go
+
+```c
+int a;
+int *p;
+int *(*f)(int *);
+```
+
+```go
+a int
+p *int
+f func(*int) *int
+```
 
 ---
 
 ## Cloud technologies
-.link https://www.docker.com/ Docker
-.link https://podman.io/ Podman
-.link https://kubernetes.io/ Kubernetes
-.link https://coreos.com/operators/ Kubernetes Operators
-.link https://min.io/ MinIO
-.link https://nsq.io/ NSQ
-.link https://nats.io/ NATS
-.link https://www.redhat.com/en/technologies/cloud-computing/openshift OpenShift
-.link https://geth.ethereum.org/ Go Ethereum
+- [Docker](https://www.docker.com/)
+- [Podman](https://podman.io/)
+- [Kubernetes](https://kubernetes.io/)
+- [Kubernetes Operators](https://coreos.com/operators/)
+- [MinIO](https://min.io/)
+- [NSQ](https://nsq.io/)
+- [NATS](https://nats.io/)
+- [OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift)
+- [Go Ethereum](https://geth.ethereum.org/)
 
 ---
 
@@ -115,11 +125,17 @@ previous century :)
 
 ---
 
+## Interfaces
+
+![interfaces](images/interface.jpg)
+
+---
 
 ## Interfaces are automatically implemented
-- "satisfied" in Go lingo
 
-.image ./images/interface.jpg
+- "satisfied" in Go lingo
+- no need to say explicitly `implements` ...
+
 
 ---
 
@@ -140,7 +156,7 @@ previous century :)
 
 ## But... we are in 21th century!
 
-.image ./images/ural.jpg _ 700
+![ural](images/ural.jpg)
 
 ---
 
@@ -156,13 +172,15 @@ previous century :)
 ---
 
 ## Multi-core CPUs
-.image ./images/perf.png
+
+![perf](images/perf.png)
 
 
 ---
 
 ## Multi-core CPUs
-.image ./images/Amdahl.png
+
+![amdahl](images/Amdahl.png)
 
 
 ---
@@ -241,7 +259,7 @@ previous century :)
 
 - processes
 - threads
-- **goroutines*
+- *goroutines*
 - coroutines
 
 ---
@@ -250,7 +268,10 @@ previous century :)
 ## Goroutines + channels is a way to ... Go
 
 - Deadlocks are not such a big problem then
-.image ./images/deadlock.jpg _ 700
+
+---
+
+![deadlock](images/deadlock.jpg)
 
 ---
 
@@ -274,7 +295,7 @@ previous century :)
 
 ## Memory locality
 
-.image ./images/computer_latency_1.png _ 700
+![mem_latency](images/computer_latency_1.png)
 
 ---
 
@@ -289,7 +310,7 @@ previous century :)
 
 ## Memory locality and access times
 
-.image ./images/computer_latency_2.png _ 1000
+![cpu_latency](images/computer_latency_2.png)
 
 ---
 
@@ -299,15 +320,14 @@ previous century :)
 ---
 
 ## Dynamic devel teams
-.image ./images/teams.png
 
----
-
+![teams](images/teams.png)
 
 ---
 
 
 ## Dynamic devel teams
+
 - stability
 - on source code level: if it compiles in version X, it will compile in version X+1 too
 - OTOH: https://pythonclock.org/
@@ -318,6 +338,7 @@ previous century :)
 
 
 ## go-fmt
+
 - Gofmt’s style is no one’s favorite, yet gofmt is everyone’s favorite. — Rob Pike
 - standard tool
 
@@ -326,32 +347,35 @@ previous century :)
 
 
 ## Wanna be mainstream?
-- [[http://pypl.github.io/PYPL.html]]
-- [[https://hackernoon.com/10-best-programming-languages-to-learn-in-2019-e5b05af4a972]]
-- [[https://insights.dice.com/2018/12/17/5-programming-languages-consider-learning-2019/]]
-- [[https://www.rankred.com/new-programming-languages-to-learn/]]
+- [http://pypl.github.io/PYPL.html]
+- [https://hackernoon.com/10-best-programming-languages-to-learn-in-2019-e5b05af4a972]
+- [https://insights.dice.com/2018/12/17/5-programming-languages-consider-learning-2019/]
+- [https://www.rankred.com/new-programming-languages-to-learn/]
 
 
 ---
 
 
 ## Popularity
-- [[https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved]]
-- [[https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-dreaded]]
-- [[https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-wanted]]
+
+- [https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved]
+- [https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-dreaded]
+- [https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-wanted]
 
 
 
 ---
 
 ## Popularity chart
-.image ./images/popularity.png  _ 600
+
+![popularity](images/popularity.png)
 
 
 ---
 
 
 ## So...is it worth to spend time learning Go?
+
 - networking - YES
 - (micro)services - YES
 - scalable systems - YES
@@ -367,6 +391,7 @@ previous century :)
 
 
 ## So...is it worth to spend time learning Go?
+
 - you like classic (broken) class-bases OOP - NO
 - you like baroque languages - NO, enjoy C++
 - you like inconsistent languages - NO, enjoy Perl
@@ -379,12 +404,16 @@ previous century :)
 ---
 
 
+<!--
 // last slide
 ## More Gophers
 // The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/)
 // Source https://golang.org/doc/gopher/bumper.png
 // The design and this image is licensed under the Creative Commons 3.0 Attributions license.
-.image ./images/bumper.png  _ 900
+
+-->
+
+![bumper](images/bumper.png)
 
 ---
 
