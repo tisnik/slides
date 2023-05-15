@@ -14,3 +14,4 @@ List of slideshows:
 6. [Go performance tricks: How I Learned to Stop Worrying and Love Go in production](https://tisnik.github.io/slides/go_performance.html#/)
 7. [HCC Proxy: PoC](https://tisnik.github.io/slides/hccp.html#/)
 8. [Behavior-driven development (BDD) & Behavior-driven testing (BDT)](https://tisnik.github.io/slides/BDD.html#/)
+9. [Is Go language actually worth learning?](https://tisnik.github.io/slides/go.html#/)
