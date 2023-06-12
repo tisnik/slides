@@ -1,1 +1,8 @@
-# Type annotations and static type checking for Python
+# Type annotations & static type checks for Python
+
+---
+
+![Mypy logo](images/mypy.png)
+
+---
+
