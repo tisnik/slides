@@ -110,3 +110,5 @@ dasel --colour -f config.toml -w csv | more
 clear
 dasel --colour -f config.toml -w csv service_log | more
 
+clear
+dasel -f notification.public.xml -w csv | more
