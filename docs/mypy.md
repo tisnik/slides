@@ -233,6 +233,8 @@ print(adder(x,x))
 
 * `Apple` is subtype of `Fruit` in all following examples
 
+---
+
 * Covariance
     - `List[Apple]` is subtype of `List[Fruit]`
 * Contravariance
@@ -241,7 +243,6 @@ print(adder(x,x))
     - `List[Fruit]` has no relation to `List[Apple]`
 * Bivariance
     - `List[Apple]` is subtype of `List[Fruit]`
-    - and
     - `List[Fruit]` is subtype of `List[Apple]`
 
 ---
