@@ -15,3 +15,4 @@ List of slideshows:
 7. [HCC Proxy: PoC](https://tisnik.github.io/slides/hccp.html#/)
 8. [Behavior-driven development (BDD) & Behavior-driven testing (BDT)](https://tisnik.github.io/slides/BDD.html#/)
 9. [Is Go language actually worth learning?](https://tisnik.github.io/slides/go.html#/)
+10. [Type annotations and static type checking for Python](https://tisnik.github.io/slides/mypy.html#/)
