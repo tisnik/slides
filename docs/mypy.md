@@ -9,13 +9,14 @@
 ## Most popular languages
 
 ```
-Dynamically typed  Statically typed
-Python             C
-JavaScript         C++
-Ruby               Go
-Perl               Rust
-Matlab             Java
-PHP                Scala
+Dynamically typed    Statically typed
+-------------------------------------
+Python               C
+JavaScript           C++
+Ruby                 Go
+Perl                 Rust
+Matlab               Java
+PHP                  Scala
 ```
 
 ---
@@ -24,12 +25,15 @@ PHP                Scala
 
 * Short edit-(compile)-run cycle
 * Very easy to start using them
+* Ideal for scripting
+   - CLI
+   - web browser (simple actions)
 
 ---
 
 ## Cons
 
-* Not easy to use it large projects
+* Not easy to use them in large projects
 * Lot of unit tests needs to be written
 * Information about types are sometimes "hidden" in comments
 
@@ -38,9 +42,11 @@ PHP                Scala
 ## Static types as optional language feature
 
 ```
-JavaScript   TypeScript, Flow
-Python       Mypy, Pyright
-Ruby         Sorbet
+Language       Static types provided by
+---------------------------------------
+JavaScript     TypeScript, Flow
+Python         Mypy, Pyright
+Ruby           Sorbet
 ```
 
 ---
@@ -49,7 +55,7 @@ Ruby         Sorbet
 
 * Dynamically typed language
    - no plans to change that!
-* Type annotations are optional
+* Type annotations are fully optional
 * Mypy or Pyright are static checkers
 
 ---
@@ -59,3 +65,7 @@ Ruby         Sorbet
 ---
 
 ## Variance problem
+
+* 
+
+* Four types of variances
