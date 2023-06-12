@@ -243,6 +243,7 @@ print(adder(x,x))
     - `List[Fruit]` has no relation to `List[Apple]`
 * Bivariance
     - `List[Apple]` is subtype of `List[Fruit]`
+    - and at the same moment
     - `List[Fruit]` is subtype of `List[Apple]`
 
 ---
