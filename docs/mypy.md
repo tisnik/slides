@@ -1,4 +1,4 @@
-# Type annotations & static type checks for Python
+# Static type checking for Python
 
 ---
 
@@ -6,3 +6,56 @@
 
 ---
 
+## Most popular languages
+
+```
+Dynamically typed  Statically typed
+Python             C
+JavaScript         C++
+Ruby               Go
+Perl               Rust
+Matlab             Java
+PHP                Scala
+```
+
+---
+
+## Popularity of dynamically typed languages
+
+* Short edit-(compile)-run cycle
+* Very easy to start using them
+
+---
+
+## Cons
+
+* Not easy to use it large projects
+* Lot of unit tests needs to be written
+* Information about types are sometimes "hidden" in comments
+
+---
+
+## Static types as optional language feature
+
+```
+JavaScript   TypeScript, Flow
+Python       Mypy, Pyright
+Ruby         Sorbet
+```
+
+---
+
+## Python
+
+* Dynamically typed language
+   - no plans to change that!
+* Type annotations are optional
+* Mypy or Pyright are static checkers
+
+---
+
+## Mypy usage
+
+---
+
+## Variance problem
