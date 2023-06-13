@@ -217,7 +217,8 @@ print(adder(x,x))
 
 ## Variance problem
 
-* Type `T` is subtype of type `U` if we can use value of type `U` in places where type `T` is expected 
+* Type `T` is subtype of type `U` if we can use value of type `T` in places where type `U` is expected 
+
 * But what about `List[T]` and `List[U]`?
     - not as clear as it might look like
 
@@ -312,14 +313,14 @@ class Apple extends Fruit {
 }
 
 public class Variance2 {
-    public static void smichej(Fruit[] punnet) {
+    public static void mix(Fruit[] punnet) {
         punnet[0] = new Orange();
         punnet[1] = new Apple();
     }
 
     public static void main(String[] args) {
         Fruit[] punnet = new Orange[2];
-        smichej(punnet);
+        mix(punnet);
 
         for (Fruit Fruit:punnet) {
             System.out.println(Fruit);
