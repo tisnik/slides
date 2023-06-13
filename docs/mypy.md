@@ -67,10 +67,8 @@ Ruby           Sorbet
 ## Mypy usage
 
 ```python
-
 def add(a, b):
     return a+b
-
 ```
 
 * `Any` type added everywhere automagically
@@ -81,10 +79,8 @@ def add(a, b):
 ## Type annotations
 
 ```python
-
 def add(a:int, b:int) -> int:
     return a+b
-
 ```
 
 ---
@@ -94,14 +90,12 @@ def add(a:int, b:int) -> int:
 * Based on Python language specification!
 
 ```python
-
 def add(a:int, b:int) -> int:
     return a+b
 
 print(add(1, 2))
 print(add(1, True))
 print(add(1, False))
-
 ```
 
 ---
@@ -111,19 +105,15 @@ print(add(1, False))
 * Python 3.10
 
 ```python
-
 l: list[int] = []
-
 ```
 
 * Older Pythons
 
 ```python
-
 from typing import List
 
 l: List[int] = []
-
 ```
 
 ---
@@ -131,19 +121,15 @@ l: List[int] = []
 ## Checking
 
 ```python
-
 from typing import List
 
 l: List[int] = [1, 2, 3]
-
 ```
 
 ```python
-
 from typing import List
 
 l: List[int] = [1, 2, None]
-
 ```
 
 ---
@@ -151,19 +137,15 @@ l: List[int] = [1, 2, None]
 ## Tuple data type
 
 ```python
-
 from typing import Tuple
 
 p: Tuple[int] = (1, 2, 3)
-
 ```
 
 ```python
-
 from typing import Tuple
 
 p: Tuple[int, int, int] = (1, 2, 3)
-
 ```
 
 ---
@@ -171,19 +153,15 @@ p: Tuple[int, int, int] = (1, 2, 3)
 ## Tuple data type
 
 ```python
-
 from typing import Tuple
 
 p: Tuple[int, float, bool, str] = (1, 3.14, True, "Hello")
-
 ```
 
 ```python
-
 from typing import Tuple
 
 p: Tuple[int, float, bool, str] = (2.0, 3.14, 1, "Hello")
-
 ```
 
 ---
@@ -193,7 +171,6 @@ p: Tuple[int, float, bool, str] = (2.0, 3.14, 1, "Hello")
 * Can't work everywhere!
 
 ```python
-
 x = 21
 
 
@@ -202,7 +179,6 @@ def adder(a:int, b:int) -> int:
 
 
 print(adder(x,x))
-
 ```
 
 ---
@@ -210,7 +186,6 @@ print(adder(x,x))
 ## Static checkers are ok most of time...
 
 ```python
-
 x = "foo"
 
 
@@ -219,7 +194,6 @@ def adder(a:int, b:int) -> int:
 
 
 print(adder(x,x))
-
 ```
 
 ---
@@ -227,7 +201,6 @@ print(adder(x,x))
 ## But sometimes it must fail...
 
 ```python
-
 x = 21
 
 
@@ -238,7 +211,6 @@ def adder(a:int, b:int) -> int:
 exec("x='foo'")
 
 print(adder(x,x))
-
 ```
 
 ---
