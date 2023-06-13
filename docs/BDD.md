@@ -10,9 +10,9 @@
     - `pcamara@redhat.com`
     - `ptisnovs@redhat.com`
 * Slides:
-    - `https://tisnik.github.io/slides/BDD.html`
+    - [https://tisnik.github.io/slides/BDD.html](https://tisnik.github.io/slides/BDD.html)
 * Examples:
-    - `https://github.com/tisnik/python-behave-demos`
+    - [https://github.com/tisnik/python-behave-demos](https://github.com/tisnik/python-behave-demos)
 
 ---
 
@@ -143,6 +143,8 @@
 
 ### OT: unit tests are not enough!
 
+* not even integration tests
+
 ![dum](images/obraceny-dum-1.jpg)
 
 ---
@@ -185,6 +187,7 @@
 ### When to create BDD tests?
 
 * Part of system description
+    - early catch of possible problems
 * Also part of acceptance testing
 
 ---
@@ -384,6 +387,12 @@ Feature: Interface to bank backend
         | 100  |   CAD    | 1617.200 |
         | 2    |   HRK    |    6.814 |
 ```
+
+---
+
+## Practical part
+
+![Python](images/python.png)
 
 ---
 
