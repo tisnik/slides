@@ -1,6 +1,15 @@
 ## Is Go language actually worth learning?
-### Pavel Tišnovský <ptisnovs@redhat.com>
-10 May 2023
+
+---
+
+![QR](images/go_qr.png)
+
+---
+
+* Pavel Tišnovský
+    - `ptisnovs@redhat.com`
+* Slides:
+    - [https://tisnik.github.io/slides/go.html](https://tisnik.github.io/slides/go.html)
 
 ---
 
