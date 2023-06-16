@@ -72,6 +72,13 @@
 
 ---
 
+## ?
+
+* Bug fixes are very expensive in the later stages of the development
+    - any examples?
+
+---
+
 ## Why BDD?
 
 * Other problems
@@ -141,6 +148,20 @@
 
 ---
 
+### Unit tests
+
+* Were "holy grail" one time
+* Is it enough to just use unit tests?
+
+---
+
+### Unit tests
+
+* Is it enough to just use unit tests?
+    - if not, why it is not enough?
+
+---
+
 ### OT: unit tests are not enough!
 
 * not even integration tests
@@ -166,7 +187,7 @@
 * Can be used for front end and for back end as well
 * "Weird test scenario" ➝ probably the system has improper behavior
     - (water machines in RH)
-    - button instead of switch
+    - button used instead of switch
     - ...
 
 ---
@@ -189,6 +210,8 @@
 * Part of system description
     - early catch of possible problems
 * Also part of acceptance testing
+    - the same test scenarios
+    - but now with implementation!
 
 ---
 
@@ -217,7 +240,7 @@
 
 ### Given-When-Then
 
-* Semi-structured way to write down test cases
+* Semi-structured way to write down test specifications
 * Three clauses
     - `Given`
     - `When`
