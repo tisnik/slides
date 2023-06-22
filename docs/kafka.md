@@ -271,7 +271,7 @@
 
 ## Append-only log
 
-* new mesage/event is always written on the end of topic
+* new mesage/event is always written on the end of one partition
 * messages/events are immutable
 * can be read by
     - seeking and arbitrary offset
@@ -485,6 +485,7 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
     - setup globally
     - and possible to setup for topic
     - retention limits are minimum guarantees
+    - just one criterium might be met
 
 ```
 log.retention.hours
@@ -493,6 +494,13 @@ log.segment.bytes
 log.retention.check.interval.ms
 log.roll.hours
 ```
+
+---
+
+### Retention
+
+* The messages on a topic are not immediately removed after they are consumed/expired
+* Once either of the limit is breached, the messages are marked deleted
 
 ---
 
