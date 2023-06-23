@@ -877,9 +877,9 @@ bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic test_to
 * Specify replica assignments
 
 ```
-bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_4 --replica-assignment 1:2,0:1
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_4 --replica-assignment 101:102,100:101
 
-bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_5 --replica-assignment 2:0:1
+bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test_topic_5 --replica-assignment 102:100:101
 ```
 
 ---
