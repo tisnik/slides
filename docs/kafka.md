@@ -1604,7 +1604,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic connect-test-
 * Key+value
 
 ```bash
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic conect-test-1 -property parse.key=true --property key.separator=:
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic connect-test-1 -property parse.key=true --property key.separator=:
 ```
 
 ---
