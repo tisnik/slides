@@ -1620,7 +1620,7 @@ bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic conn
 * Key+value
 
 ```bash
-bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic conect-test-1 -property parse.key=true --property key.separator=:
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic connect-test-1 -property parse.key=true --property key.separator=:
 ```
 
 ---
