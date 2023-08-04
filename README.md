@@ -18,5 +18,5 @@ List of slideshows:
 10. [Type annotations and static type checking for Python](https://tisnik.github.io/slides/mypy.html#/)
 11. [Embedding data into executables produced by Go compiler](https://tisnik.github.io/slides/embedding_data_into_binary.html#/)
 12. [Goose: database migration tool for Go](https://tisnik.github.io/slides/goose.html#/)
-11. [](https://tisnik.github.io/slides/#/)
-12. [](https://tisnik.github.io/slides/#/)
+13. [Functional Python](https://tisnik.github.io/slides/functional_python.html#/)
+14. [](https://tisnik.github.io/slides/#/)
