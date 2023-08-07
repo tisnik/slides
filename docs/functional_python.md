@@ -71,7 +71,7 @@
     - transformation
 - Caching functions
 
---- 
+---
 
 ## Practical part
 
@@ -287,6 +287,7 @@ def createCounter():
 #### Tuple comprehension
 
 ```python
+(x*2 for x in range(11) if x%3 != 0)
 ```
 
 ---
@@ -305,6 +306,9 @@ lengths = [len(word) for word in words]
 #### Set comprehension
 
 ```python
+{x*2 for x in range(11) if x%3 != 0}
+
+{(x, x*2) for x in range(11) if x%3 != 0}
 ```
 
 ---
@@ -312,6 +316,7 @@ lengths = [len(word) for word in words]
 #### Dict comprehension
 
 ```python
+{x: x*2 for x in range(11) if x%3 != 0}
 ```
 
 ---
