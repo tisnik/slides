@@ -79,17 +79,80 @@
 
 ### Higher order functions
 
+- must exist by definition
+- standard functions
+    - `map`
+    - `filter`
+    - `reduce` from functools
+
+---
+
+#### `map`
+
+---
+
+#### `filter`
+
+---
+
+#### `reduce`
+
 ---
 
 ### Lambdas
+
+- anonymous functions
+- not fully true in Python
+    - it's basically just an expression
+
+---
+
+#### Lambdas
 
 ---
 
 ### Closures
 
+- must exist because:
+    - functions are first class citizens
+    - variables outside current block are accessible
+- problems in Python
+    - not global, not local variables
+    - mutable access
+
+---
+
+#### Counter (incorrect)
+
+---
+
+#### Counter (correct)
+
 ---
 
 ### Generator expressions
+
+- pretty nice way how to rewrite `map` and `filter`
+    - tuple comprehension
+    - list comprehension
+    - set comprehension
+    - dict comprehension
+
+---
+
+#### Tuple comprehension
+
+---
+
+#### List comprehension
+
+---
+
+#### Set comprehension
+
+---
+
+#### Dict comprehension
 
 ---
 
@@ -97,8 +160,21 @@
 
 ---
 
-### Caching
+#### `partial` usage
 
 ---
 
+### `partialmethod` usage
 
+---
+
+### Caching
+
+- pure functions
+     - return values depends only on parameters
+     - it is a mapping, nothing else
+     - can be cached
+
+---
+
+#### `lru_cache` usage
