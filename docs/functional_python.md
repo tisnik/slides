@@ -4,6 +4,8 @@
 
 ![Python](images/python.png)
 
+# λ
+
 ---
 
 
@@ -19,6 +21,8 @@
 ## Why?
 
 - Pure functions are super easy to test
+    - mock? super trivial
+- Alse much easier to debug
 - Functional code have state isolated
     - easier to comprehend
     - easier to test
@@ -50,8 +54,51 @@
 
 - Functions are first-class citizens?
     - yes (with all the consequences)
+    - function literal - messy!
 - Immutable data types?
    - sort of
 
 ---
+
+## Functional concepts in Python
+
+- Higer order functions
+- Lambdas (very limited)
+- Closures
+- Generator expression
+    - list & set & dict & tuple comprehensions
+- Partial functions
+    - transformation
+- Caching functions
+
+--- 
+
+## Practical part
+
+---
+
+### Higher order functions
+
+---
+
+### Lambdas
+
+---
+
+### Closures
+
+---
+
+### Generator expressions
+
+---
+
+### Partial functions
+
+---
+
+### Caching
+
+---
+
 
