@@ -142,6 +142,15 @@ let rec length([]) = 0
 
 ---
 
+## Is it worth it?
+
+* OCaml (Jane Stree + others)
+* F# (used on many places)
+* Transpilation to JS from OCaml+F# (used on many places)
+* More used + more pragmatic approach that f.e. Haskell
+
+---
+
 ## Howto try?
 
 * [Try OCaml](https://try.ocaml.pro/)
