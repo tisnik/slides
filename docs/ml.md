@@ -70,7 +70,28 @@ let x = 42
 
 ---
 
+## Strong type checking
+
+* Improper
+
+```
+let x = 1 + 2
+let x = 1 + 2.5
+let x = 1 +. 2.5
+let x = 1.0 + 2.5
+```
+
+* The only proper
+
+```
+let x = 1.0 +. 2.5
+```
+
+---
+
 ## Functions
+
+* Fully type inference possible
 
 ```
 let inc x = x + 1
