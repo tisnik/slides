@@ -139,3 +139,10 @@ let rec length([]) = 0
 let rec length([]) = 0
   | length(_::tail) = 1 + length(tail);
 ```
+
+---
+
+## Howto try?
+
+* [Try OCaml](https://try.ocaml.pro/)
+* [Try F#](https://try.fsharp.org/)
