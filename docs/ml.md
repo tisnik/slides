@@ -41,6 +41,11 @@
 ## Immutable "variables"
 
 ```
+let x = 42
+printf "x=%d" x
+
+x <- x + 1
+printf "x=%d" x
 ```
 
 ---
@@ -48,6 +53,11 @@
 ## Mutability is ugly
 
 ```
+let mutable x = 42
+printf "x=%d" x
+
+x <- x + 1
+printf "x=%d" x
 ```
 
 ---
@@ -55,6 +65,7 @@
 ## ML type inference
 
 ```
+let x = 42
 ```
 
 ---
@@ -62,6 +73,11 @@
 ## Functions
 
 ```
+let inc x = x + 1
+```
+
+```
+let inc x:int = x + 1
 ```
 
 ---
@@ -69,13 +85,10 @@
 ## Polymorphic functions
 
 ```
-```
+let ident x = x;;
 
----
-
-## Better example
-
-```
+Printf.printf "ident=%d\n" (ident 10);;
+Printf.printf "ident=%s\n" (ident "foo");;
 ```
 
 ---
@@ -83,10 +96,25 @@
 ## Pattern matching
 
 ```
+let rec fib = function 
+    0 -> 0
+  | 1 -> 1
+  | n -> fib (n-1) + fib (n-2)
+
+
+
+fib 10
 ```
 ---
 
 ## Pattern matching
 
 ```
+let rec length([]) = 0
+  | length(head::tail) = 1 + length(tail);
+```
+
+```
+let rec length([]) = 0
+  | length(_::tail) = 1 + length(tail);
 ```
