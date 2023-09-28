@@ -46,6 +46,10 @@
 
 ---
 
+![Kafka usage](images/pipeline-animation.gif)
+
+---
+
 ### Kafka streams
 
 ![Kafka streams](images/kafka_streams.png)
