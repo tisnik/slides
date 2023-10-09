@@ -2,7 +2,7 @@
 
 ![Kafka logo](images/kafka_logo.png)
 
-Pavel Tišnovský
+Pavel Tišnovský,
 apache_kafka@centrum.cz
 
 ---
