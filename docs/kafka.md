@@ -2,6 +2,9 @@
 
 ![Kafka logo](images/kafka_logo.png)
 
+Pavel Tišnovský
+apache_kafka@centrum.cz
+
 ---
 
 "Every enterprise is powered by data"
