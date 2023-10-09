@@ -511,6 +511,23 @@ log.roll.hours
 
 ---
 
+## Practical part
+
+---
+
+### Kafka installation
+
+* download tarball
+* uncompress
+* fix problems
+    - JRE needs to be installed
+    - use directories w/o spaces
+    - use short path (ideally c:\kafka on Win)
+    - download binary tarball (not src one)
+    - VPN: use 127.0.0.1 in configuration
+
+---
+
 ## CLI
 
 * Apache Kafka with batteries included
