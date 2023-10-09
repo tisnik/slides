@@ -7,7 +7,7 @@
 ---
 
 * Pavel Tišnovský
-    - `ptisnovs@redhat.com`
+    - `tisnik@centrum.cz`
 * Slides:
     - [https://tisnik.github.io/slides/go.html](https://tisnik.github.io/slides/go.html)
 
