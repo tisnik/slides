@@ -1378,6 +1378,12 @@ java -cp .:kafka_2.12-3.3.2/libs/kafka-clients-3.3.2.jar:kafka_2.12-3.3.2/libs/s
 
 ---
 
+#### Full project
+
+https://github.com/tisnik/kafka-producer
+
+---
+
 #### Messages consumer
 
 ```java
@@ -1438,6 +1444,12 @@ javac -cp kafka_2.12-3.3.2\libs\kafka-clients-3.3.2.jar SimpleConsumer.java
 ```bash
 java -cp .;kafka_2.12-3.3.2\libs\kafka-clients-3.3.2.jar;kafka_2.12-3.3.2\libs\slf4j-api-1.7.36.jar SimpleConsumer
 ```
+
+---
+
+#### Full project
+
+https://github.com/tisnik/kafka-consumer
 
 ---
 
