@@ -8,6 +8,58 @@
 
 ## Obsah kurzu
 
+* Deklarace datových typů
+* Statická typová kontrola
+* Testování aplikací v Pythonu
+
+---
+
+## Deklarace datových typů
+
+---
+
+### Nejpopulárnější jazyky
+
+```
+Dynamicky typované   Staticky typované
+--------------------------------------
+Python               C
+JavaScript           C++
+Ruby                 Go
+Perl                 Rust
+Matlab               Java
+PHP                  Scala
+```
+
+---
+
+### Přednosti dynamicky typovaných jazyků
+
+* Rychlý cyklus vývoje
+    - edit-(compile)-run
+* Velmi snadné pro začátečníky
+* Ideální pro skriptování
+    - CLI
+    - skripty na webových stránkách
+
+---
+
+### Zápory dynamicky typovaných jazyků
+
+* Zaručení korektnosti rozsáhlých projektů
+* Většinou se vyžaduje větší množství jednotkových testů
+    - code coverage není dobrou metrikou!
+* Informace o typech se někdy zapisují do komentářů
+* IDE nemusí vždy nabízet správné funkce/metody/opravy
+
+---
+
+## Statická typová kontrola
+
+---
+
+![Mypy logo](images/mypy.png)
+
 ---
 
 ## Testování
