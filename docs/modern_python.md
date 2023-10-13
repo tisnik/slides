@@ -54,11 +54,69 @@ PHP                  Scala
 
 ---
 
-## Statická typová kontrola
+## To nejlepší z obou světů?
+
+* Volitelné typy
+
+```
+Jazyk          Technologie pro statické typy
+--------------------------------------------
+JavaScript     TypeScript, Flow
+Python         Mypy, Pyright, Pyre
+Ruby           Sorbet
+```
+
+---
+
+### Volitelné typy a Python
+
+* Python je dynamicky typovaný
+    - a nejsou plány to změnit!
+* Typy jsou čistě volitelné
+    - přidáno do Pythonu 3.5
+    - nazvané "type hints"
+    - (aby to vývojáře nestrašilo)
+* Statické typové kontroly
+    - mypy, pyright, pyre
+
+---
+
+### Statická typová kontrola a Mypy
 
 ---
 
 ![Mypy logo](images/mypy.png)
+
+---
+
+```python
+def add(a, b):
+    return a+b
+```
+
+* Typ `Any` je přidán automaticky
+
+---
+
+### Typové anotace
+
+```python
+def add(a:int, b:int) -> int:
+    return a+b
+```
+
+### `bool` nebo `int`?
+
+* Viz specifikace Pythonu!
+
+```python
+def add(a:int, b:int) -> int:
+    return a+b
+
+print(add(1, 2))
+print(add(1, True))
+print(add(1, False))
+```
 
 ---
 
