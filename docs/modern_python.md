@@ -65,6 +65,19 @@
 
 ---
 
+## Nové vlastnosti jazyka
+
+* Formátovací řetězce
+* Pouze poziční parametry funkcí
+* Pattern matching
+* "Mroží" operátor
+* Podpora pro asynchronní programování
+* Skupiny výjimek
+* Deklarace datových typů
+* Statická typová kontrola
+
+---
+
 ## Postupné rozšiřování možností Pythonu
 
 ```
@@ -90,20 +103,84 @@ Python 3.12   klíčové slovo type + sémantika
 
 ### Ukázka použití f-řetězců
 
+* "Interpolace" proměnných
+
 ```python
 a=1
 b=2
 c=a+b
 
-f"{a}+{b}={c}"
+print(f"{a}+{b}={c}")
 ```
+
+[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-1.py)
 
 ---
 
-### Složitější příklady
+### Výrazy v f-řetězci
+
+* V řetězci lze použít i výrazy
 
 ```python
+a=1
+b=2
+
+print(f"{a}+{b}={a+b}")
 ```
+
+[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-2.py)
+
+---
+
+### Podmínka ve výrazu
+
+* Ne vždy plně čitelné, ale pro jednoduché šablony ano
+
+```python
+a=1
+b=-1
+
+print(f"Kladné: {'ano' if a>0 else 'ne'}")
+print(f"Kladné: {'ano' if b>0 else 'ne'}")
+```
+
+[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-3.py)
+
+---
+
+### Volání funkce v f-řetězci
+
+```python
+x = "Hello world!"
+
+print(f"Délka '{x}' je {len(x)} znaků")
+```
+
+[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-4.py)
+
+---
+
+### Volání metody v f-řetězci
+
+```python
+x = "hello world!"
+
+print(f"Zpráva pro vás: '{x.capitalize()}'")
+```
+
+[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-5.py)
+
+---
+
+## Poziční parametry funkcí
+
+* Přidáno do Pythonu 3.8
+* Umožňují rozlišit funkce s parametry zapisovanými jen pozičně
+* Ostatní parametry buď pozičně nebo je lze pojmenovat
+
+---
+
+### Poziční parametry funkcí
 
 ---
 
