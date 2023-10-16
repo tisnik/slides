@@ -8,9 +8,74 @@
 
 ## Obsah kurzu
 
+* Nové vlastnosti jazyka
+* Novinky v ekosystému Pythonu
+* Vylepšení výkonnosti Pythonu
+* Python a vývoj webových aplikací
+* Testování aplikací v Pythonu
+
+---
+
+### Obsah: nové vlastnosti jazyka
+
+* Formátovací řetězce
+* Pouze poziční parametry funkcí
+* Pattern matching
+* "Mroží" operátor
+* Podpora pro asynchronní programování
+* Skupiny výjimek
 * Deklarace datových typů
 * Statická typová kontrola
-* Testování aplikací v Pythonu
+
+---
+
+### Obsah: novinky v ekosystému Pythonu
+
+* Správa projektů
+* Lintery
+
+---
+
+### Obsah: vylepšení výkonnosti Pythonu
+
+* Výkonnější CPython
+* Problém související s GILem
+* JIT překlad
+
+---
+
+### Obsah: python a vývoj webových aplikací
+
+* Brython
+* Bokeh
+
+---
+
+### Obsah: testování aplikací v Pythonu
+
+* Jednotkové testy
+* Zjištění pokrytí kódu testy
+* Testy chování (BDD)
+* Nástroj Hypothesis
+* Fuzzy testy
+
+---
+
+# Nové vlastnosti jazyka
+
+---
+
+## Postupné rozšiřování možností Pythonu
+
+```
+Python 3.6    f-řetězce, async-IO
+Python 3.7    klíčová slova async a await
+Python 3.8    mroží operátor, poziční parametry
+Python 3.9    generické typy
+Python 3.10   pattern matching
+Python 3.11   skupiny výjimek
+Python 3.12   klíčové slovo type + sémantika
+```
 
 ---
 
