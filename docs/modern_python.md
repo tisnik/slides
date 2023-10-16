@@ -79,7 +79,64 @@ Python 3.12   klíčové slovo type + sémantika
 
 ---
 
+## Formátovací řetězce
+
+* Přidáno do Pythonu 3.6
+* Lze využít společně s původním formátováním
+* Prefix f""
+    - proto se nazývají f-strings
+
+---
+
+### Ukázka použití f-řetězců
+
+```python
+a=1
+b=2
+c=a+b
+
+f"{a}+{b}={c}"
+```
+
+---
+
+### Složitější příklady
+
+```python
+```
+
+---
+
+## Podpora pro asynchronní programování
+
+* Postupně přidáno v Pythonu 3.6 a 3.7
+* Nová klíčová slova `async` a `await`
+
+---
+
+## Poziční parametry funkcí
+
+* Přidáno do Pythonu 3.8
+* Umožňují rozlišit parametry, které lze zapsat jen pozičně
+* Ostatní parametry buď pozičně nebo je lze pojmenovat
+
+---
+
+## Mroží operátor
+
+* Přidáno do Pythonu 3.8
+
+---
+
+## Pattern matching
+
+* Přidáno do Pythonu 3.10
+
+---
+
 ## Deklarace datových typů
+
+* Přidáváno postupně
 
 ---
 
@@ -185,7 +242,47 @@ print(add(1, False))
 
 ---
 
-## Testování
+# Novinky v ekosystému Pythonu
+
+---
+
+# Vylepšení výkonnosti Pythonu
+
+---
+
+## Vylepšení výkonnosti Pythonu
+
+* Výkonnější CPython
+* Problém související s GILem
+* JIT překlad
+
+---
+
+## Výkonnější CPython
+
+---
+
+## Problém související s GILem
+
+---
+
+## JIT překlad
+
+---
+
+# Python a vývoj webových aplikací
+
+---
+
+##
+
+---
+
+##
+
+---
+
+# Testování
 
 * Základní technologie testování
 * Pyramida testů
