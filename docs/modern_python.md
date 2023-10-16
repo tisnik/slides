@@ -182,20 +182,94 @@ print(f"Zpráva pro vás: '{x.capitalize()}'")
 
 ### Poziční parametry funkcí
 
+* Běžně deklarovaná funkce
+
+```python
+def foo(x, y, z):
+    return x+y-z
+
+
+print(foo(1, 2, 10))
+print(foo(x=1, y=2, z=10))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//positional-params-1.py)
+
 ---
 
-## Podpora pro asynchronní programování
+### Poziční parametry funkcí
 
-* Postupně přidáno v Pythonu 3.6 a 3.7
-* Nová klíčová slova `async` a `await`
+* Parametry lze pojmenovat a předat v jiném pořadí
+
+```python
+def foo(x, y, z):
+    return x+y-z
+
+
+print(foo(1, 2, 10))
+print(foo(z=1, y=2, x=10))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//positional-params-2.py)
 
 ---
 
-## Poziční parametry funkcí
+### Poziční parametry funkcí
 
-* Přidáno do Pythonu 3.8
-* Umožňují rozlišit parametry, které lze zapsat jen pozičně
-* Ostatní parametry buď pozičně nebo je lze pojmenovat
+* Všechny parametry jsou čistě poziční
+
+```python
+def foo(x, y, z, /):
+    return x+y-z
+
+
+print(foo(1, 2, 10))
+print(foo(z=1, y=2, x=10))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//positional-params-3.py)
+
+---
+
+### Poziční parametry funkcí
+
+* První parametr je čistě poziční
+
+```python
+def foo(x, /, y, z):
+    return x+y-z
+
+
+print(foo(1, 2, 10))
+print(foo(1, z=1, y=2))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//positional-params-4.py)
+
+---
+
+### Poziční parametry funkcí
+
+* Kombinace s pojmenovanými parametry
+
+```python
+def foo(x=0, /, y=0, z=0):
+    return x+y-z
+
+
+print(foo())
+print(foo(10))
+print(foo(1, 2, 10))
+print(foo(1, z=1, y=2))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//positional-params-5.py)
+
+---
+
+## Pattern matching
+
+* Přidáno do Pythonu 3.10
 
 ---
 
@@ -205,9 +279,14 @@ print(f"Zpráva pro vás: '{x.capitalize()}'")
 
 ---
 
-## Pattern matching
+## Podpora pro asynchronní programování
 
-* Přidáno do Pythonu 3.10
+* Postupně přidáno v Pythonu 3.6 a 3.7
+* Nová klíčová slova `async` a `await`
+
+---
+
+## Skupiny výjimek
 
 ---
 
@@ -293,16 +372,22 @@ def add(a, b):
     return a+b
 ```
 
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-1.py)
+
 * Typ `Any` je přidán automaticky
 
 ---
 
 ### Typové anotace
 
+* specifikují se za dvojtečkou
+
 ```python
 def add(a:int, b:int) -> int:
     return a+b
 ```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-2.py)
 
 ### `bool` nebo `int`?
 
@@ -316,6 +401,8 @@ print(add(1, 2))
 print(add(1, True))
 print(add(1, False))
 ```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-3.py)
 
 ---
 
