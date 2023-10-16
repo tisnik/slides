@@ -96,7 +96,7 @@ Python 3.12   klíčové slovo type + sémantika
 
 * Přidáno do Pythonu 3.6
 * Lze využít společně s původním formátováním
-* Prefix f""
+* Prefix `f""`
     - proto se nazývají f-strings
 
 ---
@@ -113,7 +113,7 @@ c=a+b
 print(f"{a}+{b}={c}")
 ```
 
-[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-1.py)
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-1.py)
 
 ---
 
@@ -128,7 +128,7 @@ b=2
 print(f"{a}+{b}={a+b}")
 ```
 
-[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-2.py)
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-2.py)
 
 ---
 
@@ -144,7 +144,7 @@ print(f"Kladné: {'ano' if a>0 else 'ne'}")
 print(f"Kladné: {'ano' if b>0 else 'ne'}")
 ```
 
-[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-3.py)
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-3.py)
 
 ---
 
@@ -156,7 +156,7 @@ x = "Hello world!"
 print(f"Délka '{x}' je {len(x)} znaků")
 ```
 
-[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-4.py)
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-4.py)
 
 ---
 
@@ -168,7 +168,7 @@ x = "hello world!"
 print(f"Zpráva pro vás: '{x.capitalize()}'")
 ```
 
-[Source code](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-5.py)
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-5.py)
 
 ---
 
