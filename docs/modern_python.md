@@ -12,11 +12,13 @@
 * Novinky v ekosystému Pythonu
 * Vylepšení výkonnosti Pythonu
 * Python a vývoj webových aplikací
+* Alternativní projekty a jazyky
 * Testování aplikací v Pythonu
 
 ---
 
-### Obsah: nové vlastnosti jazyka
+## Obsah kurzu
+### Nové vlastnosti jazyka
 
 * Formátovací řetězce
 * Pouze poziční parametry funkcí
@@ -29,14 +31,16 @@
 
 ---
 
-### Obsah: novinky v ekosystému Pythonu
+## Obsah kurzu
+### Novinky v ekosystému Pythonu
 
 * Správa projektů
 * Lintery
 
 ---
 
-### Obsah: vylepšení výkonnosti Pythonu
+## Obsah kurzu
+### Vylepšení výkonnosti Pythonu
 
 * Výkonnější CPython
 * Problém související s GILem
@@ -44,14 +48,24 @@
 
 ---
 
-### Obsah: python a vývoj webových aplikací
+## Obsah kurzu
+### Python a vývoj webových aplikací
 
 * Brython
 * Bokeh
 
 ---
 
-### Obsah: testování aplikací v Pythonu
+## Obsah kurzu
+### Alternativní projekty a jazyky
+
+* Coconut
+* Mojo
+
+---
+
+## Obsah kurzu
+### Testování aplikací v Pythonu
 
 * Jednotkové testy
 * Zjištění pokrytí kódu testy
@@ -62,6 +76,8 @@
 ---
 
 # Nové vlastnosti jazyka
+
+![Python](images/python.png)
 
 ---
 
@@ -408,9 +424,13 @@ print(add(1, False))
 
 # Novinky v ekosystému Pythonu
 
+![Python](images/python.png)
+
 ---
 
 # Vylepšení výkonnosti Pythonu
+
+![Python](images/python.png)
 
 ---
 
@@ -436,6 +456,8 @@ print(add(1, False))
 
 # Python a vývoj webových aplikací
 
+![Python](images/python.png)
+
 ---
 
 ##
@@ -447,6 +469,8 @@ print(add(1, False))
 ---
 
 # Testování
+
+![Python](images/python.png)
 
 * Základní technologie testování
 * Pyramida testů
