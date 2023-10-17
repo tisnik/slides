@@ -286,6 +286,673 @@ print(foo(1, z=1, y=2))
 ## Pattern matching
 
 * Přidáno do Pythonu 3.10
+* Lepší varianta konstrukce `switch-case`
+
+---
+
+### Inspirováno dalšími programovacími jazyky
+
+* SNOBOL
+* AWK
+* ML (Caml, OCaml, F#)
+* Rust
+* Coconut (překládáno do Pythonu)
+
+---
+
+### Částečně flexibilní řešení
+
+* Ne všechny vzory je možné použít
+    - například `"literal" + x + "literal"`
+    - možná se jejich podpora objeví v další verzi Pythonu?
+
+---
+
+### Ukázky pattern matchingu
+
+---
+
+### Klasické řešení problému bez pattern matchingu
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    if response == "a":
+        return "Abort"
+    elif response == "r":
+        return "Retry"
+    elif response == "f":
+        return "Fail"
+    else:
+        return "Wrong response"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-1.py)
+
+---
+
+### Použití mapy (slovníku)
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    commands = {
+            "a": "Abort",
+            "r": "Retry",
+            "f": "Fail"
+            }
+
+    return commands.get(response, "Wrong response")
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-2.py)
+
+---
+
+### Řídicí struktura match-case
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    match response:
+        case "a":
+            return "Abort"
+        case "r":
+            return "Retry"
+        case "f":
+            return "Fail"
+        case _:
+            return "Wrong response"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-3.py)
+
+---
+
+### Množiny pro větší množství vstupů
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    if response in {"a", "A"}:
+        return "Abort"
+    elif response in {"r", "R"}:
+        return "Retry"
+    elif response in {"f", "F"}:
+        return "Fail"
+    else:
+        return "Wrong response"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-4.py)
+
+---
+
+### Spojka `or` ve vzoru
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    match response:
+        case "a" | "A":
+            return "Abort"
+        case "r" | "R":
+            return "Retry"
+        case "f" | "F":
+            return "Fail"
+        case _:
+            return "Wrong response"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-5.py)
+
+---
+
+### Zachycení hodnoty ve vzoru
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+    response = input("Abort, Retry, Fail? ")
+
+    match response:
+        case "a" | "A":
+            return "Abort"
+        case "r" | "R":
+            return "Retry"
+        case "f" | "F":
+            return "Fail"
+        case _ as x:
+            return f"Wrong response {x}"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-6.py)
+
+---
+
+### Zachycení hodnoty ve vzoru
+
+```python
+print("Not ready reading drive A")
+
+
+def abort_retry_fail():
+
+    match input("Abort, Retry, Fail? "):
+        case "a" | "A":
+            return "Abort"
+        case "r" | "R":
+            return "Retry"
+        case "f" | "F":
+            return "Fail"
+        case _ as x:
+            return f"Wrong response {x}"
+
+
+print(abort_retry_fail())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-abort-retry-fail-7.py)
+
+---
+
+### Generátor Fibonaccího posloupnosti
+
+```python
+def fib(value):
+    match value:
+        case 0:
+            return 0
+        case 1:
+            return 1
+        case n if n>1:
+            return fib(n-1) + fib(n-2)
+        case _ as wrong:
+            raise ValueError("Wrong input", wrong)
+
+
+for n in range(0, 11):
+    print(n, fib(n))
+
+fib(-1)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-fib.py)
+
+---
+
+### Výpočet faktoriálu - základní varianta
+
+```python
+def factorial(n):
+    match n:
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case x:
+            return x * factorial(x-1)
+
+
+for i in range(0, 10):
+    print(i, factorial(i))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-factorial1.py)
+
+---
+
+### Podmínka ve větvi
+
+```python
+def factorial(n):
+    match n:
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case x if x>1:
+            return x * factorial(x-1)
+        case _:
+            raise TypeError("expecting integer >= 0")
+
+
+for i in range(-1, 10):
+    try:
+        print(i, factorial(i))
+    except Exception as e:
+        print(e)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-factorial2.py)
+
+---
+
+### Test typu
+
+```python
+def factorial(n):
+    match n:
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case x if isinstance(x, int) and x>1:
+            return x * factorial(x-1)
+        case _:
+            raise TypeError("expecting integer >= 0")
+
+
+for i in range(-1, 10):
+    try:
+        print(i, factorial(i))
+    except Exception as e:
+        print(e)
+
+try:
+    print(factorial(3.14))
+except Exception as e:
+    print(e)
+
+try:
+    print(factorial("hello"))
+except Exception as e:
+    print(e)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-factorial3.py)
+
+---
+
+### Větev "or"
+
+```python
+def factorial(n):
+    match n:
+        case 0 | 1:
+            return 1
+        case x if isinstance(x, int) and x>1:
+            return x * factorial(x-1)
+        case _:
+            raise TypeError("expecting integer >= 0")
+
+
+for i in range(-1, 10):
+    try:
+        print(i, factorial(i))
+    except Exception as e:
+        print(e)
+
+try:
+    print(factorial(3.14))
+except Exception as e:
+    print(e)
+
+try:
+    print(factorial("hello"))
+except Exception as e:
+    print(e)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-factorial4.py)
+
+---
+
+### Vzorek s n-ticí
+
+```python
+def test_number(value):
+    match value:
+        case (0, 0):
+            print("Zero")
+        case (real, 0):
+            print(f"Real number {real}")
+        case (0, imag):
+            print(f"Imaginary number {imag}")
+        case (real, imag):
+            print(f"Complex number {real}+i{imag}")
+        case _:
+            raise ValueError("Not a complex number")
+
+
+test_number((0,0))
+test_number((1,0))
+test_number((0,1))
+test_number((1,1))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-complex1.py)
+
+---
+
+### Vzorek s n-ticí a s podmínkou
+
+```python
+def test_number(value):
+    match value:
+        case (0, 0):
+            print("Zero")
+        case (real, 0) if real>0:
+            print(f"Positive real number {real}")
+        case (real, 0):
+            print(f"Negative real number {real}")
+        case (0, imag) if imag<0:
+            print(f"Negative imaginary number {imag}")
+        case (0, imag):
+            print(f"Negative imaginary number {imag}")
+        case (real, imag):
+            print(f"Complex number {real}+i{imag}")
+        case _:
+            raise ValueError("Not a complex number")
+
+
+test_number((0,0))
+test_number((1,0))
+test_number((-1,0))
+test_number((0,1))
+test_number((0,-1))
+test_number((1,1))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-complex2.py)
+
+---
+
+### Příkazy složené z většího množství slov
+
+```python
+def perform_command():
+    response = input("> ")
+
+    match response:
+        case "quit":
+            return "Quit"
+        case "list employees":
+            return "List employees"
+        case "list departments":
+            return "List departments"
+        case "list rooms":
+            return "List rooms"
+        case _:
+            return "Wrong command"
+
+
+print(perform_command())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-multiword-commands-1.py)
+
+---
+
+### Vzorek a seznamy
+
+```python
+def perform_command():
+    response = input("> ")
+
+    match response.split():
+        case ["quit"]:
+            return "Quit"
+        case ["list", "employees"]:
+            return "List employees"
+        case ["list", "departments"]:
+            return "List departments"
+        case ["list", "rooms"]:
+            return "List rooms"
+        case _:
+            return "Wrong command"
+
+
+print(perform_command())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-multiword-commands-2.py)
+
+---
+
+### Zachycení hodnoty
+
+```python
+def perform_command():
+    response = input("> ")
+
+    match response.split():
+        case ["quit"]:
+            return "Quit"
+        case ["list", "employees"]:
+            return "List employees"
+        case ["list", "departments"]:
+            return "List departments"
+        case ["list", "rooms"]:
+            return "List rooms"
+        case ["info", subject]:
+            return f"Info about subject '{subject}'"
+        case _:
+            return "Wrong command"
+
+
+print(perform_command())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-multiword-commands-3.py)
+
+---
+
+### Vnořená konstrukce `match-case`
+
+```python
+def perform_command():
+    response = input("> ")
+
+    match response.split():
+        case ["quit"]:
+            return "Quit"
+        case ["list", obj]:
+            match obj:
+                case "employees":
+                    return "List employees"
+                case "departments":
+                    return "List departments"
+                case "rooms":
+                    return "List rooms"
+                case _:
+                    return "Invalid object type: employees, departments, or rooms expected"
+        case ["info", subject]:
+            return f"Info about subject '{subject}'"
+        case _:
+            return "Wrong command"
+
+
+print(perform_command())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-multiword-commands-4.py)
+
+---
+
+### Vnořená konstrukce `match-case` + množiny ve vzorku
+
+```python
+def perform_command():
+    response = input("> ")
+
+    match response.split():
+        case ["quit"]:
+            return "Quit"
+        case ["list", ("employees" | "departments" | "rooms") as obj]:
+            match obj:
+                case "employees":
+                    return "List employees"
+                case "departments":
+                    return "List departments"
+                case "rooms":
+                    return "List rooms"
+        case ["info", subject]:
+            return f"Info about subject '{subject}'"
+        case _:
+            return "Wrong command"
+
+
+print(perform_command())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-multiword-commands-5.py)
+
+---
+
+### Vzorky a OOP
+
+```python
+class Complex():
+
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def __str__(self):
+        return f"Complex number {self.real}+i{self.imag} represented as object"
+
+
+def test_number(value):
+    match value:
+        case (0, 0):
+            print("Zero")
+        case (real, 0) if real>0:
+            print(f"Positive real number {real}")
+        case (real, 0):
+            print(f"Negative real number {real}")
+        case (0, imag) if imag<0:
+            print(f"Negative imaginary number {imag}")
+        case (0, imag):
+            print(f"Negative imaginary number {imag}")
+        case (real, imag):
+            print(f"Complex number {real}+i{imag}")
+        case Complex():
+            print(value)
+        case _:
+            raise ValueError("Not a complex number")
+
+
+test_number((0,0))
+test_number((1,0))
+test_number((-1,0))
+test_number((0,1))
+test_number((0,-1))
+test_number((1,1))
+
+test_number(Complex(0,0))
+test_number(Complex(1,0))
+test_number(Complex(-1,0))
+test_number(Complex(0,1))
+test_number(Complex(0,-1))
+test_number(Complex(1,1))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-object1.py)
+
+---
+
+### Vzorky a OOP
+
+```python
+from fractions import Fraction
+
+
+class Complex():
+
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def __str__(self):
+        return f"Complex number {self.real}+i{self.imag} represented as object"
+
+
+def test_number(value):
+    match value:
+        case (0, 0):
+            print("Zero")
+        case (real, 0) if real>0:
+            print(f"Positive real number {real}")
+        case (real, 0):
+            print(f"Negative real number {real}")
+        case (0, imag) if imag<0:
+            print(f"Negative imaginary number {imag}")
+        case (0, imag):
+            print(f"Negative imaginary number {imag}")
+        case (real, imag):
+            print(f"Complex number {real}+i{imag}")
+        case Complex(real=0, imag=0):
+            print(f"Zero complex represented as object")
+        case Complex():
+            print(value)
+        case Fraction():
+            print(f"Fraction {value}")
+        case _:
+            raise ValueError("Not a complex number")
+
+
+test_number((0,0))
+test_number((1,0))
+test_number((-1,0))
+test_number((0,1))
+test_number((0,-1))
+test_number((1,1))
+
+test_number(Complex(0,0))
+test_number(Complex(1,0))
+test_number(Complex(-1,0))
+test_number(Complex(0,1))
+test_number(Complex(0,-1))
+test_number(Complex(1,1))
+
+test_number(Fraction(0,1))
+test_number(Fraction(1,1))
+test_number(Fraction(1,2))
+test_number(Fraction(1,3))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//pattern-matching-object2.py)
 
 ---
 
