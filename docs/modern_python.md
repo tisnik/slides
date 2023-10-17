@@ -959,6 +959,97 @@ test_number(Fraction(1,3))
 ## Mroží operátor
 
 * Přidáno do Pythonu 3.8
+* PEP 572 - Assignment Expressions
+* Možnost přiřazení v rámci `výrazu`
+    - původní přiřazení lze jen v rámci `příkazu`
+* Takzvané `pojmenované výrazy`
+
+---
+
+### Proměnná definovaná v podmínce
+
+```python
+limit = 8
+
+password = "Hello world" 
+
+if (length := len(password)) < limit:
+    print(f"Password should be longer than {length} chars")
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//walrus-operator-1.py)
+
+---
+
+### Dtto, ale opačný výsledek
+
+```python
+limit = 8
+
+password = "Hello" 
+
+if (length := len(password)) < limit:
+    print(f"Password should be longer than {length} chars")
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//walrus-operator-2.py)
+
+---
+
+### Problém: opakované výpočty
+
+```python
+values = (1, 2, 3, 4, 5)
+
+result = {
+        "count": len(values),
+        "sum": sum(values),
+        "mean": sum(values) / len(values)
+        }
+
+print(result)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//walrus-operator-3.py)
+
+---
+
+### Předpočet hodnot
+
+```python
+values = (1, 2, 3, 4, 5)
+
+count = len(values)
+summ = sum(values)
+
+result = {
+        "count": count,
+        "sum": summ,
+        "mean": summ/count
+        }
+
+print(result)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//walrus-operator-4.py)
+
+---
+
+### Úprava založená na walrus operátoru
+
+```python
+values = (1, 2, 3, 4, 5)
+
+result = {
+        "count": (count := len(values)),
+        "sum": (summ := sum(values)),
+        "mean": summ/count
+        }
+
+print(result)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//walrus-operator-5.py)
 
 ---
 
