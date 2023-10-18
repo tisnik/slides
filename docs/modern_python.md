@@ -1095,12 +1095,22 @@ print(result)
 
 ### Souběžnost a paralelismus v Pythonu
 
-* více procesů
+* Více procesů
     - `multiprocessing`
-* více vláken
+* Více vláken
     - `threading`
-* korutiny
+* Korutiny
     - `asyncio`
+
+---
+
+### `async` a `await`
+
+* Nejenom v Pythonu
+    - populární i v dalších jazycích
+* Typicky pro I/O operace
+* Funkce označené `async`
+* Čekání na dokončení pomocí `await`
 
 ---
 
@@ -1267,6 +1277,8 @@ asyncio.run(main())
 
 ### Čtení výsledků přes frontu
 
+* Synchronizace
+
 ```python
 import asyncio
 
@@ -1297,6 +1309,8 @@ asyncio.run(main())
 ---
 
 ### Producent-konzument
+
+* Běžící asynchronně
 
 ```python
 import asyncio
