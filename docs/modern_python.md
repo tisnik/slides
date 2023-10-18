@@ -1088,6 +1088,46 @@ print(result)
 
 ---
 
+### Vyhození skupiny výjimek
+
+```python
+eg = ExceptionGroup(
+    "one", [TypeError(1), ValueError(3), OSError(4)])
+
+import traceback
+traceback.print_exception(eg)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//exception-group-1.py)
+
+---
+
+### Vyhození skupiny výjimek
+
+```python
+eg = ExceptionGroup(
+    "one",
+    [
+        TypeError(1),
+        ExceptionGroup(
+            "two",
+             [TypeError(2), ValueError(3)]
+        ),
+        ExceptionGroup(
+             "three",
+              [OSError(4)]
+        )
+    ]
+)
+
+import traceback
+traceback.print_exception(eg)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//exception-group-2.py)
+
+---
+
 ## Deklarace datových typů
 
 * Přidáváno postupně
