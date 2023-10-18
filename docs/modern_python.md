@@ -1081,6 +1081,282 @@ print(result)
 
 ---
 
+### Souběžnost a paralelismus
+
+* Nejedná se o tytéž vlastnosti
+* Souběžnost
+    - více úloh běžících na menším množství CPU
+    - i na jednom CPU
+    - překrývání
+* Paralelismus
+    - n úloh na n CPU
+
+---
+
+### Souběžnost a paralelismus v Pythonu
+
+* více procesů
+    - `multiprocessing`
+* více vláken
+    - `threading`
+* korutiny
+    - `asyncio`
+
+---
+
+### `async` a `await`
+
+* Nekorektní použití `await`
+
+```python
+import asyncio
+import time
+
+
+async def task():
+    print("task started")
+    await asyncio.sleep(5)
+    print("task finished")
+
+
+def main():
+    task1 = asyncio.create_task(task())
+    print("task created")
+
+    await task1
+
+    print("done")
+
+
+main()
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-await-1.py)
+
+---
+
+### `async` a `await`
+
+* Korektní použití `await`
+
+```python
+import asyncio
+
+
+async def task():
+    print("task started")
+    await asyncio.sleep(5)
+    print("task finished")
+
+
+async def main():
+    task1 = asyncio.create_task(task())
+    print("task created")
+
+    await task1
+
+    print("done")
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-await-2.py)
+
+---
+
+### Dvě souběžné úlohy
+
+```python
+import asyncio
+
+
+async def task(name):
+    print(f"{name} task started")
+    await asyncio.sleep(5)
+    print(f"{name} task finished")
+
+
+async def main():
+    task1 = asyncio.create_task(task("first"))
+    print("first task created")
+
+    task2 = asyncio.create_task(task("second"))
+    print("second task created")
+
+    await task1
+    await task2
+
+    print("done")
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-await-3.py)
+
+---
+
+### Tři souběžné úlohy, čtení výsledné hodnoty
+
+```python
+import asyncio
+
+
+async def task(name):
+    print(f"{name} task started")
+    await asyncio.sleep(5)
+    print(f"{name} task finished")
+    return name[::-1]
+
+
+async def main():
+    task1 = asyncio.create_task(task("first"))
+    print("first task created")
+
+    task2 = asyncio.create_task(task("second"))
+    print("second task created")
+
+    task3 = asyncio.create_task(task("third"))
+    print("third task created")
+
+    print("result of task #1:", await task1)
+    print("result of task #2:", await task2)
+    print("result of task #3:", await task3)
+
+    print("done")
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-await-4.py)
+
+---
+
+### Komunikace přes fronty
+
+```python
+import asyncio
+
+
+async def task(name, queue):
+    while not queue.empty():
+        param = await queue.get()
+        print(f"Task named {name} started with parameter {param}")
+        await asyncio.sleep(5)
+        print(f"{name} task finished")
+
+
+async def main():
+    queue = asyncio.Queue()
+
+    for i in range(20):
+        await queue.put(i)
+
+    for n in range(1, 2):
+        asyncio.create_task(task(f"{n}", queue))
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-queue-1.py)
+
+---
+
+### Čtení výsledků přes frontu
+
+```python
+import asyncio
+
+
+async def task(name, queue):
+    while not queue.empty():
+        param = await queue.get()
+        print(f"Task named {name} started with parameter {param}")
+        await asyncio.sleep(5)
+        print(f"{name} task finished")
+
+
+async def main():
+    queue = asyncio.Queue()
+
+    for i in range(20):
+        await queue.put(i)
+
+    for n in range(1, 2):
+        await asyncio.gather(asyncio.create_task(task(f"{n}", queue)))
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-queue-2.py)
+
+---
+
+### Producent-konzument
+
+```python
+import asyncio
+
+
+async def task(name, queue):
+    while not queue.empty():
+        param = await queue.get()
+        print(f"Task named {name} started with parameter {param}")
+        await asyncio.sleep(5)
+        print(f"{name} task finished")
+
+
+async def main():
+    queue = asyncio.Queue()
+
+    for i in range(20):
+        await queue.put(i)
+
+    await asyncio.gather(
+        asyncio.create_task(task(1, queue)),
+        asyncio.create_task(task(2, queue)),
+        asyncio.create_task(task(3, queue)),
+        asyncio.create_task(task(4, queue)),
+    )
+
+
+asyncio.run(main())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//async-queue-3.py)
+
+---
+
+### Prioritní fronta
+
+```python
+import queue
+import random
+
+q = queue.PriorityQueue(40)
+
+for item in range(30):
+    print("Size", q.qsize())
+    print("Empty?", q.empty())
+    print("Full?", q.full())
+
+    value = random.randint(1, 20)
+    print(value)
+    q.put("prvek # {:2d}".format(value))
+
+
+while not q.empty():
+    print("Read item:", q.get())
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//priority-queue.py)
+
+---
+
 ## Skupiny výjimek
 
 * Přidáno do Pythonu 3.11
