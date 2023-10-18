@@ -52,6 +52,8 @@
 ### Python a vývoj webových aplikací
 
 * Brython
+* Transcrypt
+* PyScript
 * Bokeh
 
 ---
@@ -185,6 +187,25 @@ print(f"Zpráva pro vás: '{x.capitalize()}'")
 ```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-5.py)
+
+---
+
+### Jednodušší ladění
+
+```python
+name = "Guido"
+surname = "Rossum"
+
+print(f"{name=} {surname=}")
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//f-string-6.py)
+
+Výsledek:
+
+```
+name='Guido' surname='Rossum'
+```
 
 ---
 
@@ -1062,15 +1083,19 @@ print(result)
 
 ## Skupiny výjimek
 
+* Přidáno do Pythonu 3.11
+* PEP 654 – Exception Groups and except
+
 ---
 
 ## Deklarace datových typů
 
 * Přidáváno postupně
+* PEP 484 - Type Hints a další
 
 ---
 
-### Nejpopulárnější jazyky
+### Nejpopulárnější jazyky současnosti
 
 ```
 Dynamicky typované   Staticky typované
@@ -1186,6 +1211,13 @@ print(add(1, False))
 
 ---
 
+## Novinky v ekosystému Pythonu
+
+* Správa projektů
+* Lintery
+
+---
+
 # Vylepšení výkonnosti Pythonu
 
 ![Python](images/python.png)
@@ -1210,6 +1242,10 @@ print(add(1, False))
 
 ## JIT překlad
 
+* Just-in-time (JIT)
+* Ahead-of-time (AOT)
+* Několik projektů nabízejících JIT/AOT
+
 ---
 
 # Python a vývoj webových aplikací
@@ -1218,11 +1254,25 @@ print(add(1, False))
 
 ---
 
-##
+## Python a vývoj webových aplikací
+
+* Brython
+* Transcrypt
+* PyScript
+* Bokeh
 
 ---
 
-##
+# Alternativní projekty a jazyky
+
+![Python](images/python.png)
+
+---
+
+## Alterntivní projekty a jazyky
+
+* Coconut
+* Mojo
 
 ---
 
