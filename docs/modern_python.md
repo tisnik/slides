@@ -1854,7 +1854,8 @@ print(d)
 
 ### Specifikace typu slovníku
 
-* `any`
+* použití typu `any`
+
 ```python
 from typing import Dict, Any
 
@@ -1869,6 +1870,10 @@ print(d)
 ```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-3.py)
+
+---
+
+### Specifikace typu slovníku
 
 * explicitní specifikace
 
@@ -1908,6 +1913,10 @@ print(d)
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-5.py)
 
+---
+
+### Typ `union`
+
 * Pro klíče
 
 ```python
@@ -1944,6 +1953,10 @@ print(d)
 ```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-7.py)
+
+---
+
+### Typ `optional`
 
 * S `optional`
 
