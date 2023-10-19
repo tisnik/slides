@@ -1624,6 +1624,8 @@ def add(a:int, b:int) -> int:
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-2.py)
 
+---
+
 ### `bool` nebo `int`?
 
 * Viz specifikace Pythonu!
@@ -1638,6 +1640,326 @@ print(add(1, False))
 ```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-3.py)
+```python
+def add(a:bool, b:bool) -> bool:
+    return a and b
+
+print(add(1, 2))
+print(add(1, True))
+print(add(1, False))
+print(add(True, False))
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-4.py)
+
+---
+
+### Výpis typových anotací
+
+* `any`
+
+```python
+def add(a, b):
+    return a+b
+
+
+print(add.__annotations__)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-5.py)
+
+* explicitní typy
+
+```python
+def add(a:int, b:int) -> int:
+    return a+b
+
+
+print(add.__annotations__)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-6.py)
+
+
+---
+
+### Výpis typových anotací
+
+* složitější typy
+
+```python
+from typing import List, Set
+
+def add(a:List[Set[int]], b:List[Set[int]]) -> List[Set[int]]:
+    return a+b
+
+
+print(add.__annotations__)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-add-7.py)
+
+---
+
+### Typované n-tice
+
+* nekorektní varianta
+
+```python
+from typing import Tuple
+
+p: Tuple[int] = (1, 2, 3)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-tuple-type-1.py)
+
+* korektní varianta
+
+```python
+from typing import Tuple
+
+p: Tuple[int, int, int] = (1, 2, 3)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-tuple-type-2.py)
+
+---
+
+### Rozdílné typy prvků
+
+* nekorektní varianta
+
+```python
+from typing import Tuple
+
+p: Tuple[int, float, bool, str] = (1, 3.14, True, "Hello")
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-tuple-type-3.py)
+
+* korektní varianta
+
+```python
+from typing import Tuple
+
+p: Tuple[int, float, bool, str] = (2.0, 3.14, 1, "Hello")
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-tuple-type-4.py)
+
+---
+
+### Typované seznamy
+
+* nekorektní varianta
+
+```python
+l: list[int] = []
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-1.py)
+
+* import
+
+```python
+from typing import List
+
+l: List[int] = []
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-2.py)
+
+---
+
+### Test typu prvků
+
+* v pořádku
+
+```python
+from typing import List
+
+l: List[int] = [1, 2, 3]
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-3.py)
+
+* nekorektní
+
+```python
+from typing import List
+
+l: List[int] = [1, 2, None]
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-4.py)
+
+---
+
+### Znovu problém bool-int
+
+* v pořádku
+
+```python
+from typing import List
+
+l: List[int] = [1, True, False]
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-5.py)
+
+* nekorektní
+
+```python
+from typing import List
+
+l: List[bool] = [True, False, 42]
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-list-type-6.py)
+
+---
+
+### Typované slovníky
+
+* Slovníky v Pythonu
+
+```python
+d = {}
+
+d["foo"] = 1
+d["bar"] = 3
+d["baz"] = 10
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-1.py)
+
+* Libovolné klíče a hodnoty
+
+```python
+d = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d[10] = 10
+d[42] = "answer"
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-2.py)
+
+---
+
+### Specifikace typu slovníku
+
+* `any`
+```python
+from typing import Dict, Any
+
+d:Dict[Any, Any] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d[10] = 10
+d[42] = "answer"
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-3.py)
+
+* explicitní specifikace
+
+```python
+from typing import Dict
+
+d:Dict[str, float] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d[10] = 10
+d[42] = "answer"
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-4.py)
+
+---
+
+### Typ `union`
+
+* Pro hodnoty
+
+```python
+from typing import Dict, Union
+
+d:Dict[str, Union[int, float, str]] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d[10] = 10
+d[42] = "answer"
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-5.py)
+
+* Pro klíče
+
+```python
+from typing import Dict, Union
+
+d:Dict[Union[int, str], Union[int, float, str]] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d[10] = 10
+d[42] = "answer"
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-6.py)
+
+---
+
+### Typ `optional`
+
+* Bez `optional`
+
+```python
+from typing import Dict
+
+d:Dict[str, float] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d["baz"] = None
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-7.py)
+
+* S `optional`
+
+```python
+from typing import Dict, Optional
+
+d:Dict[str, Optional[float]] = {}
+
+d["foo"] = 1
+d["bar"] = 3.14
+d["baz"] = None
+
+print(d)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-dict-type-8.py)
 
 ---
 
