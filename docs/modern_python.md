@@ -1976,6 +1976,268 @@ print(d)
 
 ---
 
+### Typy a funkce vyššího řádu
+
+* typ `callable`
+
+```python
+#!/usr/bin/env python3
+# vim: set fileencoding=utf-8
+
+#
+#  (C) Copyright 2023  Pavel Tisnovsky
+#
+#  All rights reserved. This program and the accompanying materials
+#  are made available under the terms of the Eclipse Public License v1.0
+#  which accompanies this distribution, and is available at
+#  http://www.eclipse.org/legal/epl-v10.html
+#
+#  Contributors:
+#      Pavel Tisnovsky
+#
+
+from typing import Callable
+
+
+def printIsPositive(condition:Callable[[float], bool]) -> None:
+    if condition(5):
+        print("Positive")
+    else:
+        print("Negative")
+
+
+def positiveFloat(x:float) -> bool:
+    return x > 0.0
+
+
+def positiveInt(x:int) -> bool:
+    return x > 0
+
+
+printIsPositive(positiveFloat)
+printIsPositive(positiveInt)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-callable.py)
+
+---
+
+### Problém s variancí
+
+* Týká se podtypů a nadřazených typů
+    - v OOP běžné
+* Čtyři možné typy variance
+    - kovariance
+    - kontravariance
+    - invariance
+    - bivariance
+
+---
+
+### Příklad variancí
+
+* `Jablko` je podtypem typu `Ovoce` ve všech dalších případech
+
+---
+
+### Příklad variancí
+
+* Covariance
+    - `List[Apple]` je podtypem `List[Fruit]`
+* Contravariance
+    - `List[Fruit]` je podtypem `List[Apple]`
+* Invariance
+    - `List[Fruit]` nemá žádný vztah k `List[Apple]`
+* Bivariance
+    - `List[Apple]` je podtypem `List[Fruit]`
+    - a současně (!!!):
+    - `List[Fruit]` je podtypem `List[Apple]`
+
+---
+
+### Proč se o varianci vůbec starat?
+
+* Úzce souvisí s typovým systémem
+* A s tím, jaké kontroly lze provést staticky
+
+---
+
+```java
+class Fruit {
+}
+
+class Orange extends Fruit {
+    public String toString() {
+        return "Orange";
+    }
+}
+
+class Apple extends Fruit {
+    public String toString() {
+        return "Apple";
+    }
+}
+
+public class Variance1 {
+    public static void mix(Fruit[] punnet) {
+        punnet[0] = new Orange();
+        punnet[1] = new Apple();
+    }
+
+    public static void main(String[] args) {
+        Fruit[] punnet = new Fruit[2];
+        mix(punnet);
+
+        for (Fruit Fruit:punnet) {
+            System.out.println(Fruit);
+        }
+    }
+}
+```
+
+---
+
+### Statická kontrola typů ok, pád v runtime!
+
+```java
+class Fruit {
+}
+
+class Orange extends Fruit {
+    public String toString() {
+        return "Orange";
+    }
+}
+
+class Apple extends Fruit {
+    public String toString() {
+        return "Apple";
+    }
+}
+
+public class Variance2 {
+    public static void mix(Fruit[] punnet) {
+        punnet[0] = new Orange();
+        punnet[1] = new Apple();
+    }
+
+    public static void main(String[] args) {
+        Fruit[] punnet = new Orange[2];
+        mix(punnet);
+
+        for (Fruit Fruit:punnet) {
+            System.out.println(Fruit);
+        }
+    }
+}
+```
+
+---
+
+### Variance v Pythonu
+
+```python
+from typing import List
+
+
+class Ovoce:
+    pass
+
+
+class Hruska(Ovoce):
+    def __repr__(self):
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    def __repr__(self):
+        return "Jablko"
+
+
+def tiskni(kosik : List[Ovoce]):
+    for ovoce in kosik:
+        print(ovoce)
+
+
+kosik : List[Hruska] = []
+
+tiskni(kosik)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-variance-1.py)
+
+---
+
+### Použití `sequence` a nikoli seznamu
+
+```python
+from typing import Sequence
+
+
+class Ovoce:
+    pass
+
+
+class Hruska(Ovoce):
+    def __repr__(self):
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    def __repr__(self):
+        return "Jablko"
+
+
+def tiskni(kosik : Sequence[Ovoce]):
+    for ovoce in kosik:
+        print(ovoce)
+
+
+kosik : Sequence[Hruska] = []
+
+tiskni(kosik)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-variance-2.py)
+
+---
+
+### Tisk typové anotace
+
+```python
+from typing import Sequence
+
+
+class Ovoce:
+    pass
+
+
+class Hruska(Ovoce):
+    def __repr__(self):
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    def __repr__(self):
+        return "Jablko"
+
+
+def tiskni(kosik : Sequence[Ovoce]):
+    for ovoce in kosik:
+        print(ovoce)
+
+
+kosik : Sequence[Hruska] = []
+
+tiskni(kosik)
+
+print(tiskni.__annotations__)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mypy-variance-3.py)
+
+---
+
 # Novinky v ekosystému Pythonu
 
 ![Python](images/python.png)
