@@ -2251,6 +2251,275 @@ print(tiskni.__annotations__)
 
 ---
 
+## Správa projektů
+
+* pip (+ venv či virtualenv)
+* Pyenv
+* Poetry
+* Hatch
+* PDM
+
+---
+
+## Lintery
+
+* pycodestyle
+* pydocstyle
+* black
+* ruff
+* (mypy)
+
+---
+
+### pip
+
+* `requirements.txt`
+    - typicky zvolené verze
+    - min/max/konkrétní/latest
+
+---
+
+### Problémy pipu
+
+* jak pracovat s virtualenv
+* kontrola verzí (konzistence)
+* řešení tranzitivních závislostí
+* striktní nebo příliš volný rozsah verzí
+* nejsou k dispozici otisky balíčků
+    - možný prostor pro útoky
+    - nelze reprodukovat "build" na dalším počítači
+    - či dokonce na stejném počítači později
+
+---
+
+### Další problémy
+
+* kam uložit metadata projektu
+    - nastavení linterů
+    - informace o autorovi
+    - aliasy příkazů
+* `setup.py` je jen částečným řešením
+* `setup.cfg`
+    `.coveragerc`
+    `tox.ini`
+    - atd. atd.
+
+---
+
+### `setup.cfg`
+
+```
+[metadata]
+name = ccx-data-pipeline
+author = somebody
+description-file = README.md
+license = Apache 2.0
+long_description_content_type = text/markdown
+home-page = https://github.com/somebody/ccx-data-pipeline
+classifier =
+    Intended Audience :: Information Technology
+    Intended Audience :: System Administrators
+    Operating System :: POSIX :: Linux
+    Programming Language :: Python
+    Programming Language :: Python :: 3
+    Programming Language :: Python :: 3.7
+
+[options]
+zip_safe = False
+packages = find:
+install_requires =
+    app-common-python
+    insights-core-messaging
+    ccx-ocp-core
+    ccx-rules-ocp
+    ccx-rules-ocm
+    kafka-python
+    requests
+    jsonschema
+    python-json-logger
+    prometheus_client
+    python-logstash
+    boto3
+    watchtower
+setup_requires =
+    setuptools
+    setuptools_scm
+    wheel
+
+[options.packages.find]
+exclude =
+    test*
+
+[options.entry_points]
+console_scripts =
+    ccx-data-pipeline = ccx_data_pipeline.command_line:ccx_data_pipeline
+
+[options.extras_require]
+dev =
+    black
+    coverage
+    freezegun
+    pycco
+    pycodestyle
+    pydocstyle
+    pylint
+    pytest
+    pytest-cov
+
+[pycodestyle]
+ignore = E402
+max-line-length = 100
+exclude =
+    .tox,
+    .git,
+    __pycache__,
+    build,
+    dist,
+    tests/,
+    samples/,
+    *.pyc,
+    *.egg-info,
+    .cache,
+    .eggs,
+    docs,
+    .venv,
+    venv,
+
+[flake8]
+max-line-length = 100
+```
+
+---
+
+### `setup.py`
+
+```
+from setuptools import setup
+
+
+setup(use_scm_version={"local_scheme": "node-and-timestamp"})
+```
+
+---
+
+### `requirements.txt`
+
+```
+-i https://repository.engineering.redhat.com/nexus/repository/ccx/simple
+
+app-common-python==0.1.8
+attrs==19.3.0
+boto3==1.14.27
+botocore==1.17.27
+CacheControl==0.12.6
+ccx-ocp-core==2021.12.08
+ccx-rules-ocm==0.0.1
+ccx-rules-ocp==2021.12.08
+certifi==2020.6.20
+cffi==1.14.0
+chardet==3.0.4
+colorama==0.4.3
+cryptography==3.0
+dateparser==0.7.6
+decorator==4.4.2
+defusedxml==0.6.0
+docutils==0.15.2
+fsspec==0.7.4
+idna==2.10
+importlib-metadata==1.7.0
+insights-core>=3.0.235
+insights-core-messaging==1.2.0
+Jinja2==2.11.2
+jmespath==0.10.0
+jsonschema==3.2.0
+kafka-python==2.0.1
+lockfile==0.12.2
+MarkupSafe==1.1.1
+msgpack==1.0.0
+numpy==1.19.1
+packaging==20.7
+pandas==1.0.5
+prometheus-api-client==0.3.1
+prometheus-client==0.9.0
+py==1.9.0
+pycparser==2.20
+pyparsing==2.4.7
+pyrsistent==0.16.0
+python-dateutil==2.8.1
+python-json-logger==0.1.11
+python-logstash==0.4.6
+pytz==2020.1
+PyYAML==5.3.1
+redis==3.5.3
+regex==2020.7.14
+requests==2.24.0
+retry==0.9.2
+retrying==1.3.3
+s3fs==0.4.2
+s3transfer==0.3.3
+six==1.15.0
+tzlocal==2.1
+urllib3==1.25.10
+watchtower==0.8.0
+zipp==3.1.0
+sentry-sdk==0.19.5
+```
+
+---
+
+### `pyproject.toml`
+
+* všechna metadata v jediném souboru
+* PEP-621
+* správa závislostí pro různá prostředí
+* metadata pro další nástroje
+    - `ruff`
+    - `mypy`
+    - `black`
+
+---
+
+### Lock file
+
+* obsahuje konkrétní verze závislostí
+* taktéž otisky balíčků
+* i pro tranzitivní závislosti
+* build lze kdykoli zopakovat
+    - jiný počítač
+    - stejný počítač v jiném okamžiku
+
+---
+
+### PDM
+
+* správce závislostí
+* správce prostředí
+* používá `pyproject.toml`
+* a lock file
+
+---
+
+### PDM
+
+* vytvoření nového projektu
+* soubor `pyproject.toml`
+* přidání nové závislosti
+* tranzitivní závislosti
+* závislosti pro vývojáře
+* lock file
+* správa prostředí
+
+---
+
+### Lintery
+
+* Black
+* Pycodestyle
+* Pydocstyle
+* Ruff
+
+---
+
 # Vylepšení výkonnosti Pythonu
 
 ![Python](images/python.png)
