@@ -2547,6 +2547,646 @@ sentry-sdk==0.19.5
 * Just-in-time (JIT)
 * Ahead-of-time (AOT)
 * Několik projektů nabízejících JIT/AOT
+* Proč?
+    - viz další slajdy
+
+---
+
+### Problematika výkonu aplikací psaných v Pythonu
+
+[https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python3-gcc.html](https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python3-gcc.html)
+
+---
+
+### Řešený problém
+
+* Dynamické typování + přetížené operátory
+* Základní vlastnosti Pythonu
+
+```python
+def add_two_numbers(x, y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//cython-1.py)
+
+---
+
+### Jak tento problém vyřešit?
+
+* AOT překladač
+   - Cython
+* JIT překladač
+   - Numba
+
+---
+
+### Cython
+
+* Nadmnožina Pythonu
+    - (což už neplatí)
+* Překládaný jazyk
+    - jedná se o transpiler do jazyka C
+    - `.pyx` -> `.c` -> `.so` -> `launch.py`
+* Explicitní datové typy jsou nepovinné
+* `nogil`
+* Volání nativních funkcí
+
+---
+
+#### Překlad do C
+
+```python
+cdef add_two_numbers(x, y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//cython-2.pyx)
+
+---
+
+#### Explicitní typy parametrů
+
+```python
+cdef add_two_numbers(int x, int y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//cython-3.pyx)
+
+---
+
+### Zákaz GILu
+
+```python
+cdef int add_two_numbers(int x, int y) nogil:
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//cython-4.pyx)
+
+---
+
+### Zavolání standardní C funkce
+
+```python
+from libc.stdio cimport printf
+
+
+cdef int add_two_numbers(int x, int y) nogil:
+    printf("%i\n", x)
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//cython-5.pyx)
+
+---
+
+### Numba
+
+* JIT pro Python
+
+---
+
+### Dekorátor @jit
+
+```python
+from numba import jit
+
+@jit
+def funkce1():
+    pass
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//numba-1.py)
+
+---
+
+### Jednodušší a rychlejší `print`
+
+* Pouze pro čísla a řetězce
+* Bez nepovinných argumentů `file` a `sep`
+
+---
+
+### Vynucení JITu
+
+```python
+@jit(nopython=True)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//numba-2.py)
+
+---
+
+### Porovnání výkonnosti
+
+* ANSI C: ANSI C (ne Python)
+* Cython #1: základní varianta
+* Cython #2: bez typových informací
+* Cython #3: optimalizace + `nogil`
+* Numba #1: původní varianta
+* Numba #2: s dekorátorem `@jit`
+* Numba #3: nativní funkce `print`
+* Numba #4: nativní funkce `print` + @jit(nopython=True)
+
+---
+
+### ANSI C: ANSI C (ne Python)
+
+```python
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "palette_mandmap.h"
+
+void calc_mandelbrot(unsigned int width, unsigned int height, unsigned int maxiter, unsigned char palette[][3])
+{
+    puts("P3");
+    printf("%d %d\n", width, height);
+    puts("255");
+
+    double cy = -1.5;
+    int y;
+    for (y=0; y<height; y++) {
+        double cx = -2.0;
+        int x;
+        for (x=0; x<width; x++) {
+            double zx = 0.0;
+            double zy = 0.0;
+            unsigned int i = 0;
+            while (i < maxiter) {
+                double zx2 = zx * zx;
+                double zy2 = zy * zy;
+                if (zx2 + zy2 > 4.0) {
+                    break;
+                }
+                zy = 2.0 * zx * zy + cy;
+                zx = zx2 - zy2 + cx;
+                i++;
+            }
+            unsigned char *color = palette[i];
+            unsigned char r = *color++;
+            unsigned char g = *color++;
+            unsigned char b = *color;
+            printf("%d %d %d\n", r, g, b);
+            cx += 3.0/width;
+        }
+        cy += 3.0/height;
+    }
+}
+
+int main(int argc, char **argv)
+{
+    if (argc < 4) {
+        puts("usage: ./mandelbrot width height maxiter");
+        return 1;
+    }
+    int width = atoi(argv[1]);
+    int height = atoi(argv[2]);
+    int maxiter = atoi(argv[3]);
+    calc_mandelbrot(width, height, maxiter, palette);
+    return 0;
+}
+
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot.c)
+
+---
+
+### Cython #1: základní varianta
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+
+def calc_mandelbrot(width, height, maxiter, palette):
+    print("P3")
+    print("{w} {h}".format(w=width, h=height))
+    print("255")
+
+    cy = -1.5
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print("{r} {g} {b}".format(r=r, g=g, b=b))
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        print("usage: python mandelbrot width height maxiter")
+        exit(1)
+
+    width = int(argv[1])
+    height = int(argv[2])
+    maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-1.pyx)
+
+---
+
+### Cython #2: bez typových informací
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+
+cdef calc_mandelbrot(int width, int height, int maxiter, palette):
+    cdef double zx
+    cdef double zy
+    cdef double zx2
+    cdef double zy2
+    cdef double cx
+    cdef double cy
+    cdef int r
+    cdef int g
+    cdef int b
+    cdef int i
+
+    print("P3")
+    print("{w} {h}".format(w=width, h=height))
+    print("255")
+    cy = -1.5
+
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print("{r} {g} {b}".format(r=r, g=g, b=b))
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        print("usage: python mandelbrot width height maxiter")
+        exit(1)
+
+    width = int(argv[1])
+    height = int(argv[2])
+    maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-2.pyx)
+
+---
+
+### Cython #3: optimalizace + `nogil`
+
+```python
+import palette_mandmap
+from sys import argv, exit
+import cython
+from cpython cimport array
+from libc.stdio cimport printf
+
+
+@cython.cdivision(True)
+cdef void calc_mandelbrot(int width, int height, int maxiter, unsigned char *palette) nogil:
+    cdef double zx
+    cdef double zy
+    cdef double zx2
+    cdef double zy2
+    cdef double cx
+    cdef double cy
+    cdef unsigned char r
+    cdef unsigned char g
+    cdef unsigned char b
+    cdef int i
+    cdef int index
+
+    printf("P3\n%d %d\n255\n", width, height)
+    cy = -1.5
+
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            index = i * 3
+            r = palette[index]
+            g = palette[index+1]
+            b = palette[index+2]
+            printf("%d %d %d\n", r, g, b)
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+cdef array.array palette = array.array('B')
+
+if __name__ == "__main__":
+
+    if len(argv) < 4:
+        print("usage: python mandelbrot width height maxiter")
+        exit(1)
+
+    for color in palette_mandmap.palette:
+        for component in color:
+            palette.append(component)
+
+    width = int(argv[1])
+    height = int(argv[2])
+    maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette.data.as_uchars)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-3.pyx)
+
+---
+
+### Numba #1: původní varianta
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+def calc_mandelbrot(width, height, maxiter, palette):
+    print("P3")
+    print("{w} {h}".format(w=width, h=height))
+    print("255")
+
+    cy = -1.5
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print("{r} {g} {b}".format(r=r, g=g, b=b))
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        width = 512
+        height = 512
+        maxiter = 255
+    else:
+        width = int(argv[1])
+        height = int(argv[2])
+        maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-1.py)
+
+---
+
+### Numba #2: s dekorátorem `@jit`
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+from numba import jit
+
+
+@jit
+def calc_mandelbrot(width, height, maxiter, palette):
+    print("P3")
+    print("{w} {h}".format(w=width, h=height))
+    print("255")
+
+    cy = -1.5
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print("{r} {g} {b}".format(r=r, g=g, b=b))
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        width = 512
+        height = 512
+        maxiter = 255
+    else:
+        width = int(argv[1])
+        height = int(argv[2])
+        maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-2.py)
+
+---
+
+### Numba #3: nativní funkce `print`
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+from numba import jit
+
+
+@jit
+def calc_mandelbrot(width, height, maxiter, palette):
+    print("P3")
+    print(width)
+    print(height)
+    print("255")
+
+    cy = -1.5
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print(r)
+            print(g)
+            print(b)
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        width = 512
+        height = 512
+        maxiter = 255
+    else:
+        width = int(argv[1])
+        height = int(argv[2])
+        maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-3.py)
+
+---
+
+### Numba #4: nativní funkce `print` + @jit(nopython=True)
+
+```python
+import palette_mandmap
+from sys import argv, exit
+
+from numba import jit
+
+
+@jit(nopython=True)
+def calc_mandelbrot(width, height, maxiter, palette):
+    print("P3")
+    print(width)
+    print(height)
+    print("255")
+
+    cy = -1.5
+    for y in range(0, height):
+        cx = -2.0
+        for x in range(0, width):
+            zx = 0.0
+            zy = 0.0
+            i = 0
+            while i < maxiter:
+                zx2 = zx * zx
+                zy2 = zy * zy
+                if zx2 + zy2 > 4.0:
+                    break
+                zy = 2.0 * zx * zy + cy
+                zx = zx2 - zy2 + cx
+                i += 1
+
+            r = palette[i][0]
+            g = palette[i][1]
+            b = palette[i][2]
+            print(r)
+            print(g)
+            print(b)
+            cx += 3.0/width
+        cy += 3.0/height
+
+
+if __name__ == "__main__":
+    if len(argv) < 4:
+        width = 512
+        height = 512
+        maxiter = 255
+    else:
+        width = int(argv[1])
+        height = int(argv[2])
+        maxiter = int(argv[3])
+    calc_mandelbrot(width, height, maxiter, palette_mandmap.palette)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//mandelbrot-4.py)
+
+---
+
+### Výsledky benchmarků
+
+![images/benchmarks-1.png](images/benchmarks-1.png)
+![images/benchmarks-2.png](images/benchmarks-2.png)
 
 ---
 
