@@ -3183,9 +3183,14 @@ if __name__ == "__main__":
 
 ---
 
-### Výsledky benchmarků
+### Výsledky benchmarků 1/2
 
 ![images/benchmarks-1.png](images/benchmarks-1.png)
+
+---
+
+### Výsledky benchmarků 2/2
+
 ![images/benchmarks-2.png](images/benchmarks-2.png)
 
 ---
