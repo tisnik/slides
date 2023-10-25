@@ -3210,6 +3210,356 @@ if __name__ == "__main__":
 
 ---
 
+### Transcrypt
+
+* Transpiler Python -> JavaScript
+    - výsledný JS lze načíst do webové stránky
+* Podpora DOM
+* `print` na konzoli
+    - plus většina standardních funkcí Pythonu
+* Malý runtime
+
+---
+
+### Základní datové typy (seznamy)
+
+```python
+x = [1, 2, 3, 4, 5]
+
+x.append(99)
+
+print(x)
+
+for item in x:
+    print(item)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-lists.py)
+
+---
+
+### Základní datové typy (seznamy)
+
+```python
+// Transcrypt'ed from Python, 2023-10-19 16:36:48
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+var __name__ = '__main__';
+export var x = [1, 2, 3, 4, 5];
+x.append (99);
+print (x);
+for (var item of x) {
+	print (item);
+}
+
+//# sourceMappingURL=lists.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-lists.js)
+
+---
+
+### Základní datové typy (slovníky)
+
+```python
+x = {"foo": 1, "bar": 2, "baz": None}
+
+print(x)
+
+for key, value in enumerate(x):
+    print(key, value)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-maps.py)
+
+---
+
+### Základní datové typy (slovníky)
+
+```python
+// Transcrypt'ed from Python, 2023-10-19 16:36:27
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+var __name__ = '__main__';
+export var x = dict ({'foo': 1, 'bar': 2, 'baz': null});
+print (x);
+for (var [key, value] of enumerate (x)) {
+	print (key, value);
+}
+
+//# sourceMappingURL=maps.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-maps.js)
+
+---
+
+### Funkce
+
+```python
+#!/usr/bin/env python3
+# vim: set fileencoding=utf-8
+
+#
+#  (C) Copyright 2023  Pavel Tisnovsky
+#
+#  All rights reserved. This program and the accompanying materials
+#  are made available under the terms of the Eclipse Public License v1.0
+#  which accompanies this distribution, and is available at
+#  http://www.eclipse.org/legal/epl-v10.html
+#
+#  Contributors:
+#      Pavel Tisnovsky
+#
+
+def add(a, b):
+    return a+b
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-adder.py)
+
+---
+
+### Funkce
+
+```python
+// Transcrypt'ed from Python, 2023-10-19 16:39:41
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+var __name__ = '__main__';
+export var add = function (a, b) {
+	return a + b;
+};
+
+//# sourceMappingURL=adder1.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-adder.js)
+
+---
+
+### Uzávěry
+
+```python
+def createCounter():
+    counter = 0
+    def next():
+        nonlocal counter
+        counter += 1
+        return counter
+    return next
+
+
+
+#
+# Spusteni testu.
+#
+def main():
+    counter1 = createCounter()
+    counter2 = createCounter()
+    for i in range(1,11):
+        result1 = counter1()
+        result2 = counter2()
+        print("Iteration #%d" % i)
+        print("    Counter1: %d" % result1)
+        print("    Counter2: %d" % result2)
+
+
+main()
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-counter-closure.py)
+
+---
+
+### Uzávěry
+
+```python
+// Transcrypt'ed from Python, 2023-10-19 16:42:46
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+var __name__ = '__main__';
+export var createCounter = function () {
+	var counter = 0;
+	var py_next = function () {
+		counter++;
+		return counter;
+	};
+	return py_next;
+};
+export var main = function () {
+	var counter1 = createCounter ();
+	var counter2 = createCounter ();
+	for (var i = 1; i < 11; i++) {
+		var result1 = counter1 ();
+		var result2 = counter2 ();
+		print (__mod__ ('Iteration #%d', i));
+		print (__mod__ ('    Counter1: %d', result1));
+		print (__mod__ ('    Counter2: %d', result2));
+	}
+};
+main ();
+
+//# sourceMappingURL=counter_closure.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-counter-closure.js)
+
+---
+
+### Komunikace s webovou stránkou
+
+* Skript v Pythonu
+
+```python
+from itertools import chain
+
+class SolarSystem:
+    planets = [list (chain (planet, (index + 1,))) for index, planet in enumerate ((
+        ('Mercury', 'hot', 2240),
+        ('Venus', 'sulphurous', 6052),
+        ('Earth', 'fertile', 6378),
+        ('Mars', 'reddish', 3397),
+        ('Jupiter', 'stormy', 71492),
+        ('Saturn', 'ringed', 60268),
+        ('Uranus', 'cold', 25559),
+        ('Neptune', 'very cold', 24766) 
+    ))]
+    
+    lines = (
+        '{} is a {} planet',
+        'The radius of {} is {} km',
+        '{} is planet nr. {} counting from the sun'
+    )
+    
+    def __init__ (self):
+        self.lineIndex = 0
+    
+    def greet (self):
+        self.planet = self.planets [int (Math.random () * len (self.planets))]
+        document.getElementById ('greet') .innerHTML = 'Hello {}'.format (self.planet [0])
+        self.explain ()
+        
+    def explain (self):
+        document.getElementById ('explain').innerHTML = (
+            self.lines [self.lineIndex] .format (self.planet [0], self.planet [self.lineIndex + 1])
+        )
+        self.lineIndex = (self.lineIndex + 1) % 3
+        
+solarSystem = SolarSystem ()
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-hello.py)
+
+---
+
+### Komunikace s webovou stránkou
+
+* Výsledek transpřekladu
+
+```python
+// Transcrypt'ed from Python, 2023-10-19 16:43:26
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+import {chain} from './itertools.js';
+var __name__ = '__main__';
+export var SolarSystem =  __class__ ('SolarSystem', [object], {
+	__module__: __name__,
+	planets: (function () {
+		var __accu0__ = [];
+		for (var [index, planet] of enumerate (tuple ([tuple (['Mercury', 'hot', 2240]), tuple (['Venus', 'sulphurous', 6052]), tuple (['Earth', 'fertile', 6378]), tuple (['Mars', 'reddish', 3397]), tuple (['Jupiter', 'stormy', 71492]), tuple (['Saturn', 'ringed', 60268]), tuple (['Uranus', 'cold', 25559]), tuple (['Neptune', 'very cold', 24766])]))) {
+			__accu0__.append (list (chain (planet, tuple ([index + 1]))));
+		}
+		return __accu0__;
+	}) (),
+	lines: tuple (['{} is a {} planet', 'The radius of {} is {} km', '{} is planet nr. {} counting from the sun']),
+	get __init__ () {return __get__ (this, function (self) {
+		self.lineIndex = 0;
+	});},
+	get greet () {return __get__ (this, function (self) {
+		self.planet = self.planets [int (Math.random () * len (self.planets))];
+		document.getElementById ('greet').innerHTML = 'Hello {}'.format (self.planet [0]);
+		self.explain ();
+	});},
+	get explain () {return __get__ (this, function (self) {
+		document.getElementById ('explain').innerHTML = self.lines [self.lineIndex].format (self.planet [0], self.planet [self.lineIndex + 1]);
+		self.lineIndex = __mod__ (self.lineIndex + 1, 3);
+	});}
+});
+export var solarSystem = SolarSystem ();
+
+//# sourceMappingURL=hello.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-hello.js)
+
+---
+
+### Kreslení na canvas
+
+* Skript v Pythonu
+
+```python
+canvas = document.getElementById('canvas')
+context = canvas.getContext('2d')
+
+context.font = '60pt Arial'
+context.fillStyle = 'darkblue'
+context.strokeStyle = 'navyblue'
+
+context.fillText('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15)
+context.strokeText('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15)
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-canvas1.py)
+
+---
+
+### Kreslení na canvas
+
+* Výsledek transpřekladu
+
+```python
+// Transcrypt'ed from Python, 2023-10-20 14:52:48
+import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
+var __name__ = '__main__';
+export var canvas = document.getElementById ('canvas');
+export var context = canvas.getContext ('2d');
+context.font = '60pt Arial';
+context.fillStyle = 'darkblue';
+context.strokeStyle = 'navyblue';
+context.fillText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15);
+context.strokeText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15);
+
+//# sourceMappingURL=canvas1.map```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-canvas1.js)
+
+---
+
+### Kreslení na canvas
+
+* Podpůrná HTML stránka s canvasem
+
+```python
+<html>
+    <head>
+        <title>Canvas</title>
+        <style>
+            body {
+              background: #dddddd;
+            }
+           
+            #canvas {
+              margin: 10px;
+              padding: 10px;
+              background: #ffffff;
+              border: thin inset #aaaaaa;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='canvas' width='800' height='600'>Canvas not supported</canvas>
+        <script type="module">import * as canvas from "./__target__/transcrypt-canvas1.js";
+        </script>
+    </body>
+</html>
+```
+
+[Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-canvas1.html)
+
+---
+
 # Alternativní projekty a jazyky
 
 ![Python](images/python.png)
