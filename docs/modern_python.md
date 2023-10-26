@@ -3210,14 +3210,60 @@ if __name__ == "__main__":
 
 ---
 
+### Transpilery
+
+* "Code to code compilers"
+    - transformace kódu mezi dvěma jazyky
+    - použito právě pro konverzi do JavaScriptu
+* AOT nebo JIT
+
+---
+
+### Mnoho typů transpilerů
+
+```
+#   Jazyk či transpřekladač Poznámka
+1   CoffeeScript            přidání syntaktického cukru do JavaScriptu
+2   ClojureScript           překlad aplikací psaných v Clojure do JavaScriptu
+3   TypeScript              nadmnožina jazyka JavaScript, přidání datových typů
+4   6to5                    transpřeklad z ECMAScript 6 (nová varianta JavaScriptu) do starší varianty JavaScriptu
+5   Kaffeine                rozšíření JavaScriptu o nové vlastnosti
+6   RedScript               jazyk inspirovaný Ruby
+7   GorillaScript           další rozšíření JavaScriptu
+8   ghcjs                   transpřekladač pro fanoušky programovacího jazyka Haskell
+9   Haxe                    transpřekladač, mezi jehož cílové jazyka patří i Java a JavaScript
+10  Wisp                    transpřekladač jazyka podobného Clojure, opět do JavaScriptu
+11  ScriptSharp             transpřekladač z C# do JavaScriptu
+12  Dart                    transpřekladač z jazyka Dart do JavaScriptu
+13  COBOL → C               transpřekladač OpenCOBOL
+14  COBOL → Java            transpřekladač P3COBOL
+15  lua2js                  transpřekladač jazyka Lua, opět do JavaScriptu
+16  Coconut                 transpřekladač jazyka Coconut do Pythonu
+```
+
+---
+
+### Brython
+
+* Transpiler Python -> JavaScript
+* JIT
+    - kód se překládá až při inicialiazi stránky
+    - jakékoli úpravy se ihned projeví po F5
+
+---
+
 ### Transcrypt
 
 * Transpiler Python -> JavaScript
+* AOT
     - výsledný JS lze načíst do webové stránky
 * Podpora DOM
 * `print` na konzoli
     - plus většina standardních funkcí Pythonu
 * Malý runtime
+    - cca 20kB
+* Podpora Numscryptu
+    - (nedokonalá) varianta Numpy
 
 ---
 
@@ -3293,21 +3339,6 @@ for (var [key, value] of enumerate (x)) {
 ### Funkce
 
 ```python
-#!/usr/bin/env python3
-# vim: set fileencoding=utf-8
-
-#
-#  (C) Copyright 2023  Pavel Tisnovsky
-#
-#  All rights reserved. This program and the accompanying materials
-#  are made available under the terms of the Eclipse Public License v1.0
-#  which accompanies this distribution, and is available at
-#  http://www.eclipse.org/legal/epl-v10.html
-#
-#  Contributors:
-#      Pavel Tisnovsky
-#
-
 def add(a, b):
     return a+b
 ```
@@ -3570,6 +3601,14 @@ context.strokeText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 
 
 * Coconut
 * Mojo
+
+---
+
+### Coconut
+
+---
+
+### Mojo
 
 ---
 
