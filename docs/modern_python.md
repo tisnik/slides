@@ -3777,6 +3777,201 @@ context.strokeText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 
 
 ### Coconut
 
+* Jazyk překládaný do JavaScriptu
+* Nové jazykové konstrukce
+* Vylepšené jazykové konstrukce
+
+---
+
+### Hello world
+
+* coconut-01-hello-world.coco
+
+---
+
+### Hello world
+
+* coconut-01-hello-world.py
+
+---
+
+### Sekvence
+
+* coconut-02-sequences.coco
+
+---
+
+### Sekvence
+* coconut-02-sequences.py
+
+---
+
+### Anonymní funkce
+
+* coconut-03-anonymous-functions.coco
+
+---
+
+### Anonymní funkce
+
+* coconut-03-anonymous-functions.py
+
+---
+
+### Neměnitelné datové typy
+
+* coconut-04-immutable-types.coco
+
+---
+
+### Neměnitelné datové typy
+
+* coconut-04-immutable-types.py
+
+---
+
+### Infixová notace
+
+* coconut-05-infix-notation.coco
+
+---
+
+### Infixová notace
+
+* coconut-05-infix-notation.py
+
+---
+
+### Kolony
+
+* coconut-06-pipeline.coco
+
+---
+
+### Kolony: po překladu
+
+* coconut-06-pipeline-compiled.py
+
+---
+
+### Kolony: původní kód
+
+* coconut-06-pipeline-compiled-original-code.py
+
+---
+
+### Kolony: čísla řádků
+
+* coconut-06-pipeline-compiled-line-numbers.py
+
+---
+
+### Kompozice funkcí
+
+* coconut-07-function-composition.coco
+
+---
+
+### Kompozice funkcí
+
+* coconut-07-function-composition.py
+
+---
+
+### Zřetězení operací
+
+* coconut-08-generator-chaining.coco
+
+---
+
+### Zřetězení operací
+
+* coconut-08-generator-chaining.py
+
+---
+
+### Operátor ??
+
+* coconut-09-??-operator.coco
+
+---
+
+### Operátor ??
+
+* coconut-09-??-operator.py
+
+---
+
+### Operátor ??=
+
+* coconut-10-??=-operator.coco
+
+---
+
+### Operátor ??=
+
+* coconut-10-??=-operator.py
+
+---
+
+### Elvisův operátor
+
+* coconut-11-elvis-operator.coco
+
+---
+
+### Elvisův operátor
+
+* coconut-11-elvis-operator.py
+
+---
+
+### Podpora Unicode
+
+* coconut-12-unicode-chars.coco
+
+---
+
+### Podpora Unicode
+
+* coconut-12-unicode-chars.py
+
+---
+
+### Pattern matching
+
+* coconut-13-pattern-matching.coco
+
+---
+
+### Pattern matching
+
+* coconut-13-pattern-matching.py
+
+---
+
+### Pattern matching
+
+* coconut-14-pattern-matching-2.coco
+
+---
+
+### Pattern matching
+
+* coconut-14-pattern-matching-2.py
+
+---
+
+### TCO
+
+* coconut-15-tail-call-optimization.coco
+
+---
+
+### TCO
+
+* coconut-15-tail-call-optimization.py
+
 ---
 
 ### Mojo
