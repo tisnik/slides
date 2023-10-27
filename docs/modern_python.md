@@ -2520,6 +2520,177 @@ sentry-sdk==0.19.5
 
 ---
 
+### Black
+
+* automatické formátování zdrojového kódu
+* na základě specifikovaných pravidel
+
+---
+
+### Pycodestyle
+
+* kontrola, zda zdrojový kód odovídá PEP-8
+* whodné zkombinovat s dalšími podobnými nástroji
+    - Ruff atd.
+---
+
+### Pydocstyle
+
+- kontrola dokumentačních řetězců
+- moduly
+- třídy
+- metody
+- funkce
+
+---
+
+### Ruff
+
+* nový nástroj pro kontrolu zdrojových kódů Pythonu
+* napsáno v Rustu
+    - velmi rychlý
+* možno relativně snadno přidat do CI
+
+---
+
+### Ruff
+
+* konfigurace v souboru `pyproject.toml`
+
+```toml
+[tool.ruff]
+#select = ["E", "F", "W", "C", "D"]
+select = ["E", "F", "W", "C"]
+ignore = ["D211", "D213", "E402"]
+
+line-length = 100
+```
+
+---
+
+### Makefile
+
+```
+style:  code-style docs-style ## Perform all style checks
+
+code-style: ## Check code style for all Python sources from this repository
+        python3 tools/run_pycodestyle.py
+
+ruff: ## Run Ruff linter
+        ruff .
+
+docs-style: ## Check documentation strings in all Python sources from this repository
+        pydocstyle .
+
+doc-check: ## Run gen_scenario_list.py to generate docs file and compare it to current one
+        python3 tools/gen_scenario_list.py > tmp.md
+        diff tmp.md docs/scenarios_list.md
+```
+
+---
+
+### Kontrola na CI
+
+* konfigurace repositáře
+* TravisCI
+* GitHub Actions
+* atd.
+
+---
+
+### TravisCI
+
+* `.travic.yml`
+
+```yaml
+language: python
+python:
+    #- "3.7"
+  - "3.8"
+  - "3.8-dev"  # 3.8 development branch
+  - "nightly"  # nightly build
+addons:
+  apt:
+    packages:
+    - libsnappy-dev
+# Pycodestyle part
+# needed to work correctly with Python 3 shebang
+env: SKIP_INTERPRETER=true
+install:
+  - pip install pycodestyle
+  - pip install pytest-cov
+  - pip install -r requirements.txt
+script:
+  - make code-style
+  - pytest -v --cov=schemas/
+```
+
+---
+
+### GitHub Actions
+
+* `.github/workflows/*.yaml`
+
+```yaml
+name: Ruff
+on: [ push, pull_request ]
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chartboost/ruff-action@v1
+```
+
+---
+
+### GitHub Actions
+
+* `.github/workflows/*.yaml`
+
+```yaml
+name: Pytest
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  pytest:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install --upgrade setuptools
+      - run: pip install --upgrade wheel
+      - run: pip install pycodestyle
+      - run: pip install pydocstyle
+      - run: pip install pytest-cov
+      - run: pip install --upgrade importlib-metadata
+      - run: pip install behave
+      - run: pip install semver
+      - name: Style checks
+        run: make style
+      - name: Docstrings checks
+        run: make doc-check
+      - name: Unit tests
+        run: make unit_tests
+      - name: Unit tests coverage
+        run: make coverage
+```
+
+---
+
 # Vylepšení výkonnosti Pythonu
 
 ![Python](images/python.png)
