@@ -60,7 +60,9 @@
 
 ![xarray](images/xarray2.png)
 
---
+---
 
 ## Practical part
+
+* see live demo!
 
