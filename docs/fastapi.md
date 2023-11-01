@@ -13,18 +13,45 @@
 
 ## Pydantic
 
+* Knihovna pro parsing a transformaci dat
+   - nikoli primárně pro validaci dat
+   - garantován je model, ne kontrola vstupu
+
+---
+
+## Pydantic
+
 * Pydantic
    - psáno v Rustu (rychlost)
    - typové informace
    - validace
    - serializace
    - deserializace
+* https://docs.pydantic.dev
+
+---
+
+## Pydantic
+
+* Příklad jednoduchého modelu
+
+```python
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    id: int
+    name: str = 'Jane Doe'
+```
+
+* jméno není povinné
 
 ---
 
 ## Uvicorn
 
 * asynchronous server gateway interface (ASGI)
+    - Uvicorn je jednou z implementací
 * https://asgi.readthedocs.io/en/latest/
 
 ---
@@ -52,6 +79,7 @@
 * `pdm`
 * úprava `pyproject.toml`
    - příkaz pro spuštění 
+
 ---
 
 ## `pyproject.toml`
@@ -378,3 +406,11 @@ async def delete_operation(id: int):
 ```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/fastapi/sources//main5.py)
+
+---
+
+### Mapování dalších datových typů
+
+* Pydantic
+    - https://docs.pydantic.dev/2.0/usage/types/list_types/
+    - https://docs.pydantic.dev/2.0/usage/types/dicts_mapping/
