@@ -2,6 +2,11 @@
 
 ---
 
+* Pavel Tišnovský
+* kurzy.python@centrum.cz
+
+---
+
 ![Python](images/python.png)
 
 ---
