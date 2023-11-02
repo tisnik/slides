@@ -522,7 +522,7 @@ print(abort_retry_fail())
 
 ---
 
-### Generátor Fibonaccího posloupnosti
+### Generátor Fibonacciho posloupnosti
 
 ```python
 def fib(value):
@@ -2605,7 +2605,7 @@ doc-check: ## Run gen_scenario_list.py to generate docs file and compare it to c
 
 ### TravisCI
 
-* `.travic.yml`
+* `.travis.yml`
 
 ```yaml
 language: python
