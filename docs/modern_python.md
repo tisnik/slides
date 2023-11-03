@@ -3458,7 +3458,8 @@ for (var item of x) {
 	print (item);
 }
 
-//# sourceMappingURL=lists.map```
+//# sourceMappingURL=lists.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-lists.js)
 
@@ -3491,7 +3492,8 @@ for (var [key, value] of enumerate (x)) {
 	print (key, value);
 }
 
-//# sourceMappingURL=maps.map```
+//# sourceMappingURL=maps.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-maps.js)
 
@@ -3518,7 +3520,8 @@ export var add = function (a, b) {
 	return a + b;
 };
 
-//# sourceMappingURL=adder1.map```
+//# sourceMappingURL=adder1.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-adder.js)
 
@@ -3585,7 +3588,8 @@ export var main = function () {
 };
 main ();
 
-//# sourceMappingURL=counter_closure.map```
+//# sourceMappingURL=counter_closure.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-counter-closure.js)
 
@@ -3671,7 +3675,8 @@ export var SolarSystem =  __class__ ('SolarSystem', [object], {
 });
 export var solarSystem = SolarSystem ();
 
-//# sourceMappingURL=hello.map```
+//# sourceMappingURL=hello.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-hello.js)
 
@@ -3713,7 +3718,8 @@ context.strokeStyle = 'navyblue';
 context.fillText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15);
 context.strokeText ('Hello Canvas', canvas.width / 2 - 210, canvas.height / 2 + 15);
 
-//# sourceMappingURL=canvas1.map```
+//# sourceMappingURL=canvas1.map
+```
 
 [Zdrojový kód příkladu](https://github.com/tisnik/most-popular-python-libs/blob/master/modern_python/sources//transcrypt-canvas1.js)
 
