@@ -24,6 +24,7 @@
 ---
 
 ## Python
+
 * Dnes jeden z nejpopulárnějších programovacích jazyků
     - viz například TIOBE programming community index
     - <https://www.tiobe.com/tiobe-index/>
@@ -68,6 +69,51 @@
 ---
 
 ## Knihovny používané v této oblasti
+
+* NumPy
+* Xarray
+* Pandas
+* Polars
+* Matplotlib
+
+---
+
+### NumPy
+
+---
+
+### Xarray
+
+* n-dimensionální pole s metadaty
+    - jméno
+    - dimenze (osy)
+    - koordináty na osách
+    - uživatelské atributy
+
+---
+
+### Přednosti použití Xarray
+
+* intuitivní práce s poli
+* založeno na metadatech, ne na kódu
+* stručnost
+* dnes de facto standardní řešení
+* méně chyb při zpracování dat
+    - operace nad nekorektními osami
+* broadcasting založený na jménu osy
+* velmi jednoduchá operace typu `groupby`
+
+---
+
+### Pandas
+
+---
+
+### Polars
+
+---
+
+### Matplotlib
 
 ---
 
