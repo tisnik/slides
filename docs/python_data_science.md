@@ -56,29 +56,78 @@
 
 ---
 
-## Nástroje pro datovou analýzy
+## Nástroje pro datovou analýzu
 
----
-
-## Transformace dat na informace
+* Data mining
+* Data procesing a modelování
+* Vizualizace
 
 ---
 
 ## Jupyter Notebook
 
+* Typický centrální prvek, v němž se odehrává vývoj
+* Lze sdílet
+* Podporuje různá jádra (kernels)
+* Podpora vizualizace přímo na ploše notebooku
+
 ---
 
-## Knihovny používané v této oblasti
+## Data mining
+
+* Scrapy
+* BeautifulSoup
+
+---
+
+## Data processing a modelování
 
 * NumPy
+* SciPy
 * Xarray
 * Pandas
 * Polars
+
+---
+
+## Vizualizace dat
+
 * Matplotlib
+* Seaborn
+* Bokeh
+* Plotly
+* pydot
+
+---
+
+## Strojové učení
+
+* PyCaret
+* H2O
+* TPOT
+* Auto-sklearn
+* Keras
+* SciKit-Learn
+* PyTorch
+* TensorFlow
+
+---
+
+## Zpracování přirozeného jazyka
+
+* NLTK
+* spaCy
 
 ---
 
 ### NumPy
+
+* n-dimenzionální pole jako základní datový typ
+    - ideově vychází z APL
+* mnoho typů konstruktorů
+* broadcsting
+* (re)shaping
+    - změna tvaru pole (počet dimenzí, tvar)
 
 ---
 
@@ -129,3 +178,11 @@
 
 ---
 
+### Užitečné odkazy
+
+* 15 Python Libraries for Data Science You Should Know
+    - https://www.dataquest.io/blog/15-python-libraries-for-data-science/
+* Top Python Libraries for Data Science in 2022
+    - https://www.datacamp.com/blog/top-python-libraries-for-data-science
+
+---
