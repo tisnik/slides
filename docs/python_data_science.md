@@ -122,12 +122,76 @@
 
 ### NumPy
 
+![numpy_arrays.png](images/numpy_logo.png)
+
+---
+
+### NumPy
+
+* výslovnosti
+    - [nəmpᴧɪ]
+    - [nəmpi]
+* historie
+    - matrix package
+    - Numeric
+    - NumPy
+* Kooperace s dalšími knihovnami a frameworky
+    - SciPy
+    - Matplotlib
+    - OpenCV
+
+---
+
+### NumPy
+
 * n-dimenzionální pole jako základní datový typ
     - ideově vychází z APL
+    - nové funkce
+    - nové (přetížené) operátory
 * mnoho typů konstruktorů
 * broadcsting
 * (re)shaping
     - změna tvaru pole (počet dimenzí, tvar)
+
+---
+
+### Nativní (skalární) datové typy
+
+```
+```
+
+---
+
+### N-dimenzionální pole
+
+![numpy_arrays.png](images/numpy_arrays.png)
+
+---
+
+### N-dimenzionální pole
+
+* Představuje obecné n-dimenzionální pole
+* Interní způsob uložení dat zcela odlišný od Pythonovských seznamů či n-tic
+    - „pohled“ na kontinuální blok hodnot
+* Homogenní datová struktura
+    - menší flexibilita
+    - menší paměťové nároky
+    - vyšší výpočetní rychlost díky použití nativního kódu
+    - obecně lepší využití cache a rychlejší přístup k prvkům
+* Základní strukturovaný datový typ knihovny NumPy
+
+---
+
+### N-dimenzionální pole
+
+* Volitelný typ prvků
+* Volitelný počet dimenzí
+    - vektory
+    - matice
+    - pole s větším počtem dimenzí
+* Volitelné uspořádání prvků
+    - podle zvyklostí jazyka Fortran
+    - podle zvyklostí jazyka C
 
 ---
 
