@@ -120,13 +120,13 @@
 
 ---
 
-### NumPy
+## NumPy
 
 ![numpy_arrays.png](images/numpy_logo.png)
 
 ---
 
-### NumPy
+## NumPy
 
 * výslovnosti
     - [nəmpᴧɪ]
@@ -158,6 +158,29 @@
 ### Nativní (skalární) datové typy
 
 ```
+╔════════════╤═══════════════════════════╤═══════════════════════════════╗
+║ Formát     │ Popis                     │ Rozsah                        ║
+╟────────────┼───────────────────────────┼───────────────────────────────╢
+║ bool       │ uloženo po bajtech        │  True/False                   ║
+╟────────────┼───────────────────────────┼───────────────────────────────╢
+║ int8       │ celočíselný se znaménkem  │ -128..127                     ║
+║ int16      │ celočíselný se znaménkem  │ -32768..32767                 ║
+║ int32      │ celočíselný se znaménkem  │ -2147483648..2147483647       ║
+║ int64      │ celočíselný se znaménkem  │ -9223372036854775808..        ║
+║            │                           │  9223372036854775807          ║
+╟────────────┼───────────────────────────┼───────────────────────────────╢
+║ uint8      │ celočíselný bez znaménka  │  0..255                       ║
+║ uint16     │ celočíselný bez znaménka  │  0..65535                     ║
+║ uint32     │ celočíselný bez znaménka  │  0..4294967295                ║
+║ uint64     │ celočíselný bez znaménka  │  0..18446744073709551615      ║
+╟────────────┼───────────────────────────┼───────────────────────────────╢
+║ float16    │ plovoucí řádová čárka     │  poloviční přesnost (half)    ║
+║ float32    │ plovoucí řádová čárka     │  jednoduchá přesnost (single) ║
+║ float64    │ plovoucí řádová čárka     │  dvojitá přesnost (double)    ║
+╟────────────┼───────────────────────────┼───────────────────────────────╢
+║ complex64  │ komplexní číslo (dvojice) │  2×float32                    ║
+║ complex128 │ komplexní číslo (dvojice) │  2×float64                    ║
+╚════════════╧═══════════════════════════╧═══════════════════════════════╝
 ```
 
 ---
@@ -195,7 +218,7 @@
 
 ---
 
-### Xarray
+## Xarray
 
 * n-dimensionální pole s metadaty
     - jméno
@@ -218,15 +241,15 @@
 
 ---
 
-### Pandas
+## Pandas
 
 ---
 
-### Polars
+## Polars
 
 ---
 
-### Matplotlib
+## Matplotlib
 
 ---
 
@@ -242,7 +265,7 @@
 
 ---
 
-### Užitečné odkazy
+## Užitečné odkazy
 
 * 15 Python Libraries for Data Science You Should Know
     - https://www.dataquest.io/blog/15-python-libraries-for-data-science/
