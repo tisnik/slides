@@ -97,6 +97,7 @@
 * Bokeh
 * Plotly
 * pydot
+* plotnine
 
 ---
 
@@ -333,9 +334,33 @@ Velká Británie|libra|1|GBP|28,230
 
 ## Matplotlib
 
+* zaměřena explicitně na tvorbu grafů
+* právě vzájemnou kombinací obou knihoven NumPy+matplotlib lze relativně
+* snadno dosáhnout velmi pěkných výsledků plně porovnatelných s výsledky
+  vytvořenými komerčními balíky.
+
 ---
 
-## Vizualizace dat: Matplotlib
+### Možnosti knihovny Matplotlib
+
+* grafy funkcí typu y = f(x)
+* parametrické zadání 2D průběhu x, y = f(t)
+* grafy funkcí typu z = f(x,y)
+* parametrické zadání 3D průběhu x, y, z = f(t)
+
+---
+
+### Zobrazení grafů
+
+* na obrazovce
+* do plochy Jupyter Notebooku
+* do rastrových obrázků
+* do vektorových kreseb
+* do PDF
+
+---
+
+## Plotnine
 
 ---
 
