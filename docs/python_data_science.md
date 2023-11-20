@@ -5,8 +5,6 @@
 * Pavel Tišnovský
 * kurzy.python@centrum.cz
 
----
-
 ![Python](images/python.png)
 
 ---
@@ -16,7 +14,7 @@
 * Nástroje pro datovou analýzu
 * Transformace dat na informace
 * Jupyter Notebook
-* Knihovny používané v této oblasti: NumPy, Pandas, Polars, Seaborn, scikit-learn
+* Knihovny používané v této oblasti: NumPy, Pandas, Polars, Seaborn, scikit-learn, Dask
 * Vizualizace dat: Matplotlib
 * Zpracování obrazů a přirozeného jazyka v Pythonu
 * Strojové učení
@@ -46,11 +44,17 @@
     - NumPy
     - SciPy
     - Matplotlib
+
+---
+
+## Typické použití Pythonu
+
 * Moderní způsoby využití Pythonu
     - AI
     - Machine Learning (Deep Learning)
     - PyTorch
     - Big data
+    - aplikace v prohlížeči
 * Tzv. „glue“ jazyk
 * Vestavitelný interpret Pythonu
 
@@ -60,6 +64,12 @@
 
 * Data mining
 * Data procesing a modelování
+    - klasifikace
+    - predikce
+    - výběr modelu
+    - redukce počtu dimenzí
+    - pre-processing
+    - modelování
 * Vizualizace
 
 ---
@@ -87,6 +97,7 @@
 * Xarray
 * Pandas
 * Polars
+* SciKit-learn
 
 ---
 
@@ -118,6 +129,12 @@
 
 * NLTK
 * spaCy
+
+---
+
+## HPC
+
+* Dask
 
 ---
 
@@ -256,6 +273,12 @@
 
 ## Pandas
 
+![pandas](images/pandas.png)
+
+---
+
+## Pandas
+
 * Načtení dat z různých datových zdrojů do datových rámců
     - CSV
     - TSV
@@ -263,6 +286,11 @@
     - tabulkové procesory
 * Programová konstrukce datových rámců
 * Prohlížení obsahu datových rámců
+
+---
+
+## Pandas
+
 * Iterace nad daty, řazení a další podobné operace
 * Spojování, seskupování a změna tvaru dat
 * Práce s takzvanými sériemi
@@ -279,9 +307,8 @@
   - Textových souborů s volitelným oddělovačem a formátem sloupců
   - Tabulek z tabulkových procesorů (xls, xlsx, xlsm, xlsb, odf, ods, odt)
   - Souborů JSON se strukturovanými daty
-  - Načítání z relačních databází s využitím SQL driverů
+  - Načítání z relačních databází s využitím SQL
   - Načítání z Parquet souborů
-  - atd.
 
 ---
 
@@ -289,6 +316,10 @@
 
 * https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt
 * Evidentně se jedná o tabulková a velmi dobře strukturovaná data, která by bylo vhodné umět automaticky zpracovat
+
+---
+
+### Zpracování souborů s nestandardním formátem
 
 ```
 13.11.2023 #219
@@ -329,6 +360,90 @@ Velká Británie|libra|1|GBP|28,230
 ---
 
 ## Polars
+
+![polars](images/polars.png)
+
+---
+
+### Polars
+
+* Alternativa ke knihovně Pandas
+* Podporuje multithreading
+* SIMD operace (ne vždy)
+* Optimalizace dotazů
+* Líné vyhodnocování
+
+---
+
+### Polars
+
+* Datové rámce rozsáhlejší než dostupná RAM
+* Naprogramováno v Rustu
+* Vazby s dalšími knihovnami
+    - pyarrow, NumPy, Pandas etc.
+* Rozhraní pro Python a NodeJS
+
+---
+
+### Datové řady a datové rámce
+
+* Podobné těm v Pandas
+    - funkce a metody se stejnými jmény
+    - ovšem ne zcela kompatibilní
+
+---
+
+### Načtení z SQL
+
+```python
+import polars
+
+connection_string = "postgresql://postgres:postgres@localhost:5432/testdb"
+
+query = """
+    SELECT org_id, cluster_id, rule_fqdn
+      FROM rule_hit
+     ORDER by org_id, cluster_id
+"""
+
+df = polars.read_sql(query, connection_string)
+
+print(df)
+print()
+```
+
+---
+
+### Klíč k úspěchu: být líný!
+
+* FP programování
+* Architektura založená na Kafce atd.
+* Dask atd.
+* Líné datové rámce v Polars
+
+---
+
+### Líné datové rámce
+
+```python
+import polars
+
+df = polars.read_csv("hall_of_fame.csv").lazy()
+
+df2 = df.groupby("Winner", maintain_order=True).agg([polars.col("Year").len()]). \
+      sort("Year"). \
+      reverse(). \
+      head(5)
+
+print(df2.describe_plan())
+print(df2.describe_optimized_plan())
+```
+
+---
+
+## Matplotlib
+
+![Matplotlib](images/matplotlib.png)
 
 ---
 
