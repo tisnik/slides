@@ -477,6 +477,40 @@ print(df2.describe_optimized_plan())
 
 ## Plotnine
 
+* Kombinace možností ggplot2 a Pythonu
+* ggplot2 - populární balíček z ekosystému jazyka R
+* Vyšší úroveň abstrakce v porovnání s Matplotlibem
+
+---
+
+### Konstrukce grafů s využitím grammar of graphics
+
+![grammar of graphics](images/gog.png)
+
+---
+
+### Korelační diagram
+
+![plotnine1](images/plotnine1.png)
+
+---
+
+### Rozdělení grafu
+
+![plotnine2](images/plotnine2.png)
+
+---
+
+### Aproximace
+
+![plotnine3](images/plotnine3.png)
+
+---
+
+### Regresní přímka
+
+![plotnine4](images/plotnine4.png)
+
 ---
 
 ## Zpracování obrazů a přirozeného jazyka v Pythonu
