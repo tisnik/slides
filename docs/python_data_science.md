@@ -513,11 +513,48 @@ print(df2.describe_optimized_plan())
 
 ---
 
+## Scikit-learn
+
+* Součást konceptu data procesingu a modelování
+    - klasifikace
+    - predikce
+    - výběr modelu
+    - redukce počtu dimenzí
+    - pre-processing
+    - modelování
+
+---
+
+### Fáze data procesingu a modelování
+
+* Klasifikace
+    - "rozpoznani" objektu
+* Prefikce (regrese)
+* Clustering
+    - objekty seskupené do množin
+    - (různý typ zákazníků atd.)
+* Model selection
+    - porovnání a validace parametrů modelu
+    - vylepšení modelu (parameter tuning)
+* Redukce počtu dimenzí
+    - méně "náhodných" proměnných
+* Pre-processing
+    - extrakce
+    - normalizace (!!!)
+
+---
+
 ## Zpracování obrazů a přirozeného jazyka v Pythonu
+
+* 
+* 
 
 ---
 
 ## Strojové učení
+
+* TensorFlow
+* Keras
 
 ---
 
@@ -527,6 +564,12 @@ print(df2.describe_optimized_plan())
     - https://www.dataquest.io/blog/15-python-libraries-for-data-science/
 * Top Python Libraries for Data Science in 2022
     - https://www.datacamp.com/blog/top-python-libraries-for-data-science
+* Image Recognition Tutorial in Python for Beginners
+    - https://howtocreateapps.com/image-recognition-python/
+* Image Recognition and Classification in Python with TensorFlow and Keras
+    - https://stackabuse.com/image-recognition-in-python-with-tensorflow-and-keras/
+* The CIFAR-10 dataset
+    - https://www.cs.toronto.edu/~kriz/cifar.html
 
 ---
 
