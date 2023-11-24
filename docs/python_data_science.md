@@ -515,6 +515,12 @@ print(df2.describe_optimized_plan())
 
 ## Scikit-learn
 
+![scikit-learn](images/scikit-learn.png)
+
+---
+
+## Scikit-learn
+
 * Součást konceptu data procesingu a modelování
     - klasifikace
     - predikce
@@ -546,8 +552,8 @@ print(df2.describe_optimized_plan())
 
 ## Zpracování obrazů a přirozeného jazyka v Pythonu
 
-* 
-* 
+* TensorFlow 
+* Keras
 
 ---
 
