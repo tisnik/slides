@@ -1030,7 +1030,7 @@ func concatstrings(buf *tmpBuf, a []string) string {
         if count == 0 {
                 return ""
         }
-&nbsp;
+
         // If there is just one string and either it is not on the stack
         // or our result does not escape the calling frame (buf != nil),
         // then we can return that string directly.
