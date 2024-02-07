@@ -418,6 +418,16 @@ log.roll.hours
 
 ---
 
+## Mirror Maker 2 features
+
+* Unidirectional and bidirectional replication
+* Fan-out
+* Fan-in
+* Data aggregation
+* Data isolation
+
+---
+
 ## Clients for Apache Kafka
 
 * [Supported languages/ecosystems](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
