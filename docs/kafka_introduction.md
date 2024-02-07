@@ -409,6 +409,15 @@ log.roll.hours
 
 ---
 
+## Mirror Maker 2
+
+* Based on connectors
+* MirrorSourceConnector: records replication
+* MirrorCheckpointConnector: offset synchronization, checkpoints, failover
+* MirrorHeartbeatConnector: heartbeats, replication topologies
+
+---
+
 ## Clients for Apache Kafka
 
 * [Supported languages/ecosystems](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
