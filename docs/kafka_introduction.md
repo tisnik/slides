@@ -91,18 +91,6 @@
 
 ---
 
-### Request reply
-
-![com-1](images/com-01-request_reply.png)
-
----
-
-### Surveyor
-
-![com-2](images/com-02-surveyor.png)
-
----
-
 ### Pub-sub
 
 ![com-3](images/com-03-pub-sub.png)
@@ -121,15 +109,9 @@
 
 ---
 
-### Push-pull with reply to producer
+### Kafka communication strategy
 
-![com-6](images/com-06-push-pull-reply.png)
-
----
-
-### Other strategies (NATS etc.)
-
-![com-7](images/com-07-req-pull.png)
+* allows all three strategies
 
 ---
 
@@ -140,31 +122,11 @@
 
 ---
 
-### Classic architecture
-
-* Front-end
-* Back-end
-    - business logic
-    - data layer
-* Storage
-
-![Microservices1](images/microservices1.png)
+![Microservices1](images/apache_camel_pipeline.png)
 
 ---
 
-### Stateless and stateful microservices
-
-* Services w/o state
-    - super easy to test
-    - usually very easy to scale up
-    - restarts are usually not a big deal
-* Stateful service
-    - the opposite is true
-
----
-
-[Full image](images/microservices2.png)
-![Microservices2](images/microservices2.png)
+![Microservices1](images/apache_camel_pipeline_2.png)
 
 ---
 
@@ -232,6 +194,19 @@
 
 ---
 
+## Topic with one partition only
+
+```
++---+---+---+---+---+---+---+---+---+
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
++---+---+---+---+---+---+---+---+---+
+                ^                        ^
+                |                        |
+              read                     write
+```
+
+---
+
 ## Topic is NOT a queue
 
 * Topic is basically stateless
@@ -263,19 +238,6 @@
 
 * Replication
 * Changing leadership role
-
----
-
-## Topic with one partition only
-
-```
-+---+---+---+---+---+---+---+---+---+
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
-+---+---+---+---+---+---+---+---+---+
-                ^                        ^
-                |                        |
-              read                     write
-```
 
 ---
 
@@ -405,6 +367,15 @@ partition #3  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | ...
 
 ---
 
+## Kafka Cluster
+
+* Multiple brokers
+* Multiple Zookeepers
+
+[Structure](https://www.codeproject.com/KB/IP/5275411/Kafka-Internals-1.png)
+
+---
+
 ### Retention
 
 * Retention policy
@@ -422,17 +393,19 @@ log.roll.hours
 
 ---
 
-## Kafkacat (kcat)
+## Mirror Maker
 
-```
-kafkacat -L -b localhost:9092
-kafkacat -P -b localhost:9092 -t "upload"
-kafkacat -P -b localhost:9092 -t filedrop -p 0 file1.bin file2.txt /etc/motd dalsi_soubor.tgz
-kafkacat -C -b localhost:9092 -t "upload"
-kafkacat -C -b localhost:9092 -t topic1 -p 0 -o -1000 -e
-kafkacat -b localhost:9092 -G skupina_konzumentů topic1
-kafkacat -b localhost:9092 -G skupina_konzumentů téma1 téma2
-```
+* Replication over multiple data centers
+
+![MirrorMaker1](images/mirror_maker_1.png)
+
+---
+
+## Mirror Maker
+
+* Internally bunch of producers+consumers
+
+![MirrorMaker2](images/mirror_maker_2.png)
 
 ---
 
@@ -536,3 +509,6 @@ kafkacat -b localhost:9092 -G skupina_konzumentů téma1 téma2
 * Sometimes defined by one simple property file
 
 ---
+
+## Thank you!
+
