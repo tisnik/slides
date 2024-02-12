@@ -428,6 +428,24 @@ log.roll.hours
 
 ---
 
+## Case study: two Kafka clusters
+
+![MirrorMaker3](images/mirror_maker_3.png)
+
+---
+
+## Logical cluster names
+
+![MirrorMaker4](images/mirror_maker_4.png)
+
+---
+
+## Mirrored topic `test1`
+
+![MirrorMaker5](images/mirror_maker_5.png)
+
+---
+
 ## Clients for Apache Kafka
 
 * [Supported languages/ecosystems](https://cwiki.apache.org/confluence/display/KAFKA/Clients)
