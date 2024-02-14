@@ -176,7 +176,7 @@
 
 ## Append-only log
 
-* new mesage/event is always written on the end of topic
+* new mesage/event is always written on the end of partition
 * messages/events are immutable
 * can be read by
     - seeking and arbitrary offset
