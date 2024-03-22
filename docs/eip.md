@@ -1,6 +1,10 @@
 # Enterprise Integration Patterns
 
+---
+
 ## Používání návrhových vzorů
+
+![Microservices1](images/apache_camel_message_translator.gif)
 
 ---
 
@@ -17,7 +21,7 @@
 
 ---
 
-## Návrhové vzory pro enterprise systémy
+## Návrhové vzory pro enterprise systémy (1/2)
 
 * Enterprise systém založený na mikroslužbách
 * Používá se relativně malá sada ustálených způsobů
@@ -26,6 +30,11 @@
 * Standardizace
     - slovní popis (slovník)
     - grafická podoba
+
+---
+
+## Návrhové vzory pro enterprise systémy (2/2)
+
 * Snaha vyhnout se slepým uličkám
     - ty již někdo prozkoumal za nás
     - (a zaplatil za to)
@@ -47,13 +56,13 @@
 
 ## Standardizace - grafická podoba (1/2)
 
-![Microservices1](images/apache_camel_pipeline.png)
+![Microservices1](images/apache_camel_eip1.png)
 
 ---
 
-## Standardizace - grafická podoba (1/2)
+## Standardizace - grafická podoba (2/2)
 
-![Microservices1](images/apache_camel_pipeline_2.png)
+![Microservices1](images/apache_camel_eip2.png)
 
 ---
 
