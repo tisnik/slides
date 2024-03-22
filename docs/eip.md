@@ -24,11 +24,36 @@
     - vzorů
 * Vzory nejsou vynalézány, ale rozpoznávány v praxi
 * Standardizace
-    - slovní popis
+    - slovní popis (slovník)
     - grafická podoba
 * Snaha vyhnout se slepým uličkám
     - ty již někdo prozkoumal za nás
     - (a zaplatil za to)
+
+---
+
+## Standardizace - slovník
+
+* Message
+* Message bus
+* Dead letter channel
+* Pipe
+* Filter
+* Message router
+* Guaranteed Delivery
+* ...
+
+---
+
+## Standardizace - grafická podoba (1/2)
+
+![Microservices1](images/apache_camel_pipeline.png)
+
+---
+
+## Standardizace - grafická podoba (1/2)
+
+![Microservices1](images/apache_camel_pipeline_2.png)
 
 ---
 
@@ -71,6 +96,12 @@
 
 ## Požadavek-odpověď
 
+![request-reply](images/eip_request_reply.gif)
+
+---
+
+## Požadavek-odpověď
+
 ![com-1](images/com-01-request_reply.png)
 
 ---
@@ -103,6 +134,30 @@
 
 ---
 
+## CQS a CQRS
+
+* Command–query separation (CQS)
+* Command-query responsibility segregation (CQRS)
+    - COMMAND
+    - EVENT
+    - QUERY
+
+---
+
+## CQS a CQRS
+
+* V EIP:
+    - command message
+    - document message
+    - event message
+    - (request-reply messages)
+
+![command](images/eip_command.gif)
+![document](images/eip_document.gif)
+![event](images/eip_event.gif)
+
+---
+
 ## Message brokeři
 
 * ActiveMQ (Artemis)
@@ -126,6 +181,20 @@
 ### Push-pull
 
 ![com-4](images/com-04-push-pull.png)
+
+---
+
+## Apache Camel
+
+![apache](images/apache_camel_logo.png)
+
+* [https://camel.apache.org/components/3.17.x/eips/enterprise-integration-patterns.html](https://camel.apache.org/components/3.17.x/eips/enterprise-integration-patterns.html)
+
+---
+
+## Apache Camel
+
+![eip](images/eip.png)
 
 ---
 
