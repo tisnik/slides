@@ -54,8 +54,7 @@
 
 ---
 
-## Standardizace - grafická podoba
-
+## Standardizace - grafika
 ![Microservices1](images/apache_camel_eip1.png)
 ![Microservices2](images/apache_camel_eip2.png)
 
