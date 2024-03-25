@@ -97,6 +97,10 @@
 
 ---
 
+## Komunikace bez message brokera
+
+---
+
 ## Požadavek-odpověď
 
 ![request-reply](images/eip_request_reply.gif)
@@ -137,6 +141,12 @@
 
 ---
 
+## Surveyor
+
+![com-2](images/com-02-surveyor.png)
+
+---
+
 ## CQS a CQRS
 
 * Command–query separation (CQS)
@@ -161,6 +171,12 @@
 
 ---
 
+## Komunikace využívající message brokera
+
+![NSQ](images/NSQ_logo.png)
+
+---
+
 ## Message brokeři
 
 * ActiveMQ (Artemis)
@@ -177,7 +193,27 @@
 
 ### Publish-subscribe
 
+![Microservices1](images/eip_pub_sub.gif)
+
+---
+
+### Publish-subscribe
+
 ![com-3](images/com-03-pub-sub.png)
+
+---
+
+### Message channel
+
+![message_channel](images/eip_message_channel.gif)
+
+---
+
+### Point-to-point channel
+
+* Only one receiver consume message
+
+![message_channel](images/eip_message_channel_2.gif)
 
 ---
 
@@ -187,6 +223,17 @@
 
 ---
 
+## Apache Kafka
+
+![Kafka logo](images/kafka_logo.png)
+
+---
+
+![Kafka topic](images/eip_kafka.png)
+
+---
+
+
 ## Apache Camel
 
 ![apache](images/apache_camel_logo.png)
@@ -195,15 +242,7 @@
 
 ---
 
-## Apache Camel
-
 ![eip](images/eip.png)
-
----
-
-## Apache Kafka
-
----
 
 ---
 
