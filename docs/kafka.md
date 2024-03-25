@@ -76,6 +76,7 @@ apache_kafka@centrum.cz
    - ActiveMQ (Artemis)
    - RabbitMQ
    - IBM MQ
+   - SQS (as a service)
    - etc.
 
 ---
@@ -231,6 +232,11 @@ apache_kafka@centrum.cz
     - QueryBus
 
 ---
+
+![Kafka logo](images/kafka_logo.png)
+
+---
+
 
 ## Basic concepts
 
@@ -513,13 +519,16 @@ log.roll.hours
 
 ## Practical part
 
+![Kafka logo](images/kafka_logo.png)
+
 ---
 
 ### Kafka installation
 
-* download tarball
+* [download tarball](https://kafka.apache.org/downloads)
 * uncompress
-* fix problems
+* fixes for common problems
+    - 32/64bit JRE version on downloads page!!!
     - JRE needs to be installed
     - use directories w/o spaces
     - use short path (ideally c:\kafka on Win)
@@ -599,6 +608,30 @@ Connection closed by foreign host.
 ```properties
 broker.id=100
 listeners=PLAINTEXT://:9092
+num.network.threads=3
+num.io.threads=8
+ 
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+ 
+log.dirs=/tmp/kafka-logs
+num.partitions=1
+num.recovery.threads.per.data.dir=1
+log.retention.hours=168
+log.segment.bytes=1073741824
+ 
+zookeeper.connect=localhost:2181
+zookeeper.connection.timeout.ms=6000
+```
+
+---
+
+### Localhost settings
+
+```properties
+broker.id=100
+listeners=PLAINTEXT://localhost:9092
 num.network.threads=3
 num.io.threads=8
  
@@ -1610,6 +1643,12 @@ value.converter=org.apache.kafka.connect.storage.StringConverter
 key.converter.schemas.enable=false
 value.converter.schemas.enable=false
 ```
+
+---
+
+### Setup libs directory
+
+* `connect-standalone.properties`
 
 ---
 
