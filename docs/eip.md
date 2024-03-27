@@ -236,7 +236,7 @@
 
 ### Point-to-point channel
 
-* Only one receiver consume message
+* Pouze jeden konzument přijme zprávu
 
 ![message_channel](images/eip_message_channel_2.gif)
 
@@ -258,7 +258,7 @@
 
 * Fan-in/fan-out lze považovat za speciální případy
 
-[message_routers](images/eip_message_routers.gif)
+![message_routers](images/eip_message_routers.gif)
 
 ---
 
