@@ -11,11 +11,11 @@
 ## Osnova
 
 * Vzory nejsou vynalézány, ale rozpoznávány v praxi
-* Komunikace po síti není spolehlivá
-* Komunikace po síti je pomalá
 * Každá aplikace je odlišná
 * Aplikace se postupně mění
 * Komunikace v současnosti: mikroslužby a serverless řešení
+* Komunikace po síti není spolehlivá
+* Komunikace po síti je pomalá
 * Architektura založená na mikroslužbách
 * Příklady řešení komunikace ve světě mikroslužeb
 
@@ -67,7 +67,7 @@
     - odlišné způsoby nasazení
 * Požadavky + implementace se postupně mění
 * Přidávání dalších služeb
-* + další náklady
+* plus další náklady
     - monitoring
     - alerting
 
@@ -83,6 +83,23 @@
     - dotazy
 * Synchronní či asynchronní zpracování
 * Distribuované transakce
+
+---
+
+## Komunikace mezi mikroslužbami
+
+* Komunikace po síti není spolehlivá
+    - potvrzování (?)
+    - distribuované transakce (?)
+* Komunikace po síti je pomalá
+
+---
+
+![latency](images/computer_latency_1.png)
+
+---
+
+![latency](images/computer_latency_2.png)
 
 ---
 
@@ -129,6 +146,8 @@
    - typicky stálé připojení
 * dvojice uzlů
 * posílání zpráv oběma směry
+   - přímé
+   - fronty
 
 ---
 
@@ -160,9 +179,9 @@
 ## CQS a CQRS
 
 * V EIP:
-    - command message
-    - document message
-    - event message
+    - [C] command message
+    - [D] document message
+    - [E] event message
     - (request-reply messages)
 
 ![command](images/eip_command.gif)
@@ -203,6 +222,12 @@
 
 ---
 
+### Publish-subscribe s frontou
+
+![com-4](images/eip_pub_sub_2.gif)
+
+---
+
 ### Message channel
 
 ![message_channel](images/eip_message_channel.gif)
@@ -217,9 +242,23 @@
 
 ---
 
+### Competing consumers
+
+![message_channel](images/eip_competing_consumers.gif)
+
+---
+
 ### Push-pull
 
 ![com-4](images/com-04-push-pull.png)
+
+---
+
+### Message routers
+
+* Fan-in/fan-out lze považovat za speciální případy
+
+[message_routers](images/eip_message_routers.gif)
 
 ---
 
@@ -229,10 +268,16 @@
 
 ---
 
-![Kafka topic](images/eip_kafka.png)
+## Apache Kafka
+
+* Zcela nezapadá do konceptu EIP
+* Některé aspekty Kafky lze namodelovat
 
 ---
 
+![Kafka topic](images/eip_kafka.png)
+
+---
 
 ## Apache Camel
 
