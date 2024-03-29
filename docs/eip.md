@@ -60,6 +60,12 @@
 
 ---
 
+## Monolitické aplikace &rarr; mikroslužby
+
+![Everything](images/everything.jpg)
+
+---
+
 ## Mikroslužby
 
 * Vytvářeny různými týmy
@@ -70,6 +76,23 @@
 * plus další náklady
     - monitoring
     - alerting
+
+---
+
+## Mikroslužby vs. SOA
+
+```
+SOA	MSA
+spíše hrubší granularita služeb („mikromonolity“)	jemnější granularita služeb
+zaměření na standardizaci procesů, nástrojů atd.	zaměření na spolupráci lidí a možnost svobodného výběru technologií
+použití ESB (Enterprise Service Bus)	jednoduché systémy pro posílání zpráv
+podpora většího množství protokolů pro přenos zpráv	zaměření na použití jednoduchých protokolů (HTTP, STOMP, ...)
+založeno na jednom programovacím jazyku a sadě knihoven	volnost výběru jazyka i knihoven podle potřeby
+běh ve více vláknech	typicky běh v jednom vláknu s non-locking I/O, použití zelených vláken
+služby dělené podle business požadavků	dělení spíše podle kontextu
+jediná databáze pro celou aplikaci	každá mikroslužba používá vlastní datové úložiště
+požadavek na změnu: úprava (mikro)monolitu	požadavek na změnu: vytvoření nové mikroslužby
+```
 
 ---
 
@@ -92,6 +115,19 @@
     - potvrzování (?)
     - distribuované transakce (?)
 * Komunikace po síti je pomalá
+
+---
+
+## Mylné předpoklady o síti
+
+* Síť je spolehlivá
+* Zpoždění při přenosu zpráv je nulové či velmi nízké
+* Přenosová kapacita je nekonečná či dostatečně vysoká
+* Síť je bezpečná
+* Topologie sítě se nemění
+* O síť se stará pouze jeden (dohledatelný) administrátor
+* Cena přenosu dat je nulová či prakticky nulová
+* Síť je homogenní
 
 ---
 
@@ -138,6 +174,9 @@
     - stálé
     - nebo pro jedinou dvojici požadavek/odpověď
 
+---
+
+## Synchronní vs. asynchronní volání
 ---
 
 ## Oboustranná komunikace
@@ -222,7 +261,7 @@
 
 ---
 
-### Publish-subscribe s frontou
+### Publish-subscribe s komunikačním kanálem
 
 ![com-4](images/eip_pub_sub_2.gif)
 
@@ -262,6 +301,14 @@
 
 ---
 
+### Fan-out
+
+* RabbitMQ
+
+![rabbit](images/rabbitmq2-1.png)
+
+---
+
 ## Apache Kafka
 
 ![Kafka logo](images/kafka_logo.png)
@@ -271,6 +318,10 @@
 ## Apache Kafka
 
 * Zcela nezapadá do konceptu EIP
+    - kombinace několika technik
+    - témata &rarr; oddíly
+    - konzument &rarr; skupiny konzumentů
+    - &bdquo;přehrávání&ldquo; zpráv
 * Některé aspekty Kafky lze namodelovat
 
 ---
