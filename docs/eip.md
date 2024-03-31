@@ -54,6 +54,12 @@
 
 ---
 
+## Standardizace - grafika
+![Microservices1](images/apache_camel_eip1.png)
+![Microservices2](images/apache_camel_eip2.png)
+
+---
+
 ## Nejužitečnější vzory
 
 * Agregace dat z více zdrojů
@@ -66,12 +72,6 @@
 * Asynchronní přenos (fire and forget)
 * Orchestrace přenosu dat
 * + kombinace předchozích
-
----
-
-## Standardizace - grafika
-![Microservices1](images/apache_camel_eip1.png)
-![Microservices2](images/apache_camel_eip2.png)
 
 ---
 
@@ -96,13 +96,19 @@
 
 ## Mikroslužby vs. SOA
 
-* SOA
+* SOA (1/2)
      - spíše hrubší granularita služeb („mikromonolity“)
      - zaměření na standardizaci procesů, nástrojů atd.
      - použití ESB (Enterprise Service Bus)
      - podpora většího množství protokolů pro přenos zpráv
      - založeno na jednom programovacím jazyku a sadě knihoven
      - běh ve více vláknech
+
+---
+
+## Mikroslužby vs. SOA
+
+* SOA (2/2)
      - služby dělené podle business požadavků
      - jediná databáze pro celou aplikaci
      - požadavek na změnu: úprava (mikro)monolitu
@@ -111,13 +117,19 @@
 
 ## Mikroslužby vs. SOA
 
-* Mikroslužby
+* Mikroslužby (1/2)
      - jemnější granularita služeb
      - zaměření na spolupráci lidí a možnost svobodného výběru technologií
      - jednoduché systémy pro posílání zpráv
      - zaměření na použití jednoduchých protokolů (HTTP, STOMP, ...)
      - volnost výběru jazyka i knihoven podle potřeby
      - typicky běh v jednom vláknu s non-locking I/O, použití zelených vláken
+
+---
+
+## Mikroslužby vs. SOA
+
+* Mikroslužby (2/2)
      - dělení spíše podle kontextu
      - každá mikroslužba používá vlastní datové úložiště
      - požadavek na změnu: vytvoření nové mikroslužby
@@ -137,9 +149,15 @@
 
 ---
 
-## Mikroslužby
-
 ![Smart Proxy](images/smart_proxy.png)
+
+---
+
+![Smart Proxy](images/smart_proxy_2.png)
+
+---
+
+![Smart Proxy](images/smart_proxy_3.png)
 
 ---
 
@@ -287,6 +305,7 @@
 * Pořadí zpráv
 * Potvrzování zpráv (kdy přesně)
 * At least once/at most once delivery
+* Obousměrná komunikace (pub-sub atd.)!
 
 ---
 
@@ -389,6 +408,12 @@
 
 ## Architektura lambda
 
+![Kafka usage](images/pipeline-animation.gif)
+
 ---
 
 ## Architektura kappa
+
+[full image](images/kafka_kappa.png)
+![Kafka kappa](images/kafka_kappa.png)
+
