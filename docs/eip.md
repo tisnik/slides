@@ -4,6 +4,8 @@
 
 ## Používání návrhových vzorů
 
+* Pavel Tišnovský (tisnik@centrum.cz)
+
 ![Microservices1](images/apache_camel_message_translator.gif)
 
 ---
@@ -408,11 +410,34 @@
 
 ## Architektura lambda
 
+* Kombinace dávkového a proudového zpracování
+* Vybalancování
+    - zpoždění při zpracování
+    - propustnost
+    - odolnost proti chybám
+* Dva pohledy na data
+* Lze spojit před prezentační vrstvou
+
+---
+
+## Lambda: rychlá a pomalá cesta
+
+![lambda usage](images/eip_lambda.png)
+
+---
+
+
 ![Kafka usage](images/pipeline-animation.gif)
 
 ---
 
 ## Architektura kappa
+
+* Alternativa ke klasické architektuře lambda
+* Založeno na proudovém zpracování
+* Lze použít i pro celé IT (nikoli jen pro zpracování dat)
+
+---
 
 [full image](images/kafka_kappa.png)
 ![Kafka kappa](images/kafka_kappa.png)
