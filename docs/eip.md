@@ -62,6 +62,12 @@
 
 ---
 
+## 65 vzorů
+
+[vzory](https://www.enterpriseintegrationpatterns.com/patterns/messaging/)
+
+---
+
 ## Nejužitečnější vzory
 
 * Agregace dat z více zdrojů
@@ -77,7 +83,9 @@
 
 ---
 
-## Monolitické aplikace &rarr; mikroslužby
+## Vývoj EIP
+
+* Monolitické aplikace &rarr; mikroslužby
 
 ![Everything](images/everything.jpg)
 
@@ -93,6 +101,20 @@
 * plus další náklady
     - monitoring
     - alerting
+
+---
+
+## Nejsou mikroslužby vlastně SOA?
+
+* Podobný koncept
+    - znovupoužití služeb
+    - kombinace služeb pro složitější úlohy
+* SOA
+    - většinou kód + datová integrace
+    - splňují nějakou ucelenou business roli
+    - typicky založeno na XML
+* Mikroslužby
+    - rozdělují celou aplikaci na menší celky
 
 ---
 
@@ -441,4 +463,8 @@
 
 [full image](images/kafka_kappa.png)
 ![Kafka kappa](images/kafka_kappa.png)
+
+---
+
+## Děkuji za pozornost
 
