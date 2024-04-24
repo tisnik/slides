@@ -1836,6 +1836,41 @@ delete.enabled=false
 
 ---
 
+### Kafka stream processing
+
+* reading data from Kafka
+* processing
+* writing back to Kafka
+
+![stream_processing_1](images/kafka_stream_processing_1.png)
+
+---
+
+### Kafka stream processing
+
+![stream_processing_2](images/kafka_stream_processing_2.png)
+
+---
+
+### Kafka stream processing
+
+* Spark
+* Storm
+* Flink
+* Faust
+
+---
+
+### Faust
+
+* For Python (no DSL)
+* Can be used with Python libs
+    - Pandas
+    - NumPy
+    - Pytorch etc.
+
+---
+
 ## Monitoring
 
 * JMX
