@@ -5,7 +5,7 @@ from time import sleep
 from json import dumps
 
 server = "localhost:9092"
-topic = "upload"
+topic = "greetings"
 
 print("Connecting to Kafka")
 producer = KafkaProducer(
