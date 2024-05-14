@@ -39,6 +39,14 @@ threading.Thread(target=worker).start()
 
 ---
 
+### Goal
+
+---
+
+![C](images/c.png)
+
+---
+
 # Solutions
 
 * AOT compilers
@@ -69,4 +77,54 @@ threading.Thread(target=worker).start()
 * Is able to perform PGO (Profile Guided Optimization)
 * Is able to perform speculative optimizations
     - can backtrack if things go wrong
+
+---
+
+## Cython
+
+* Superset of Python programming language
+* Compiled language
+    - in fact it is transpiller to C
+    - .pyx -> .c -> .so -> launch.py
+* Explicit data types are optional
+    - type hints
+* `nogil`
+* Ability to call native functions
+
+---
+
+### Compilation into C
+
+```python
+cdef add_two_numbers(x, y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+### Explicit parameter types
+
+```python
+cdef add_two_numbers(int x, int y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Explicit return type
+
+```python
+cdef int add_two_numbers(int x, int y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
 
