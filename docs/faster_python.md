@@ -104,6 +104,8 @@ z = add_two_numbers(123, 456)
 print(z)
 ```
 
+---
+
 ### Explicit parameter types
 
 ```python
