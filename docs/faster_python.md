@@ -262,3 +262,20 @@ static int __pyx_f_13add_numbers_5_add_two_numbers(int __pyx_v_x, int __pyx_v_y)
 ---
 
 ![numba](images/numba.png)
+
+---
+
+## Numba
+
+* Just in time compiler for Python
+* Provides `@jit` decorator and more
+
+```python
+from numba import jit
+
+@jit
+def function():
+    pass
+```
+
+---
