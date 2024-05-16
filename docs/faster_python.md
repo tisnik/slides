@@ -175,8 +175,6 @@ static PyObject *__pyx_f_13add_numbers_3_add_two_numbers(int __pyx_v_x, int __py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "add_numbers_3.pyx":1
-
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
@@ -213,5 +211,54 @@ cdef int add_two_numbers(int x, int y):
 z = add_two_numbers(123, 456)
 print(z)
 ```
+
+---
+
+### Resulting C code
+
+```C
+static int __pyx_f_13add_numbers_4_add_two_numbers(int __pyx_v_x, int __pyx_v_y) {
+  int __pyx_r;
+
+  __pyx_r = (__pyx_v_x + __pyx_v_y);
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+```
+
+---
+
+### Disable GIL-related locks
+
+```python
+cdef int add_two_numbers(int x, int y) nogil:
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Resulting C code
+
+```C
+static int __pyx_f_13add_numbers_5_add_two_numbers(int __pyx_v_x, int __pyx_v_y) {
+  int __pyx_r;
+
+  __pyx_r = (__pyx_v_x + __pyx_v_y);
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+```
+
+---
 
 ![numba](images/numba.png)
