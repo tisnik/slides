@@ -24,6 +24,19 @@ print(z)
 
 ---
 
+### Code is too universal
+
+```
+  3           0 RESUME                   0
+
+  4           2 LOAD_FAST                0 (x)
+              4 LOAD_FAST                1 (y)
+              6 BINARY_OP                0 (+)
+             10 RETURN_VALUE
+```
+
+---
+
 ## Where's the problem?
 
 ```python
@@ -80,6 +93,15 @@ threading.Thread(target=worker).start()
 
 ---
 
+## Technologies available today
+
+* Cython
+* Numba
+* Nuitka
+* mypyc
+
+---
+
 ![cython](images/cython.png)
 
 ---
@@ -88,7 +110,7 @@ threading.Thread(target=worker).start()
 
 * Superset of Python programming language
 * Compiled language
-    - in fact it is transpiller to C
+    - in fact it is transpiler to C
     - .pyx -> .c -> .so -> launch.py
 * Explicit data types are optional
     - type hints
@@ -249,6 +271,102 @@ print(z)
 ```C
 static int __pyx_f_13add_numbers_5_add_two_numbers(int __pyx_v_x, int __pyx_v_y) {
   int __pyx_r;
+
+  __pyx_r = (__pyx_v_x + __pyx_v_y);
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+```
+
+---
+
+### Problems with Python functions
+
+```python
+cdef int add_two_numbers(int x, int y) nogil:
+    print(x)
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Compilation errors
+
+```
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef int add_two_numbers(int x, int y) nogil:
+    print(x)
+         ^
+------------------------------------------------------------
+
+add_numbers_6.pyx:2:9: Discarding owned Python object not allowed without gil
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef int add_two_numbers(int x, int y) nogil:
+    print(x)
+         ^
+------------------------------------------------------------
+
+add_numbers_6.pyx:2:9: Calling gil-requiring function not allowed without gil
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef int add_two_numbers(int x, int y) nogil:
+    print(x)
+         ^
+------------------------------------------------------------
+
+add_numbers_6.pyx:2:9: Constructing Python tuple not allowed without gil
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef int add_two_numbers(int x, int y) nogil:
+    print(x)
+          ^
+------------------------------------------------------------
+
+add_numbers_6.pyx:2:10: Converting to Python object not allowed without gil
+```
+
+---
+
+### Use C standard functions
+
+```python
+from libc.stdio cimport printf
+
+
+cdef int add_two_numbers(int x, int y) nogil:
+    printf("%i\n", x)
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Resulting C code
+
+```C
+static int __pyx_f_13add_numbers_7_add_two_numbers(int __pyx_v_x, int __pyx_v_y) {
+  int __pyx_r;
+
+  (void)(printf(((char const *)"%i\n"), __pyx_v_x));
 
   __pyx_r = (__pyx_v_x + __pyx_v_y);
   goto __pyx_L0;
