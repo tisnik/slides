@@ -279,3 +279,19 @@ def function():
 ```
 
 ---
+
+![mypy](images/mypy.png)
+
+---
+
+## Mypyc
+
+---
+
+![Nuitka](images/nuitka.png)
+
+---
+
+## Nuitka
+
+---
