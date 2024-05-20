@@ -508,6 +508,14 @@ static int __pyx_f_13add_numbers_7_add_two_numbers(int __pyx_v_x, int __pyx_v_y)
 
 * Just in time compiler for Python
 * Provides `@jit` decorator and more
+* Slower startup and warm-up times
+    - cause by JITting
+* Allow true parallelization
+* Other optimizations possible
+
+---
+
+### `@jit` decorator
 
 ```python
 from numba import jit
@@ -515,6 +523,23 @@ from numba import jit
 @jit
 def function():
     pass
+```
+
+---
+
+### Simpler and faster `print` function
+
+* Only for numbers and strings
+* No `file` argument
+* No `sep` argument
+* OTOH it is much faster that Python built-in one
+
+---
+
+### Forcing JIT
+
+```python
+@jit(nopython=True)
 ```
 
 ---
@@ -534,3 +559,8 @@ def function():
 ## Nuitka
 
 ---
+
+## Benchmarks
+
+---
+
