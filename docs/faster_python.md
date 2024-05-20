@@ -170,6 +170,22 @@ print(z)
 
 ---
 
+### Compilation into C
+
+```python
+import cython
+
+@cython.cfunc
+def add_two_numbers(x, y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
 ### Resulting C code
 
 ```C
@@ -207,6 +223,22 @@ static PyObject *__pyx_f_13add_numbers_2_add_two_numbers(PyObject *__pyx_v_x, Py
 
 ```python
 cdef add_two_numbers(int x, int y):
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Explicit parameter types
+
+```python
+import cython
+
+@cython.cfunc
+def add_two_numbers(x: cython.int, y: cython.int):
     return x + y
 
 
@@ -274,6 +306,22 @@ print(z)
 
 ---
 
+### Explicit return type
+
+```python
+import cython
+
+@cython.cfunc
+def add_two_numbers(x: cython.int, y: cython.int) -> cython.int:
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
 ### Resulting C code
 
 ```C
@@ -295,6 +343,23 @@ static int __pyx_f_13add_numbers_4_add_two_numbers(int __pyx_v_x, int __pyx_v_y)
 
 ```python
 cdef int add_two_numbers(int x, int y) nogil:
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Disable GIL-related locks
+
+```python
+import cython
+
+@cython.cfunc
+@cython.nogil
+def add_two_numbers(x: cython.int, y: cython.int) -> cython.int:
     return x + y
 
 
@@ -389,6 +454,24 @@ from libc.stdio cimport printf
 
 cdef int add_two_numbers(int x, int y) nogil:
     printf("%i\n", x)
+    return x + y
+
+
+z = add_two_numbers(123, 456)
+print(z)
+```
+
+---
+
+### Use C standard functions
+
+```python
+from cython.cimports.libc.stdio import printf
+
+@cython.cfunc
+@cython.nogil
+def add_two_numbers(x: cython.int, y: cython.int) -> cython.int:
+    printf("%d\n", x)
     return x + y
 
 
