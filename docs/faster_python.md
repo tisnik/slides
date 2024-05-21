@@ -550,6 +550,10 @@ def function():
 
 ## Mypyc
 
+* AOT compiler
+* Heavily based on type hints
+    - part of `mypy` package
+
 ---
 
 ![Nuitka](images/nuitka.png)
@@ -558,9 +562,55 @@ def function():
 
 ## Nuitka
 
+* AOT compiler
+* Is able to compile into "one file"
+* Does not require type hints everywhere
+
 ---
 
-## Benchmarks
+## Benchmarks (1/2)
+
+* native: ANSI C variant (no Python)
+    - without and with optimizations enabled
+* Python 3.x
+    - various Python interpreters
+* Mypyc
+    - without and with type hints
+* Numba
+    - original code (no changes no `@jit`) 
+    - `@jit` annotation
+    - native `print` function
 
 ---
+
+## Benchmarks (2/2)
+
+* Nuitka
+* Cython
+    - basic variant
+    - type hints 
+    - optimizations + `nogil`
+
+---
+
+## Results
+
+* [Computation time](images/faster-python/Approximation_computation.png)
+* [Just AOT compilers](images/faster-python/Approximation_computation_compiled.png)
+
+---
+
+## Startup time influence
+
+* [Startup time influence](images/faster-python/1st.png)
+* [Startup + computation](images/faster-python/Startup_time_and_computation.png)
+* [Heavy computation](images/faster-python/Extensive_computation.png)
+* [Sweet spot for Numba](images/faster-python/Numba_CPython_thresholds.png)
+
+---
+
+## Selected subsets
+
+* [Just interpreters](images/faster-python/Python_interpreters_only.png)
+* [Just compilers](images/faster-python/Compiled_code_only.png)
 
