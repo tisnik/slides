@@ -568,6 +568,16 @@ def function():
 
 ---
 
+## Comparisons
+
+* Mandelbrot set computation
+    - nested loops
+    - conditions
+    - heavy floating point operations
+    - lists (arrays) access too
+
+---
+
 ## Benchmarks (1/2)
 
 * native: ANSI C variant (no Python)
