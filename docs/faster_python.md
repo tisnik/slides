@@ -133,7 +133,8 @@ threading.Thread(target=worker).start()
 * Performed during execution
 * Need to be a bit picky
     - too aggressive optimizations lower performance
-* Is able to perform PGO (Profile Guided Optimization)
+* Is able to perform PGO
+    - Profile Guided Optimization
 * Is able to perform speculative optimizations
     - can backtrack if things go wrong
 
@@ -142,6 +143,7 @@ threading.Thread(target=worker).start()
 ## Python w/o GIL
 
 * Recent CPython optimized slightly
+    - PEP 684, a unique per-interpreter GIL
 * CPython w/o GIL
     - fork of standard CPython
 * Most AOT/JIT compilers support "nogil"
@@ -796,4 +798,161 @@ static int __pyx_f_17mandelbrot_cython_calc_mandelbrot(int __pyx_v_width, int __
 
 * [Just interpreters](images/faster-python/Python_interpreters_only.png)
 * [Just compilers](images/faster-python/Compiled_code_only.png)
+
+---
+
+## CPython without GIL
+
+```
+$ git clone https://github.com/colesbury/nogil
+$ ./configure --enable-optimizations
+$ make -j8
+$ make install
+```
+
+## Concurrent/parallel bubble sort
+
+```python
+from concurrent.futures.thread import ThreadPoolExecutor
+from time import perf_counter
+import random
+
+def bubble_sort(size):
+    a = [random.randrange(0, 10000) for i in range(size)]
+
+    t1 = perf_counter()
+
+    for i in range(size - 1, 0, -1):
+        for j in range(0, i):
+            if a[j] > a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
+
+    t2 = perf_counter()
+
+    print(f"Sorted in {t2-t1} seconds:")
+
+
+t1 = perf_counter()
+
+with ThreadPoolExecutor(max_workers=8) as executor:
+    for i in range(100):
+        executor.submit(bubble_sort, 5000)
+
+t2 = perf_counter()
+
+print(f"Total time: {t2-t1} seconds:")
+```
+
+---
+
+### Results
+
+```
+sequential            202 sec
+concurrent with GIL   205 sec
+parallel without GIL   74 ses
+```
+
+- [sequential](https://www.root.cz/obrazek/1113716/)
+- [concurrent](https://www.root.cz/obrazek/1113717/)
+- [parallel](https://www.root.cz/obrazek/1113718/)
+
+---
+
+### Parallel renderer
+
+```python
+#!/usr/bin/env python
+
+"""Renderer of the classic Julia fractal."""
+
+import sys
+from concurrent.futures.thread import ThreadPoolExecutor
+from PIL import Image
+from time import perf_counter
+import math
+
+IMAGE_WIDTH = 256
+IMAGE_HEIGHT = 256
+
+
+def julia(cx, cy, zx, zy, maxiter):
+    c = complex(cx, cy)
+    z = complex(zx, zy)
+    for i in range(0, maxiter):
+        if abs(z) > 2:
+            return i
+        z = z * z + c
+    return 0
+
+
+def recalc_fractal(filename, palette, xmin, ymin, xmax, ymax, cx, cy, maxiter=1000):
+    """Recalculate the whole fractal and render the set into given image."""
+    t1 = perf_counter()
+    image = Image.new("RGB", (IMAGE_WIDTH, IMAGE_HEIGHT))
+
+    width, height = image.size
+    stepx = (xmax - xmin) / width
+    stepy = (ymax - ymin) / height
+
+    y1 = ymin
+    for y in range(0, height):
+        x1 = xmin
+        for x in range(0, width):
+            i = julia(cx, cy, x1, y1, maxiter)
+            i = 3 * i % 256
+            color = (palette[i][0], palette[i][1], palette[i][2])
+            image.putpixel((x, y), color)
+            x1 += stepx
+        y1 += stepy
+
+    image.save(filename)
+    t2 = perf_counter()
+    # print("Done", filename, t2-t1)
+
+
+def main(threads):
+    import palette_mandmap
+
+    with ThreadPoolExecutor(max_workers=threads) as executor:
+        for angle in range(0, 360, 5):
+            rad = math.radians(angle)
+            cx = 1.0 * math.cos(rad)
+            cy = 1.0 * math.sin(rad)
+            filename = f"anim_{angle:03d}.png"
+            # print(filename)
+
+            executor.submit(recalc_fractal, filename, palette_mandmap.palette, -1.5, -1.5, 1.5, 1.5, cx, cy, 1000)
+
+
+if __name__ == "__main__":
+    threads = 8
+    if len(sys.argv) > 1:
+        threads = int(sys.argv[1])
+
+    t1 = perf_counter()
+    main(threads)
+    t2 = perf_counter()
+    print(f"Threads: {threads}   Rendering time: {t2-t1} seconds")
+```
+
+---
+
+## Renderer results
+
+[julia anim](https://i.iinfo.cz/images/463/python-nogil-14.gif)
+
+---
+
+## Benchmark results
+
+* On 12th Gen Intel(R) Core(TM) i7-1270P
+
+```
+sequential                       17.8 sec
+concurrent with GIL 8 workers    19.5 sec
+concurrent with GIL 32 workers   18.4 sec
+parallel without GILu 8 workers   7.77 sec
+parallel without GILu 32 workers  8.47 sec
+```
 
