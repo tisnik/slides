@@ -810,6 +810,8 @@ $ make -j8
 $ make install
 ```
 
+---
+
 ## Concurrent/parallel bubble sort
 
 ```python
@@ -940,7 +942,7 @@ if __name__ == "__main__":
 
 ## Renderer results
 
-[julia anim](https://i.iinfo.cz/images/463/python-nogil-14.gif)
+![julia anim](https://i.iinfo.cz/images/463/python-nogil-14.gif)
 
 ---
 
@@ -949,10 +951,18 @@ if __name__ == "__main__":
 * On 12th Gen Intel(R) Core(TM) i7-1270P
 
 ```
-sequential                       17.8 sec
-concurrent with GIL 8 workers    19.5 sec
-concurrent with GIL 32 workers   18.4 sec
+sequential                       17.80 sec
+concurrent with GIL 8 workers    19.50 sec
+concurrent with GIL 32 workers   18.40 sec
 parallel without GILu 8 workers   7.77 sec
 parallel without GILu 32 workers  8.47 sec
 ```
+
+---
+
+## Conclusion
+
+* nogil definitely helps
+* OTOH does not scale linearly with #cores (workers)
+* still faster to use JIT or AOT solutions
 
