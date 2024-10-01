@@ -1,4 +1,4 @@
-# Pattern matching v Pythonu
+# Pattern matching v&nbsp;Pythonu
 
 ---
 
@@ -41,6 +41,11 @@ Python 3.12   klíčové slovo type + sémantika
     - zachycení hodnot
     - test typů
     - podmínky v rozhodovacích větvích
+    - využití strukturálních vzorů
+
+---
+
+## Nová stříbrná kulka v IT?
 
 ---
 
@@ -77,6 +82,10 @@ fun fib 0 = 0
   | fib n = fib (n - 1) + fib (n - 2);
 ```
 
+---
+
+### ML (předchůdce OCamlu a jazyka F#)
+
 ```
 fun length(x) = if null(x) then 0
                 else 1 + length(tl(x));
@@ -104,14 +113,6 @@ let rec fib n =
 ### Rust
 
 ```rust
-```
-### Rust
-
-```rust
-```
-### Rust
-
-```rust
 fn main() {
     let x:i32 = 1;
 
@@ -124,6 +125,10 @@ fn main() {
     }
 }
 ```
+
+---
+
+### Rust
 
 ```rust
 fn fib(n: u32) -> u32 {
@@ -151,36 +156,7 @@ fn main() {
 
 ---
 
-### Ukázky pattern matchingu
-
----
-
-```python
-# Strukturální pattern matching:
-# - Výpočet Fibonacciho posloupnost realizovaný s využitím
-#   pattern matchingu
-
-
-def fib(value):
-    """Výpočet jednoho prvku Fibonacciho posloupnosti."""
-    match value:
-        case 0:
-            return 0
-        case 1:
-            return 1
-        case n if n>1:
-            return fib(n-1) + fib(n-2)
-        case _ as wrong:
-            raise ValueError("Wrong input", wrong)
-
-
-# tisk tabulky s prvky Fibonacciho posloupnosti
-for n in range(0, 11):
-    print(n, fib(n))
-
-# test neplatného vstupu
-fib(-1)
-
+## Ukázky pattern matchingu
 
 ---
 
@@ -247,6 +223,35 @@ for m in range(4):
     for n in range(5):
         print(m, n, A(m, n))
 
+
+
+---
+
+```python
+# Strukturální pattern matching:
+# - Výpočet Fibonacciho posloupnost realizovaný s využitím
+#   pattern matchingu
+
+
+def fib(value):
+    """Výpočet jednoho prvku Fibonacciho posloupnosti."""
+    match value:
+        case 0:
+            return 0
+        case 1:
+            return 1
+        case n if n>1:
+            return fib(n-1) + fib(n-2)
+        case _ as wrong:
+            raise ValueError("Wrong input", wrong)
+
+
+# tisk tabulky s prvky Fibonacciho posloupnosti
+for n in range(0, 11):
+    print(n, fib(n))
+
+# test neplatného vstupu
+fib(-1)
 
 
 ---
@@ -364,6 +369,8 @@ def abort_retry_fail():
 
 print(abort_retry_fail())
 
+
+---
 
 ### Vzory obsahující v&nbsp;každé větvi vetší množství hodnot
 
@@ -624,6 +631,10 @@ except Exception as e:
 ---
 
 ### Pattern matching a výčtový typ
+
+![red blue pill](images/red_blue_pill.jpg)
+
+---
 
 ```python
 from enum import Enum
