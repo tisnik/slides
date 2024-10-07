@@ -21,6 +21,7 @@
 ## Nová syntaxe+sémantika v Pythonu 3.x
 
 ```
+Python 3.5    typové informace
 Python 3.6    f-řetězce, async-IO
 Python 3.7    klíčová slova async a await
 Python 3.8    mroží operátor, poziční parametry
