@@ -1,4 +1,4 @@
-# Typové informace v Pythonu
+# Typové informace v&nbsp;Pythonu
 
 ---
 
@@ -133,6 +133,9 @@ x: int = 42
 x = "foo"
 ```
 
+
+---
+
 ```python
 # - specifikace typu lokální proměnné
 # - přiřazení nové hodnoty kompatibilního typu do proměnné
@@ -173,7 +176,6 @@ def add(a, b):
 * Proč `Any`?
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - funkce bez uvedení typových anotací
 # - zavolání této funkce pro různé typy argumentů
 
@@ -209,10 +211,13 @@ def add(a: int, b: int) -> int:
 ```
 
 
+---
+
+### Typové anotace
+
 * využití
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - funkce s uvedením typových informací
 # - zavolání této funkce pro různé typy argumentů
 
@@ -263,6 +268,10 @@ print(add(1, True))
 print(add(1, False))
 ```
 
+
+---
+
+### `bool` nebo `int`?
 
 ```python
 # - funkce s uvedením typových informací
@@ -330,6 +339,10 @@ print(add(1.1, 2.2))
 ```
 
 
+---
+
+### Typ `Union`
+
 ```python
 # - funkce s uvedením typových informací
 # - použití zobecněného typu Union
@@ -384,6 +397,10 @@ print(add(1, "bar"))
 print(add("foo", 2))
 ```
 
+
+---
+
+### Dekorátor `@overload`
 
 ```python
 # - funkce s uvedením typových informací pro dvě varianty argumentů
@@ -472,6 +489,10 @@ p: tuple[int] = (1, 2, 3)
 ```
 
 
+---
+
+### Typované n-tice
+
 * korektní varianta
 
 ```python
@@ -519,7 +540,6 @@ p: tuple[int, float, bool, str] = (1, 3.14, True, "Hello")
 ### Typované seznamy
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice seznamu s prvky typu int
 # - kompatibilita s Mypy
 
@@ -529,7 +549,6 @@ lst: List[int] = []
 ```
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice seznamu s prvky typu int
 # - vyžaduje novější verzi Pythonu
 
@@ -537,8 +556,11 @@ lst: list[int] = []
 ```
 
 
+---
+
+### Typované seznamy
+
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice seznamu s prvky typu int
 # - inicializace prvků
 # - kompatibilita s Mypy
@@ -549,7 +571,6 @@ lst: List[int] = [1, 2, 3]
 ```
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice seznamu s prvky typu int
 # - inicializace prvků
 # - vyžaduje novější verzi Pythonu
@@ -624,6 +645,8 @@ print(d)
 ```
 
 
+---
+
 ```python
 # - definice slovníku
 # - prvky mají rozdílné typy klíčů i hodnot
@@ -638,6 +661,10 @@ d[42] = "answer"
 print(d)
 ```
 
+
+---
+
+### Typované slovníky
 
 ```python
 # - definice slovníku
@@ -695,6 +722,8 @@ print(d)
 ```
 
 
+---
+
 ```python
 # - definice slovníku
 # - specifikace typu klíčů i typu hodnot
@@ -711,6 +740,10 @@ d[42] = "answer"
 print(d)
 ```
 
+
+---
+
+### Slovníky a typ `Union`
 
 ```python
 # - definice slovníku
@@ -729,6 +762,8 @@ d[42] = "answer"
 print(d)
 ```
 
+
+---
 
 ```python
 # - definice slovníku
@@ -752,7 +787,6 @@ print(d)
 ### Slovníky a typ `Optional`
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice slovníku
 # - specifikace typu klíčů i typu hodnot
 # - hodnoty mohou nabývat None
@@ -769,8 +803,11 @@ print(d)
 ```
 
 
+---
+
+### Slovníky a typ `Optional`
+
 ```python
-# Typové anotace a nástroj Mypy:
 # - definice slovníku
 # - specifikace typu klíčů i typu hodnot
 # - hodnoty mohou nabývat None
@@ -791,7 +828,6 @@ print(d)
 ### Funkce bez návratové hodnoty
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - funkce bez návratové hodnoty s uvedením typových informací
 # - zavolání této funkce pro argumenty typu str a int
 
@@ -835,6 +871,9 @@ def positiveInt(x: int) -> bool:
 printIsPositive(4, positiveFloat)
 printIsPositive(-0.5, positiveFloat)
 ```
+
+
+---
 
 ```python
 # - funkci printIsPositive lze předat jinou funkci
@@ -896,7 +935,6 @@ printIsPositive(1, positiveInt)
 ### Datový typ `range`
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - použití datového typu range
 # - typ definován pro návratovou hodnotu funkce
 
@@ -906,7 +944,6 @@ def funkce(from_val: int, to_val: int) -> range:
 ```
 
 ```python
-# Typové anotace a nástroj Mypy:
 # - použití datového typu range
 # - typ definován pro parametr funkce
 
@@ -932,3 +969,415 @@ print(suma(range(100)))
     - bivariance
 
 ---
+
+### Příklad variancí
+
+* `Jablko` je podtypem typu `Ovoce` ve všech dalších případech
+
+---
+
+### Příklad variancí
+
+* Covariance
+    - `List[Apple]` je podtypem `List[Fruit]`
+* Contravariance
+    - `List[Fruit]` je podtypem `List[Apple]`
+* Invariance
+    - `List[Fruit]` nemá žádný vztah k `List[Apple]`
+* Bivariance
+    - `List[Apple]` je podtypem `List[Fruit]`
+    - a současně (!!!):
+    - `List[Fruit]` je podtypem `List[Apple]`
+
+---
+
+### Proč se o varianci vůbec starat?
+
+* Úzce souvisí s typovým systémem
+* A s tím, jaké kontroly lze provést staticky
+
+---
+
+```java
+class Fruit {
+}
+
+class Orange extends Fruit {
+    public String toString() {
+        return "Orange";
+    }
+}
+
+class Apple extends Fruit {
+    public String toString() {
+        return "Apple";
+    }
+}
+
+public class Variance1 {
+    public static void mix(Fruit[] punnet) {
+        punnet[0] = new Orange();
+        punnet[1] = new Apple();
+    }
+
+    public static void main(String[] args) {
+        Fruit[] punnet = new Fruit[2];
+        mix(punnet);
+
+        for (Fruit Fruit:punnet) {
+            System.out.println(Fruit);
+        }
+    }
+}
+```
+
+---
+
+### Statická kontrola typů ok, pád v runtime!
+
+```java
+class Fruit {
+}
+
+class Orange extends Fruit {
+    public String toString() {
+        return "Orange";
+    }
+}
+
+class Apple extends Fruit {
+    public String toString() {
+        return "Apple";
+    }
+}
+
+public class Variance2 {
+    public static void mix(Fruit[] punnet) {
+        punnet[0] = new Orange();
+        punnet[1] = new Apple();
+    }
+
+    public static void main(String[] args) {
+        Fruit[] punnet = new Orange[2];
+        mix(punnet);
+
+        for (Fruit Fruit:punnet) {
+            System.out.println(Fruit);
+        }
+    }
+}
+```
+
+---
+
+### Míchání hrušek s jablky v1
+
+```python
+# - hierarchie tříd Ovoce <- Hruska a Ovoce <- Jablko
+# - funkce `smichej` akceptuje seznam s ovocem
+# - přidá do tohoto seznamu Hrusku a Jablko
+# - funkci `smichej` voláme s prázdným seznamem pro Ovoce
+
+from typing import List
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def smichej(kosik: List[Ovoce]) -> None:
+    """Do košíku se přidá jedna hruška a jedno jablko."""
+    kosik.append(Hruska())
+    kosik.append(Jablko())
+
+
+# košík, který může obsahovat hrušky i jablka
+kosik: List[Ovoce] = []
+
+smichej(kosik)
+
+for ovoce in kosik:
+    print(ovoce)
+```
+
+
+---
+
+### Míchání hrušek s jablky v2
+---
+
+```python
+# - hierarchie tříd Ovoce <- Hruska a Ovoce <- Jablko
+# - funkce `smichej` akceptuje seznam s ovocem
+# - přidá do tohoto seznamu Hrusku a Jablko
+# - funkci `smichej` voláme s prázdným seznamem pro Hrušky
+
+from typing import List
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def smichej(kosik: List[Ovoce]) -> None:
+    """Do košíku se přidá jedna hruška a jedno jablko."""
+    kosik.append(Hruska())
+    kosik.append(Jablko())
+
+
+# košík, který může obsahovat pouze hrušky
+kosik: List[Hruska] = []
+
+smichej(kosik)
+
+for ovoce in kosik:
+    print(ovoce)
+```
+
+
+---
+
+### Řešení problému variance v Pythonu
+
+```python
+# - hierarchie tříd Ovoce <- Hruska a Ovoce <- Jablko
+# - funkce `tiskni` akceptuje seznam s ovocem
+# - samotný seznam se přitom ve funkci nemění (jen se čte)
+# - funkci `tiskni` voláme s prázdným seznamem pro Hrušky
+
+from typing import List
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def tiskni(kosik: List[Ovoce]) -> None:
+    """Vytiskne obsah košíku s ovocem."""
+    for ovoce in kosik:
+        print(ovoce)
+
+
+# košík, který může obsahovat pouze hrušky
+kosik: List[Hruska] = []
+
+tiskni(kosik)
+```
+
+
+---
+
+### Použití `sequence` a nikoli seznamu
+
+```python
+# - hierarchie tříd Ovoce <- Hruska a Ovoce <- Jablko
+# - funkce `tiskni` akceptuje neměnitelnou sekvenci s ovocem
+# - samotný seznam se přitom ve funkci nemění (jen se čte)
+# - funkci `tiskni` voláme s prázdným seznamem pro Hrušky
+
+from typing import Sequence
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def tiskni(kosik: Sequence[Ovoce]) -> None:
+    """Vytiskne obsah košíku s ovocem."""
+    for ovoce in kosik:
+        print(ovoce)
+
+
+# košík, který může obsahovat pouze hrušky
+kosik: Sequence[Hruska] = []
+
+tiskni(kosik)
+```
+
+
+---
+
+### Tisk typové anotace
+
+```python
+# - hierarchie tříd Ovoce <- Hruska a Ovoce <- Jablko
+# - funkce `tiskni` akceptuje neměnitelnou sekvenci s ovocem
+# - samotný seznam se přitom ve funkci nemění (jen se čte)
+# - funkci `tiskni` voláme s prázdným seznamem pro Hrušky
+# - tisk anotace funkce `tiskni`
+
+from typing import Sequence
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def tiskni(kosik: Sequence[Ovoce]) -> None:
+    """Vytiskne obsah košíku s ovocem."""
+    for ovoce in kosik:
+        print(ovoce)
+
+
+# košík, který může obsahovat pouze hrušky
+kosik: Sequence[Hruska] = []
+
+tiskni(kosik)
+
+# tisk anotace funkce `tiskni`
+print(tiskni.__annotations__)
+```
+
+
+---
+
+### Návratové typy jsou kovariantní
+
+```python
+# - návratové typy jsou kovariantní
+
+from typing import Callable
+
+
+class Ovoce:
+    """Třída, která je předkem tříd Hruska i Jablko."""
+
+    pass
+
+
+class Hruska(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Hruska"
+
+
+class Jablko(Ovoce):
+    """Potomek třídy Ovoce."""
+
+    def __repr__(self) -> str:
+        """Tisk 'hodnoty' objektu."""
+        return "Jablko"
+
+
+def utrhni(f: Callable[[], Ovoce]) -> Ovoce:
+    """Zavolá funkci, která získá jeden kus ovoce a vrátí ho."""
+    ovoce = f()
+    return ovoce
+
+
+print(utrhni(Hruska))
+print(utrhni(Jablko))
+```
+
+
+---
+
+### Odkazy
+
+1. [PEP 484 -- Type Hints](https://www.python.org/dev/peps/pep-0484/)
+1. [What’s New In Python 3.5](https://docs.python.org/3.5/whatsnew/3.5.html)
+1. [26.1. typing — Support for type hints](https://docs.python.org/3.5/library/typing.html#module-typing)
+1. [Type Hints - Guido van Rossum - PyCon 2015 (youtube)](https://www.youtube.com/watch?v=2wDvzy6Hgxg)
+1. [Python 3.5 is on its way](https://lwn.net/Articles/650904/)
+1. [Type hints](https://lwn.net/Articles/640359/)
+
+---
+
+```python
+def exit():
+    .0%0.
+```
+
+
