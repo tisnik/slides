@@ -2,6 +2,9 @@
 
 ![NATS logo](images/nats.png)
 
+Pavel Tišnovský
+tisnik@centrum.cz
+
 ---
 
 Connective Technology for Adaptive Edge & Distributed Systems
