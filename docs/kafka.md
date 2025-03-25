@@ -1878,6 +1878,60 @@ delete.enabled=false
 
 ---
 
+## Mirror Maker
+
+* Replication over multiple data centers
+
+![MirrorMaker1](images/mirror_maker_1.png)
+
+---
+
+## Mirror Maker
+
+* Internally bunch of producers+consumers
+
+![MirrorMaker2](images/mirror_maker_2.png)
+
+---
+
+## Mirror Maker 2
+
+* Based on connectors
+* MirrorSourceConnector: records replication
+* MirrorCheckpointConnector: offset synchronization, checkpoints, failover
+* MirrorHeartbeatConnector: heartbeats, replication topologies
+
+---
+
+## Mirror Maker 2 features
+
+* Unidirectional and bidirectional replication
+* Fan-out
+* Fan-in
+* Data aggregation
+* Data isolation
+
+---
+
+## Case study: two Kafka clusters
+
+![MirrorMaker3](images/mirror_maker_3.png)
+
+---
+
+## Logical cluster names
+
+![MirrorMaker4](images/mirror_maker_4.png)
+
+---
+
+## Mirrored topic `test1`
+
+![MirrorMaker5](images/mirror_maker_5.png)
+
+---
+
+
 ### JMX
 
 * Java Management Extensions
