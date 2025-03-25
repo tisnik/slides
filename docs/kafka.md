@@ -1871,13 +1871,6 @@ delete.enabled=false
 
 ---
 
-## Monitoring
-
-* JMX
-* Prometheus metrics
-
----
-
 ## Mirror Maker
 
 * Replication over multiple data centers
@@ -1931,6 +1924,12 @@ delete.enabled=false
 
 ---
 
+## Monitoring
+
+* JMX
+* Prometheus metrics
+
+---
 
 ### JMX
 
