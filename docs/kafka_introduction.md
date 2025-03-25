@@ -222,7 +222,7 @@
 
 * Scalability
 * Reliability
-* Log compaction
+* Efficiency
 
 ---
 
@@ -238,6 +238,13 @@
 
 * Replication
 * Changing leadership role
+
+---
+
+## Efficiency
+
+* Log compaction
+* Message transfers in batches
 
 ---
 
