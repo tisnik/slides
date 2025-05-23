@@ -310,56 +310,6 @@ tisnik@centrum.cz
 * tzv. optimální komprese
     - při predikci lze použít aritmetické kódování
 
----
-
-### Redukce dat
-
-![reduction.png](images/reduction.png)
-
----
-
-### Redukce dat
-
-![reduction_supervised.png](images/reduction_supervised.png)
-
----
-
-### Nedoučení a přeučení
-
-* Nedoučení
-    - malá sada dat, na kterých je model trénován
-    - příliš složitý model
-    - data reprezentují pouze malý vzorek celého spektra hodnot
-* Přeučení
-    - velká vazba na trénovací data
-    - menší flexibilita práce s daty, která model nezná
-    - použití polynomu vyššího stupně, když by stačila lineární regrese
-
----
-
-### Přeučení
-
-![overtrain.png](images/overtraining.png)
-
----
-
-### Úspěšnost modelu
-
-* Pro zcela nová (neznámá) data!
-    - ne pro trénovací množinu
-    - častá chyba
-
----
-
-### Křížová validace (cross validation)
-
-* rozdělení dat do bloků
-    - například na 1/10
-    - 9/10 pro trénink
-    - 1/10 pro otestování
-
----
-
 ## Zpracování dat
 
 * Nástroje pro datovou analýzu
