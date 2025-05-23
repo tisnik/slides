@@ -59,6 +59,53 @@
 
 ---
 
+### Kafka: evolution of integration platform
+
+---
+
+### Observation
+
+![Kafka_idea_1](images/kafka_idea_1.png)
+
+---
+
+### Simple transformation
+
+![Kafka_idea_2](images/kafka_idea_2.png)
+
+---
+
+### State management
+
+![Kafka_idea_3](images/kafka_idea_3.png)
+
+---
+
+### Queue with persistence
+
+![Kafka_idea_4](images/kafka_idea_4.png)
+
+---
+
+### Log instead of queue
+
+![Kafka_idea_5](images/kafka_idea_5.png)
+
+---
+
+### Multiple observers
+
+![Kafka_idea_6](images/kafka_idea_6.png)
+
+---
+
+### A platform!
+
+![Kafka_idea_7](images/kafka_idea_7.png)
+
+---
+
+
 ### Kafka: Message broker on steroids
 
 ---
