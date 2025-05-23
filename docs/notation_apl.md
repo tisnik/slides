@@ -613,6 +613,133 @@ revenues ← 56 59 67 64 60 61 68 73 78 75 81 84
 
 ---
 
+### Languages comparison (unfair)
+
+* Rosetta stone for GCD
+
+---
+
+### Assembly
+
+```asm
+gcd:
+        mov     eax, edi
+repeat:
+        test    esi, esi
+        je      finish
+        cdq
+        idiv    esi
+        mov     eax, esi
+        mov     esi, edx
+        jmp     repeat
+finish:
+        ret
+```
+
+---
+
+### C
+
+```c
+int gcd(int a, int b) {
+    while (b != 0) {
+        int tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+    return a;
+}
+```
+
+---
+
+### Java
+
+```java
+public static int gcd(int a, int b) {
+    while (b != 0) {
+        int tmp = a;
+        a = b;
+        b = tmp % b;
+    }
+    return a;
+}
+```
+
+---
+
+### Go
+
+```go
+func gcd(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+```
+
+---
+
+### Python
+
+```python
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+```
+
+---
+
+### Ruby
+
+```ruby
+def gcd(a, b)
+  while b > 0
+    a, b = b, a % b
+  end
+  a
+end
+
+```
+
+---
+
+### ML languages (OCaml, F#)
+
+```
+let rec gcd a, b =
+    match a, b with
+    | (a, 0) -> a
+    | (a, b) -> gcd b (a % b)
+```
+
+---
+
+### And...... APL
+
+```
+gcd←{⍵=0:⍺⋄⍵∇⍵|⍺}
+```
+
+---
+
+### less code &rarr; less errors ;)
+
+| Language | Characters |
+|----------|------------|
+| Assembly | 211        |
+| C        | 124        |
+| Java     | 138        |
+| Go       |  70        |
+| Python   |  65        |
+| Ruby     |  63        |
+| ML-like  |  87        |
+| APL      |  17        |
+
+---
+
 ### Prime number generator (step-by-step)
 
 * Goal:
