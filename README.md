@@ -10,6 +10,7 @@ Please look at https://tisnik.github.io/slides/ to see the slides.
 
 1. [Apache Kafka](https://tisnik.github.io/slides/kafka.html#/)
 1. [Apache Kafka: introduction](https://tisnik.github.io/slides/kafka_introduction.html#/)
+1. [Enterprise Integration Patterns (CS)](https://tisnik.github.io/slides/eip.html#/)
 
 ## Python
 
@@ -25,14 +26,21 @@ Please look at https://tisnik.github.io/slides/ to see the slides.
 1. [FastAPI](https://tisnik.github.io/slides/fastapi.html)
 1. [Xarray: labelled multi-dimensional arrays in Python](https://tisnik.github.io/slides/xarray.html)
 
-## Other
+## Go language
+
+1. [Is Go language actually worth learning?](https://tisnik.github.io/slides/go.html#/)
+1. [Go performance tricks: How I Learned to Stop Worrying and Love Go in production](https://tisnik.github.io/slides/go_performance.html#/)
+1. [Goose: database migration tool for Go](https://tisnik.github.io/slides/goose.html#/)
+1. [Embedding data into executables produced by Go compiler](https://tisnik.github.io/slides/embedding_data_into_binary.html#/)
+
+## Non-mainstream programming languages
 
 1. [Patterns in IT, importance of notation, and the APL programming language](https://tisnik.github.io/slides/notation_apl.html#/)
+1. [ML programming language family](https://tisnik.github.io/slides/ml.html#/)
+
+## Other
+
 1. [Cluster names benchmark](https://tisnik.github.io/slides/cluster_names.html#/)
-1. [Go performance tricks: How I Learned to Stop Worrying and Love Go in production](https://tisnik.github.io/slides/go_performance.html#/)
 1. [HCC Proxy: PoC](https://tisnik.github.io/slides/hccp.html#/)
 1. [Behavior-driven development (BDD) & Behavior-driven testing (BDT)](https://tisnik.github.io/slides/BDD.html#/)
-1. [Is Go language actually worth learning?](https://tisnik.github.io/slides/go.html#/)
-1. [Embedding data into executables produced by Go compiler](https://tisnik.github.io/slides/embedding_data_into_binary.html#/)
-1. [Goose: database migration tool for Go](https://tisnik.github.io/slides/goose.html#/)
-1. [ML programming language family](https://tisnik.github.io/slides/ml.html#/)
+1. [NATS JetStream](https://tisnik.github.io/slides/nats.html#/))
