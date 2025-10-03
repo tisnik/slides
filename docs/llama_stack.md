@@ -75,6 +75,10 @@ tisnik@centrum.cz
 
 ---
 
+![LS-providers](images/llama_stack_providers.svg)
+
+---
+
 ### Komunikace s Llama Stackem
 
 * CLI
@@ -453,3 +457,100 @@ file_ingest_response = client.vector_stores.files.create(
 )
 print(f"File ingest response: {file_ingest_response}")
 ```
+
+---
+
+### Získání odpovědi z dokumentu
+
+```python
+models = client.models.list()
+model_id = models[0].identifier
+
+print(f"Using model {model_id}")
+
+MODEL_ID="openai/gpt-4-turbo"
+
+def print_rag_response(response):
+    print(f"ID: {response.id}")
+    print(f"Status: {response.status}")
+    print(f"Model: {response.model}")
+    print(f"Created at: {response.created_at}")
+    print(f"Output items: {len(response.output)}")
+
+    for i, output_item in enumerate(response.output):
+        if len(response.output) > 1:
+            print(f"\n--- Output Item {i+1} ---")
+        print(f"Output type: {output_item.type}")
+
+        if output_item.type in ("text", "message"):
+            print(f"Response content: {output_item.content[0].text}")
+        elif output_item.type == "file_search_call":
+            print(f"  Tool Call ID: {output_item.id}")
+            print(f"  Tool Status: {output_item.status}")
+            print(f"  Queries: {', '.join(output_item.queries)}")
+            print(f"  Results: {output_item.results if output_item.results else 'None'}")
+        else:
+            print(f"Response content: {output_item.content}")
+
+
+response = client.responses.create(
+    model=MODEL_ID,
+    input="zadaný dotaz",
+    tools=[
+        {
+            "type": "file_search",
+            "vector_store_ids": [vector_store_id],
+        }
+    ]
+)
+
+print_rag_response(response)
+```
+
+---
+
+### Ukázka 1/2
+
+* Dokument:
+    - `README.TXT` ze hry Supaplex
+* Relevantní část z dokumentu:
+
+```plaintext
+[a round rock] - ZONK
+       This is another very common obstacle (and usually a very
+       unpleasant one) a Zonk tends to fall down whenever possible
+       (i.e. there is a void underneath). Be careful, when a Zonk
+       falls on you (Murphy) you will explode (read: die). Murphy can
+       push Zonks to the side (not up and down) if nothing is blocking
+       the Zonk (i.e. there is a void on the other side). Murphy can
+       only push one Zonk at a time, so watch out when dropping Zonks
+       next to each other! With some good timing, you can also drop
+       Zonks on Electrons (see below) or Snik-snaks (see below) which
+       will explode (and not bother you again). Zonks have the nasty
+       habit of falling SIDEWAYS off Ram-Chips (see below) and other
+       Zonks if possible (i.e. there is a void to the side), on all
+       other objects the Zonks will lie steady.
+```
+
+---
+
+### Ukázka 1/2
+* Dotaz:
+```plaintext
+What is Zonk?
+```
+* Odpověď:
+```plaintext
+"ZONK" refers to an element in the videogame Supaplex. In the
+game, a Zonk is depicted as a round rock, and it is a common and typically
+unpleasant obstacle. Zonks tend to fall downwards whenever possible, for
+instance, if there is a void directly underneath them. Players must be cautious
+as a Zonk falling on the character (Murphy) results in an explosion and
+game-over for the player. Murphy can push Zonks laterally (but not vertically)
+if there is space for them to move, but can only push one Zonk at a time. Good
+timing is needed to use Zonks strategically, such as dropping them on top of
+enemies (like Snik-snaks) to eliminate them through explosions.
+```
+
+---
+
