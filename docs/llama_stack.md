@@ -554,3 +554,29 @@ enemies (like Snik-snaks) to eliminate them through explosions.
 
 ---
 
+## Závěr
+
+---
+
+## ✅ Pro
+
+* Relativně dobře promyšlená technologie
+    - vše řízeno konfiguračním souborem
+* Do značné míry nezávislá na klientských aplikacích
+* Potenciál pro vznik dalších poskytovatelů (providers)
+    - event-driven přístup(?)
+
+---
+
+## ❌ Proti
+
+* Nestabilita celé platformy (konfigurace, API, poskytovatelé)
+* Poměrně strohá dokumentace, příklady použití atd.
+* Poměrně značné množství chyb a regresí
+
+---
+
+## Děkuji za pozornost
+
+![tisni](images/useravatar.png)
+
